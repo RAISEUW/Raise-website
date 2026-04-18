@@ -12,7 +12,7 @@ Three of those unknowns matter more than all others combined:
 
 1. **The UI-SPEC calls the View Transitions component `<ViewTransitions />`.** That name is stale. In Astro 6.1.7 (the installed version) the component is `<ClientRouter />`, imported from `astro:transitions`. Using the old name will not compile. This is the single most important correction the planner must apply.
 2. **Scripts do not re-run across View Transitions by default.** The existing `src/pages/index.astro` IntersectionObserver will silently stop working on subsequent navigations unless it is re-architected with `data-astro-rerun` (for `is:inline` scripts) or via the `astro:page-load` event (for bundled module scripts). The UI-SPEC assumes the reveal script just moves into `src/scripts/reveal.ts` — that is necessary but not sufficient.
-3. **DET-02 linking strategy** is open. Recommendation: **add explicit `linkedPublications` / `linkedTalks` string arrays to the `people` Zod schema** (not name-match). Name-match is brittle across author-order variants ("J. Smith" vs "Jane Smith") and breaks silently during MIG-03 content migration in Phase 2.
+3. **DET-02 linking strategy** is open. Recommendation: **add `linkedPublications` / `linkedTalks` fields to the `people` schema using Astro 6's `reference()` helper** (not name-match, not raw string arrays). Name-match is brittle across author-order variants ("J. Smith" vs "Jane Smith"); `reference()` is the canonical Astro 6 pattern and catches typos at build time.
 
 All other polish work — scroll reveal CSS utility, `.animate-fade-up` stagger on index page heroes, 404 page, RSS item shape, Pagefind `translations.zero_results` override, Lenis touch-device rule — maps cleanly onto existing shipped primitives.
 
@@ -371,9 +371,18 @@ Source: [Pagefind indexing docs](https://pagefind.app/docs/indexing/) — attrib
 
 ```astro
 <!-- site/src/pages/search.astro -->
-<script is:inline data-astro-rerun>
-  window.addEventListener('astro:page-load', () => {
-    if (document.querySelector('#search')?.hasChildNodes()) return; // avoid double-init
+<script>
+  // Bundled module script. Listens to `astro:page-load` (fires on initial load AND after
+  // every view transition), so Pagefind UI is re-initialized whenever the user lands on
+  // /search via any navigation path. `PagefindUI` is loaded globally by the inline
+  // loader tag above.
+  //
+  // Do NOT use `is:inline data-astro-rerun` here — `astro:page-load` already handles
+  // re-execution; pairing the two causes double-initialization on every transition.
+  document.addEventListener('astro:page-load', () => {
+    const searchEl = document.querySelector('#search');
+    if (!searchEl || searchEl.hasChildNodes()) return; // only on /search, and only once per mount
+
     new PagefindUI({
       element: '#search',
       showSubResults: true,
@@ -396,6 +405,7 @@ Source: [Pagefind UI docs](https://pagefind.app/docs/ui/) — `translations.zero
 - **`<ViewTransitions />` import from `astro:transitions`** — this is the old (Astro ≤4) name. Use `<ClientRouter />` in Astro 6. The UI-SPEC states the wrong name; the planner must correct.
 - **Bundled module `<script>` without `astro:page-load` listener** — silently stops working after View Transitions. The existing `src/pages/index.astro` observer has this bug latent; the lift to `src/scripts/reveal.ts` + listener is the fix.
 - **`is:inline` script without `data-astro-rerun`** — also silently stops. If you must use inline, add `data-astro-rerun`.
+- **`data-astro-rerun` on a script that binds `document`-level listeners** — causes listener accumulation (one new handler per navigation). Use a plain bundled `<script>` (fires once at page load) or an `astro:page-load` listener (fires per load, but bind listeners inside a one-shot guard). Never combine `data-astro-rerun` with `astro:page-load` — double-fire.
 - **Name-match linking for DET-02** — brittle across "J. Smith" vs "Jane Smith" vs "Jane D. Smith". Schema-based IDs survive content migration.
 - **Enabling Lenis `smoothTouch: true`** — causes jank on iOS; UI-SPEC prohibits. Keep wheel-only.
 - **Moving Lenis init outside the `prefersReducedMotion` guard** — ANI-04 regression.
@@ -441,7 +451,7 @@ UI-SPEC flags this as "planner decision." Two candidates:
 
 | | **A. Name-match** (runtime filter) | **B. Explicit ID fields** (schema change) |
 |---|---|---|
-| **Implementation** | In `people/[slug].astro`, filter `publications.data.authors.includes(person.data.name)` and `events.data.speaker === person.data.name` | Add `linkedPublications: z.array(z.string()).default([])` and `linkedTalks: z.array(z.string()).default([])` to `people` schema; in `people/[slug].astro`, `getEntries()` by those IDs |
+| **Implementation** | In `people/[slug].astro`, filter `publications.data.authors.includes(person.data.name)` and `events.data.speaker === person.data.name` | Add `linkedPublications: z.array(reference('publications')).default([])` and `linkedTalks: z.array(reference('events')).default([])` to `people` schema using `reference()` from `astro:content`; in `people/[slug].astro`, call `getEntries(person.data.linkedPublications)` directly |
 | **Content file burden** | None (authors/speaker fields already exist) | Editor must populate `linkedPublications` / `linkedTalks` arrays with exact publication/event `id`s when authoring a person entry |
 | **Robustness** | **Fragile.** "Tanushree Mitra" vs "Tanu Mitra" (see `people/tanu-mitra.mdx`) vs "T. Mitra" all break silently. Pubs' `authors` contain "Tanushree Mitra" — `person.data.name` is "Tanu Mitra" in shipped file. Name-match would find zero matches. | Robust. Editor chooses the IDs explicitly. |
 | **Migration impact (Phase 2)** | MIG-01/02 publication authors are scraped from WordPress — author-name format is inconsistent in the source data. Phase 2 would need a name-normalization pass, which is extra work and never complete. | MIG-03 person authors populate `linkedPublications` from the publication IDs they're known to author. One-time manual step during migration, then stable. |
@@ -450,28 +460,57 @@ UI-SPEC flags this as "planner decision." Two candidates:
 
 **Recommendation: B (explicit ID fields).** The cost is a small schema extension and a one-time editor population during Phase 2 content migration. The benefit is a correct, stable DET-02 surface and a CMS authoring experience that doesn't decay. Name-match is tempting because it needs zero content work today, but it fails on the very first sample (`tanu-mitra.mdx` has `name: Tanu Mitra` while `llm-opioid-reddit.mdx` lists author `Tanushree Mitra` — already mismatched).
 
-**Schema edit (illustrative):**
+**Schema edit (recommended — use `reference()` not raw string arrays):**
 
 ```ts
-// site/src/content.config.ts — in `people` definition
-schema: z.object({
-  // ... existing fields ...
-  linkedPublications: z.array(z.string()).default([]),
-  linkedTalks: z.array(z.string()).default([]),
-}),
+// site/src/content.config.ts
+import { defineCollection, reference, z } from 'astro:content';
+import { glob } from 'astro/loaders';
+
+const people = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/people' }),
+  schema: z.object({
+    // ... existing fields ...
+    linkedPublications: z.array(reference('publications')).default([]),
+    linkedTalks: z.array(reference('events')).default([]),
+  }),
+});
+```
+
+**Why `reference()` over `z.array(z.string())`:**
+- Build-time validation: a typo in a linked ID fails `astro build`, not runtime render.
+- Typed entries: `getEntries(person.data.linkedPublications)` returns `CollectionEntry<'publications'>[]` with correct types.
+- CMS-friendly: Decap CMS (Phase 3) `relation` widget targets collection references natively — editors pick from a dropdown, not type IDs.
+- Canonical Astro 6 pattern. Verified in installed `site/.astro/content.d.ts` — `reference<C>(collection: C)` is exported from `astro:content`.
+
+**Frontmatter in a person MDX file:**
+
+```yaml
+---
+name: Bill Howe
+# ...
+linkedPublications:
+  - llm-opioid-reddit        # matches publication entry.id
+  - ml-fairness-computational
+linkedTalks:
+  - ai-normal-technology
+---
 ```
 
 **Query pattern in `src/pages/people/[slug].astro`:**
 
 ```ts
 import { getEntries } from 'astro:content';
+
 const linkedPubs = person.data.linkedPublications.length
-  ? await getEntries(person.data.linkedPublications.map((id) => ({ collection: 'publications', id })))
+  ? await getEntries(person.data.linkedPublications)
   : [];
 const linkedTalks = person.data.linkedTalks.length
-  ? await getEntries(person.data.linkedTalks.map((id) => ({ collection: 'events', id })))
+  ? await getEntries(person.data.linkedTalks)
   : [];
 ```
+
+No manual `{ collection, id }` mapping — `reference()` already encodes that shape.
 
 **Planner cascading decision:** Phase 1 ships the schema + UI component with empty arrays. Phase 2 (content migration) populates the arrays. Phase 1 success criteria is "the section renders with empty state when arrays are empty" — no blocker.
 
@@ -663,8 +702,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         setupReveal();
       });
     </script>
-    <script is:inline data-astro-rerun>
-      // Keyboard shortcut — must re-bind because `document` listeners persist but fresh DOM nodes need binding after navigation. Inline + data-astro-rerun is the simplest path.
+    <script>
+      // Keyboard shortcut — bound to `document`, which persists across view transitions.
+      // A bundled module script runs ONCE on initial load; do NOT use `data-astro-rerun`
+      // here, and do NOT bind inside an `astro:page-load` listener. Either would cause
+      // listener accumulation (one new keydown handler per navigation → `/` fires N times
+      // after N transitions). One-shot binding at module load is correct.
       document.addEventListener('keydown', (e) => {
         if (e.key === '/' && (e.target as HTMLElement).tagName !== 'INPUT') {
           e.preventDefault();
@@ -861,6 +904,7 @@ import Base from '../layouts/Base.astro';
 | `entry.slug` on content collection entries | `entry.id` on content collection entries | Astro 6 Content Layer API | STATE.md already flags this; existing code has lingering `.slug` references (rss.xml.ts, index.astro). |
 | `astro:transitions`-managed scripts just worked | Scripts require `astro:page-load` event or `data-astro-rerun` | Astro 5+ | Implicit in all reactive client code; easy to miss. |
 | Remark plugin for reading time | Inline word-count helper using `entry.body` | Astro 6 exposes raw body string cleanly | Zero-dep path. |
+| `z.array(z.string())` for cross-collection links | `z.array(reference('collection'))` from `astro:content` | Astro 5 (stable in 6) | Build-time ID validation, typed `getEntries()` return, CMS relation widget support. |
 
 **Deprecated / outdated:**
 - `<ViewTransitions />` — removed from Astro 6 API.
