@@ -121,42 +121,47 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 
 ## Traceability
 
-Updated by roadmapper. To be filled in.
+Every v1 requirement is mapped to exactly one phase.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DET-01 | — | Pending |
-| DET-02 | — | Pending |
-| DET-03 | — | Pending |
-| MIG-01 | — | Pending |
-| MIG-02 | — | Pending |
-| MIG-03 | — | Pending |
-| MIG-04 | — | Pending |
-| MIG-05 | — | Pending |
-| ANI-01 | — | Pending |
-| ANI-02 | — | Pending |
-| ANI-03 | — | Pending |
-| ANI-04 | — | Pending |
-| ANI-05 | — | Pending |
-| BRD-01 | — | Pending |
-| BRD-02 | — | Pending |
-| BRD-03 | — | Pending |
-| CMS-01 | — | Pending |
-| CMS-02 | — | Pending |
-| CMS-03 | — | Pending |
-| DISC-01 | — | Pending |
-| DISC-02 | — | Pending |
-| DEPL-01 | — | Pending |
-| DEPL-02 | — | Pending |
-| DEPL-03 | — | Pending |
-| DEPL-04 | — | Pending |
-| DEPL-05 | — | Pending |
+| DET-01 | Phase 1 | Pending |
+| DET-02 | Phase 1 | Pending |
+| DET-03 | Phase 1 | Pending |
+| ANI-01 | Phase 1 | Pending |
+| ANI-02 | Phase 1 | Pending |
+| ANI-03 | Phase 1 | Pending |
+| ANI-04 | Phase 1 | Pending |
+| ANI-05 | Phase 1 | Pending |
+| BRD-01 | Phase 1 | Pending |
+| BRD-02 | Phase 1 | Pending |
+| BRD-03 | Phase 1 | Pending |
+| DISC-01 | Phase 1 | Pending |
+| DISC-02 | Phase 1 | Pending |
+| MIG-01 | Phase 2 | Pending |
+| MIG-02 | Phase 2 | Pending |
+| MIG-03 | Phase 2 | Pending |
+| MIG-04 | Phase 2 | Pending |
+| MIG-05 | Phase 2 | Pending |
+| CMS-01 | Phase 3 | Pending |
+| CMS-02 | Phase 3 | Pending |
+| CMS-03 | Phase 3 | Pending |
+| DEPL-01 | Phase 3 | Pending |
+| DEPL-02 | Phase 3 | Pending |
+| DEPL-03 | Phase 3 | Pending |
+| DEPL-04 | Phase 3 | Pending |
+| DEPL-05 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 26 total
-- Mapped to phases: 0 (roadmapper will fill)
-- Unmapped: 26 ⚠️
+- Mapped to phases: 26 ✓
+- Unmapped: 0
+
+**Phase distribution:**
+- Phase 1 (Complete the Site Surface): 13 requirements
+- Phase 2 (Content Migration): 5 requirements
+- Phase 3 (CMS & Production Launch): 8 requirements
 
 ---
 *Requirements defined: 2026-04-17*
-*Last updated: 2026-04-17 after initial definition*
+*Last updated: 2026-04-17 after roadmap creation*
