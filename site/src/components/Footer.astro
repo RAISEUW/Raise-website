@@ -182,16 +182,4 @@ const currentYear = new Date().getFullYear();
   .footer-nav { grid-template-columns: repeat(2, 1fr); }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
 }
-
-@media (prefers-color-scheme: dark) {
-  .footer {
-    background: color-mix(in srgb, var(--color-surface) 3%, var(--color-base));
-    border-top-color: var(--color-border-dark);
-  }
-  .footer-logo { color: var(--color-surface); }
-  .footer-tagline { color: var(--color-surface); }
-  .footer-affiliation { color: var(--color-surface); }
-  .footer-col a { color: var(--color-surface); }
-  .footer-bottom { border-top-color: var(--color-border-dark); }
-}
 </style>

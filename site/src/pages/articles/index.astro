@@ -105,12 +105,6 @@ const allTags = [...new Set(sorted.flatMap((a) => a.data.tags))].sort();
 
 @media (max-width: 1024px) { .articles-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px) { .articles-grid { grid-template-columns: 1fr; } }
-
-@media (prefers-color-scheme: dark) {
-  .page-hero { border-bottom-color: var(--color-border-dark); }
-  .tag-btn { border-color: var(--color-border-dark); }
-  .tag-btn.active { background: var(--color-surface); color: var(--color-base); border-color: var(--color-surface); }
-}
 </style>
 
 <script>

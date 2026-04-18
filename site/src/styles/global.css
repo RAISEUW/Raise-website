@@ -13,7 +13,6 @@
   --color-accent-muted: #7C5CBF;
   --color-muted: #6B7280;
   --color-border: #E5E5E3;
-  --color-border-dark: #1F1F20;
 
   /* Radius */
   --radius-card: 12px;
@@ -40,14 +39,6 @@ body {
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.7;
-}
-
-/* Dark mode */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: var(--color-base);
-    color: var(--color-surface);
-  }
 }
 
 /* Reduced motion */

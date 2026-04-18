@@ -515,24 +515,5 @@ const partners = [
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .events-grid { grid-template-columns: 1fr; }
 }
-
-/* ── Dark mode ────────────────────────────────── */
-@media (prefers-color-scheme: dark) {
-  .pillar-card { border-color: var(--color-border-dark); }
-  .stats-section {
-    background: color-mix(in srgb, var(--color-accent) 6%, var(--color-base));
-    border-top-color: var(--color-border-dark);
-    border-bottom-color: var(--color-border-dark);
-  }
-  .stat-num { color: var(--color-surface); }
-  .partner-item { border-color: var(--color-border-dark); }
-  .cta-box {
-    border-color: var(--color-border-dark);
-    background: color-mix(in srgb, var(--color-accent) 6%, var(--color-base));
-  }
-  .btn-primary { background: var(--color-surface); color: var(--color-base); border-color: var(--color-surface); }
-  .btn-ghost { color: var(--color-surface); border-color: var(--color-border-dark); }
-  .btn-ghost:hover { border-color: var(--color-surface); }
-}
 </style>
 
