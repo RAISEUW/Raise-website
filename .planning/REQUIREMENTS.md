@@ -37,7 +37,7 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 
 ### Content Migration
 
-- [ ] **MIG-01**: All ~40 publications from raise.uw.edu are migrated to MDX with accurate frontmatter (title, authors, venue, date, topics, PDF, DOI)
+- [x] **MIG-01**: All ~40 publications from raise.uw.edu are migrated to MDX with accurate frontmatter (title, authors, venue, date, topics, PDF, DOI)
 - [ ] **MIG-02**: All 50+ events from raise.uw.edu are migrated to MDX with accurate frontmatter (title, speaker, date, location, abstract, recording, upcoming flag)
 - [ ] **MIG-03**: All 16 people from raise.uw.edu are migrated to MDX with accurate frontmatter (name, role, title, dept, photo, researchAreas)
 - [ ] **MIG-04**: At least 1 article is authored and published as a sample (new content, not migrated)
@@ -138,7 +138,7 @@ Every v1 requirement is mapped to exactly one phase.
 | BRD-03 | Phase 1 | Complete |
 | DISC-01 | Phase 1 | Complete |
 | DISC-02 | Phase 1 | Complete |
-| MIG-01 | Phase 2 | Pending |
+| MIG-01 | Phase 2 | Complete |
 | MIG-02 | Phase 2 | Pending |
 | MIG-03 | Phase 2 | Pending |
 | MIG-04 | Phase 2 | Pending |

@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: Not started
-status: planning
-last_updated: "2026-04-18T05:18:11.463Z"
+current_plan: 2
+status: executing
+last_updated: "2026-04-18T17:30:19.175Z"
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
-  percent: 100
+  total_plans: 6
+  completed_plans: 4
+  percent: 67
 ---
 
 # STATE: RAISE Website Redesign
@@ -28,17 +28,19 @@ progress:
 **Mode:** yolo
 **Granularity:** coarse
 
-**Current Focus:** Phase 01 — Complete the Site Surface
+**Current Focus:** Phase 02 — content-migration
 
 ---
 
 ## Current Position
 
+Phase: 02 (content-migration) — EXECUTING
+Plan: 2 of 3
 **Phase:** 2
-**Current Plan:** Not started
+**Current Plan:** 2
 **Total Plans in Phase:** 3
-**Status:** Ready to plan
-**Progress:** [██████████] 100%
+**Status:** Ready to execute
+**Progress:** [███████░░░] 67%
 
 ### Phase Breakdown
 
@@ -61,6 +63,7 @@ Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not star
 | Publications migrated | 0/~40 | ~40/~40 |
 | Events migrated | 0/50+ | 50+/50+ |
 | People migrated | 0/16 | 16/16 |
+| Phase 02-content-migration P01 | 45 | 3 tasks | 53 files |
 
 ### Execution History
 
@@ -98,6 +101,8 @@ Sourced from PROJECT.md key decisions:
 - [Phase 01-complete-the-site-surface]: Dark mode removed entirely after BRD-03 user review — site enforces a single light theme via CSS removal + color-scheme meta (no theme toggle; 21 @media blocks removed + --color-border-dark token retired)
 - [Phase 01-complete-the-site-surface]: UW Block W shipped in text-only fallback mode — uw-w.svg.TODO marker tracks pending Marketing-approved SVG swap
 - [Phase 01-complete-the-site-surface]: RSS past events capped at 20 items sorted by pubDate desc; atom self-link via new URL('/rss.xml', context.site)
+- [Phase 02-content-migration]: arXiv /abs/ URLs converted to /pdf/ and stored as pdf field (Plan 02-03 will download)
+- [Phase 02-content-migration]: Clean-slate scraper policy: rm -rf publications dir on each run, use git diff for regression visibility
 
 ### Active Todos
 

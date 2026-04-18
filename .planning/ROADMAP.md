@@ -55,7 +55,7 @@
   4. Visitor can read at least one published article authored specifically for the new site (sample content demonstrating the article pipeline)
   5. All author photos and publication PDFs load locally from `public/images/` and `public/pdfs/` (no broken or external-only asset links)
 
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 Plans:
 - [ ] 02-content-migration/02-01-PLAN.md — MIG-01: scraper foundation (deps, schema fix, orchestrator, libs) + publications parser
@@ -88,7 +88,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Complete the Site Surface | 3/3 | Complete    | 2026-04-18 |
-| 2. Content Migration | 0/TBD | Not started | — |
+| 2. Content Migration | 1/3 | In Progress|  |
 | 3. CMS & Production Launch | 0/TBD | Not started | — |
 
 ---
