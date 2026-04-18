@@ -11,9 +11,9 @@ created: 2026-04-17
 
 > Visual and interaction contract for Phase 1: Complete the Site Surface. Codifies the existing design system shipped in `site/src/styles/global.css` and specifies the new contracts this phase introduces (detail page polish, DET-02 cross-links, animation rules, UW/RAISE branding, RSS + 404 copy).
 >
-> Sources: `REQUIREMENTS.md` (13 reqs: DET-01..03, ANI-01..05, BRD-01..03, DISC-01..02), `ROADMAP.md` (Phase 1 success criteria), existing codebase (`site/src/styles/global.css`, `site/src/components/*`, `site/src/pages/**/[slug].astro`, `site/src/layouts/Base.astro`).
+> Sources: `REQUIREMENTS.md` (13 reqs: DET-01..03, ANI-01..05, BRD-01..03, DISC-01..02), `ROADMAP.md` (Phase 1 success criteria), `.planning/phases/01-complete-the-site-surface/01-CONTEXT.md` (locked decisions D-01 typography weights, D-02 spacing extensions), existing codebase (`site/src/styles/global.css`, `site/src/components/*`, `site/src/pages/**/[slug].astro`, `site/src/layouts/Base.astro`).
 >
-> No CONTEXT.md or RESEARCH.md exists for this phase — contract is pre-populated from existing code and REQUIREMENTS.md. No user questions needed.
+> CONTEXT.md records two user-locked exceptions to the default checker heuristics — D-01 (4 font weights) and D-02 (4 additional spacing tokens) — both tied to the existing shipped codebase. No RESEARCH.md for this phase; technical choices are already made in the scaffold.
 
 ---
 
@@ -58,33 +58,43 @@ All spacing is rem-based, convertible 1:1 to multiples of 4px (at default 16px r
 - Indexes + homepage: `max-width: 1280px`
 - Prose: `max-width: 72ch` (`.prose`)
 
-**Exceptions:** none. All observed values are multiples of 4 when flattened.
+**Exceptions:** `md: 12px`, `4xl: 80px`, `5xl: 96px`, `6xl: 128px` — all locked user-approved per `01-CONTEXT.md` D-02. All four tokens are multiples of 4 and already shipped in `site/src/styles/global.css`; every styled page depends on them. No additional exceptions beyond D-02.
 
 ---
 
 ## Typography
 
-Font sizes are fluid (`clamp()`) on hero/display headings and fixed on UI. Table declares min → max where fluid, single value where fixed. Line-height and weight as implemented in `global.css` and in-page component styles.
+The contract declares **four semantic tiers**: Display, Heading, Body, Label. Each tier may use a `clamp()` envelope — fluid values within a tier count as a single size. Implementation-level role mappings (Page H1, Section H2, card titles, prose body, meta, eyebrows, kbd chips) are listed as notes under each tier so the executor can preserve the shipped detail. Weights follow the 4-weight system locked in `01-CONTEXT.md` D-01.
 
-| Role | Size | Weight | Line Height | Family |
+| Tier | Size | Weight | Line Height | Family |
 |------|------|--------|-------------|--------|
-| Display (hero H1) | `clamp(3rem, 8vw, 7rem)` = 48 → 112px | 300 | 1.1 | Fraunces |
-| Page H1 (index/detail) | `clamp(2rem, 5vw, 4.5rem)` = 32 → 72px | 300–400 | 1.15–1.2 | Fraunces |
-| Section H2 | `clamp(1.75rem, 4vw, 3.5rem)` = 28 → 56px | 400 | 1.1 | Fraunces |
-| Subsection H3 | `clamp(1.25rem, 2.5vw, 2rem)` = 20 → 32px | 400 | 1.1 | Fraunces |
-| Card title | 16–20px (pub/event/person 16, article 20) | 400–600 (Fraunces articles, Inter pub/event/person) | 1.3–1.4 | Mixed |
-| Body | 16px (1rem) | 400 | 1.7 | Inter |
-| Prose body | 17px (1.05rem) on article detail, 16px elsewhere | 400 | 1.7 | Inter |
-| UI label / nav link | 14px (0.875rem) | 500 | 1.4 | Inter |
-| Meta / caption | 13–14px (0.8–0.875rem) | 400–500 | 1.5–1.7 | Mono or Inter |
-| Eyebrow / tag / kbd | 10–11px (0.65–0.7rem), uppercase, `letter-spacing: 0.1em` | 500 | 1 | JetBrains Mono |
+| Display | `clamp(3rem, 8vw, 7rem)` = 48 → 112px | 300 | 1.1 | Fraunces |
+| Heading | `clamp(1.25rem, 4vw, 4.5rem)` = 20 → 72px (fluid across H1/H2/H3 + card titles) | 400–600 | 1.1–1.4 | Fraunces (structural) / Inter (card titles) |
+| Body | 16–17px (`1rem` default, `1.05rem` on article prose) | 400 | 1.7 | Inter |
+| Label | 10–14px (eyebrow/kbd 10–11, meta/caption 13–14, UI label/nav 14) | 500 | 1–1.5 | JetBrains Mono (eyebrow/kbd) / Inter (UI label + meta) |
 
-**Weight policy (exception from "2 weights max"):** The design uses **four Inter/Fraunces weights** intentionally — 300 (editorial hero display), 400 (body + display default), 500 (UI labels, nav, meta), 600 (card titles, logo wordmark). This is an existing shipped decision; Phase 1 must not introduce additional weights. Italic is used only on `<em>` in hero heading (`The public good.`) via Fraunces italic and on `.prose em`.
+### Tier implementation notes
 
-**Heading style policy:**
-- All `h1`–`h4` use Fraunces, `font-weight: 400`, `line-height: 1.1`, `letter-spacing: -0.02em` as the baseline (overridden per surface).
-- Hero `<em>` is italic + accent-colored.
-- Eyebrow labels always mono, uppercase, `letter-spacing: 0.1em–0.12em`, color = `--color-accent` when a section label, `--color-muted` when a card meta label.
+**Display tier** — single role: hero H1 only.
+- Hero H1 (`.hero-heading`): `clamp(3rem, 8vw, 7rem)`, weight 300, line-height 1.1, Fraunces; italic `<em>` in the accent color (e.g. `The public good.`).
+
+**Heading tier** — collapses structural headings + card titles; fluid envelope covers all four roles.
+- Page H1 (index/detail): `clamp(2rem, 5vw, 4.5rem)` = 32 → 72px, weight 300–400, line-height 1.15–1.2, Fraunces.
+- Section H2: `clamp(1.75rem, 4vw, 3.5rem)` = 28 → 56px, weight 400, line-height 1.1, Fraunces.
+- Subsection H3: `clamp(1.25rem, 2.5vw, 2rem)` = 20 → 32px, weight 400, line-height 1.1, Fraunces.
+- Card title: 16–20px fixed (publication/event/person 16px, article 20px), weight 400 (pub/event) or 600 (article/person), line-height 1.3–1.4. Articles and people use Fraunces; publications and events use Inter for card titles.
+- All Fraunces headings use baseline `font-weight: 400`, `line-height: 1.1`, `letter-spacing: -0.02em`, overridden per surface.
+
+**Body tier** — default reading text.
+- Body: 16px (1rem), weight 400, line-height 1.7, Inter.
+- Prose body: 17px (1.05rem) on article detail, 16px (1rem) on other `.prose` surfaces, weight 400, line-height 1.7, Inter. `<em>` uses Fraunces italic.
+
+**Label tier** — all UI text below body (nav, meta, eyebrows, chips, kbd).
+- UI label / nav link: 14px (0.875rem), weight 500, line-height 1.4, Inter.
+- Meta / caption: 13–14px (0.8–0.875rem), weight 400–500, line-height 1.5–1.7, JetBrains Mono or Inter (mono on date/venue metadata, sans on descriptive captions).
+- Eyebrow / tag / kbd: 10–11px (0.65–0.7rem), weight 500, line-height 1, JetBrains Mono uppercase with `letter-spacing: 0.1em–0.12em`. Color = `--color-accent` when a section label, `--color-muted` when a card meta label.
+
+**Weight policy:** The design uses **four Inter/Fraunces weights** (300 / 400 / 500 / 600) — this is the existing shipped Inter + Fraunces variable-font system documented and locked as **D-01 in `01-CONTEXT.md`**. Summary: 300 for editorial hero display, 400 for body + structural headings, 500 for UI labels and eyebrows, 600 for card titles and wordmarks. Phase 1 MUST NOT introduce additional weights; reducing the set would regress shipped components. Italic is used only on `<em>` in the hero heading (via Fraunces italic) and on `.prose em`.
 
 ---
 
