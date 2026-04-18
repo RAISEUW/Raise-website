@@ -24,12 +24,22 @@ import Base from '../layouts/Base.astro';
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
 <script src="/pagefind/pagefind-ui.js" is:inline></script>
 <script>
-  window.addEventListener('DOMContentLoaded', () => {
+  // Bundled module script. Listens to `astro:page-load` (fires on initial load AND
+  // after every view transition), so Pagefind UI re-initializes on every route
+  // visit. Guard prevents double-mount when the user returns to /search.
+  document.addEventListener('astro:page-load', () => {
+    const searchEl = document.querySelector('#search');
+    if (!searchEl || searchEl.hasChildNodes()) return;
+
     new PagefindUI({
       element: '#search',
       showSubResults: true,
       showImages: false,
       resetStyles: false,
+      translations: {
+        zero_results:
+          'No matches for that search. Try different keywords, or browse Articles, Events, People, or Publications.',
+      },
     });
 
     const searchInput = document.querySelector<HTMLInputElement>('#search input');
