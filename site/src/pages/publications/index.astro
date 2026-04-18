@@ -1,0 +1,233 @@
+---
+import Base from '../../layouts/Base.astro';
+import PublicationCard from '../../components/PublicationCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPubs = await getCollection('publications');
+const sorted = allPubs.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTopics = [...new Set(sorted.flatMap((p) => p.data.topics))].sort();
+const allYears = [...new Set(sorted.map((p) => p.data.date.getFullYear()))].sort((a, b) => b - a);
+---
+
+<Base
+  title="Publications — RAISE"
+  description="Research publications from the RAISE center at the University of Washington."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label animate-fade-up">Research Output</span>
+      <h1 class="animate-fade-up animate-delay-100">Publications</h1>
+      <p class="page-desc animate-fade-up animate-delay-200">
+        {sorted.length} publications spanning responsible AI, fairness, misinformation, health informatics, and open systems.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container pub-layout">
+      <!-- Filters sidebar -->
+      <aside class="filters" id="filters">
+        <div class="filter-group">
+          <h3 class="filter-heading">Year</h3>
+          <ul class="filter-list" role="list">
+            <li>
+              <button class="filter-btn active" data-filter-year="">All years</button>
+            </li>
+            {allYears.map((yr) => (
+              <li>
+                <button class="filter-btn" data-filter-year={yr}>{yr}</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="filter-group">
+          <h3 class="filter-heading">Topic</h3>
+          <ul class="filter-list filter-list--topics" role="list">
+            <li>
+              <button class="filter-btn active" data-filter-topic="">All topics</button>
+            </li>
+            {allTopics.map((topic) => (
+              <li>
+                <button class="filter-btn" data-filter-topic={topic}>{topic}</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Publication list -->
+      <div class="pub-list" id="pub-list">
+        <p class="pub-count">
+          Showing <span id="pub-count-num">{sorted.length}</span> publication<span id="pub-count-plural">{sorted.length !== 1 ? 's' : ''}</span>
+        </p>
+        {sorted.map((pub) => (
+          <div
+            class="pub-item reveal"
+            data-year={pub.data.date.getFullYear()}
+            data-topics={pub.data.topics.join(',')}
+          >
+            <PublicationCard slug={pub.id} {...pub.data} />
+          </div>
+        ))}
+        <p class="pub-empty hidden" id="pub-empty">No publications match the selected filters.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+.page-hero {
+  padding: 4rem 0 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 300;
+  margin: 0.5rem 0 1rem;
+}
+
+.page-desc { color: var(--color-muted); max-width: 56ch; }
+
+.section { padding: 3rem 0 6rem; }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.pub-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.filters {
+  position: sticky;
+  top: 80px;
+}
+
+.filter-group { margin-bottom: 2rem; }
+
+.filter-heading {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.filter-list--topics { max-height: 300px; overflow-y: auto; }
+
+.filter-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.filter-btn:hover {
+  color: var(--color-base);
+  background: color-mix(in srgb, var(--color-base) 5%, transparent);
+}
+
+.filter-btn.active {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  font-weight: 500;
+}
+
+.pub-count {
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.pub-empty { color: var(--color-muted); padding: 2rem 0; font-style: italic; }
+.hidden { display: none; }
+
+@media (max-width: 768px) {
+  .pub-layout { grid-template-columns: 1fr; }
+  .filters { position: static; }
+  .filter-list--topics { max-height: 200px; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-hero { border-bottom-color: var(--color-border-dark); }
+}
+</style>
+
+<script>
+  const yearBtns = document.querySelectorAll<HTMLButtonElement>('[data-filter-year]');
+  const topicBtns = document.querySelectorAll<HTMLButtonElement>('[data-filter-topic]');
+  const items = document.querySelectorAll<HTMLElement>('.pub-item');
+  const countNum = document.getElementById('pub-count-num')!;
+  const countPlural = document.getElementById('pub-count-plural')!;
+  const emptyEl = document.getElementById('pub-empty')!;
+
+  let activeYear = '';
+  let activeTopic = '';
+
+  function applyFilters() {
+    let visible = 0;
+    items.forEach((item) => {
+      const yearMatch = !activeYear || item.dataset.year === activeYear;
+      const topicMatch = !activeTopic || item.dataset.topics?.split(',').includes(activeTopic);
+      const show = yearMatch && topicMatch;
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+    countNum.textContent = String(visible);
+    countPlural.textContent = visible !== 1 ? 's' : '';
+    emptyEl.classList.toggle('hidden', visible > 0);
+  }
+
+  yearBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeYear = btn.dataset.filterYear ?? '';
+      yearBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
+
+  topicBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      activeTopic = btn.dataset.filterTopic ?? '';
+      topicBtns.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+  });
+</script>

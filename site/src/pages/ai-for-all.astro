@@ -1,0 +1,196 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="AI for All — RAISE"
+  description="RAISE initiatives making AI accessible and relevant to broader communities through civic engagement and education."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label animate-fade-up">Initiative</span>
+      <h1 class="animate-fade-up animate-delay-100">AI for All</h1>
+      <p class="page-desc animate-fade-up animate-delay-200">
+        Making AI accessible, equitable, and useful for everyone — not just those with technical backgrounds or institutional access.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    <section class="afa-section">
+      <div class="afa-intro">
+        <h2>What is AI for All?</h2>
+        <p>
+          AI for All is RAISE's initiative to bridge the gap between AI research and real-world community needs.
+          We bring together students, professionals, faculty, and civic leaders to work on AI projects that matter —
+          for healthcare, government, nonprofits, and underserved communities.
+        </p>
+        <p>
+          We run pop-up hack days, office hours, and community workshops where anyone can show up and contribute —
+          regardless of technical background.
+        </p>
+      </div>
+    </section>
+
+    <section class="afa-section reveal">
+      <h2 class="afa-heading">Past Programs</h2>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-tag">Hack Day</div>
+          <h3>RAISE Pop-up Hack Day</h3>
+          <p class="program-date">December 3, 2024 · UW 4545 Building</p>
+          <p>
+            A 3-hour collaborative sprint where participants worked on four civic AI projects:
+            a customer service chatbot for the City of Seattle, policy conflict detection for city regulations,
+            AI-assisted cause-of-death determination for global health, and legal document extraction for medical debt cases.
+          </p>
+          <ul class="project-list">
+            <li>City of Seattle — Customer service chatbot</li>
+            <li>Policy conflict identification for city regulations</li>
+            <li>AI-assisted cause-of-death determination (global health)</li>
+            <li>Medical debt — legal document information extraction</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="afa-section afa-section--cta reveal">
+      <div class="afa-cta">
+        <h2>Bring AI for All to your community</h2>
+        <p>
+          We're always looking to expand AI for All to new partners — nonprofits, government agencies,
+          schools, and civic organizations. If you have a problem that AI might help solve, we want to hear from you.
+        </p>
+        <a href="/get-involved" class="btn btn-primary">Get in Touch →</a>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+.page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--color-border); }
+.page-hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; margin: 0.5rem 0 1rem; }
+.page-desc { color: var(--color-muted); max-width: 56ch; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.afa-section {
+  padding: 3rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.afa-section:last-child { border-bottom: none; padding-bottom: 6rem; }
+
+.afa-intro h2, .afa-heading { font-size: 1.75rem; font-weight: 400; margin-bottom: 1rem; }
+
+.afa-intro p {
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.programs-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+
+.program-card {
+  padding: 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+}
+
+.program-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 0.75rem;
+}
+
+.program-card h3 { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.25rem; }
+
+.program-date { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-muted); margin-bottom: 0.75rem; }
+
+.program-card p { font-size: 0.925rem; color: var(--color-muted); line-height: 1.6; margin-bottom: 1rem; }
+
+.project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.project-list li {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.project-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+}
+
+.afa-section--cta { border-bottom: none; }
+
+.afa-cta {
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius-card) * 2);
+  background: color-mix(in srgb, var(--color-accent) 3%, var(--color-surface));
+}
+
+.afa-cta h2 { font-size: 1.75rem; font-weight: 400; margin-bottom: 0.75rem; }
+.afa-cta p { color: var(--color-muted); margin-bottom: 1.5rem; max-width: 48ch; margin-left: auto; margin-right: auto; }
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.75rem;
+  background: var(--color-base);
+  color: var(--color-surface);
+  border-radius: var(--radius-btn);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--color-base);
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-hero { border-bottom-color: var(--color-border-dark); }
+  .afa-section { border-bottom-color: var(--color-border-dark); }
+  .program-card { border-color: var(--color-border-dark); }
+  .afa-cta { border-color: var(--color-border-dark); background: color-mix(in srgb, var(--color-accent) 6%, var(--color-base)); }
+  .btn-primary { background: var(--color-surface); color: var(--color-base); border-color: var(--color-surface); }
+  .btn-primary:hover { background: var(--color-accent); color: var(--color-surface); border-color: var(--color-accent); }
+}
+</style>

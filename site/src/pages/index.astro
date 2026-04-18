@@ -100,11 +100,13 @@ const partners = [
         </div>
         <div class="events-grid">
           {upcomingEvents.map((event) => (
-            <EventCard
-              slug={event.id}
-              upcoming={event.data.upcoming}
-              {...event.data}
-            />
+            <div class="reveal">
+              <EventCard
+                slug={event.id}
+                upcoming={event.data.upcoming}
+                {...event.data}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -122,10 +124,12 @@ const partners = [
         </div>
         <div class="articles-grid">
           {latestArticles.map((article) => (
-            <ArticleCard
-              slug={article.id}
-              {...article.data}
-            />
+            <div class="reveal">
+              <ArticleCard
+                slug={article.id}
+                {...article.data}
+              />
+            </div>
           ))}
         </div>
       </div>

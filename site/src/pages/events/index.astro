@@ -1,0 +1,101 @@
+---
+import Base from '../../layouts/Base.astro';
+import EventCard from '../../components/EventCard.astro';
+import { getCollection } from 'astro:content';
+
+const allEvents = await getCollection('events');
+const upcoming = allEvents
+  .filter((e) => e.data.upcoming)
+  .sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+const past = allEvents
+  .filter((e) => !e.data.upcoming)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base
+  title="Talks & Events — RAISE"
+  description="Talks, seminars, and events hosted by the RAISE center at the University of Washington."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label animate-fade-up">Community</span>
+      <h1 class="animate-fade-up animate-delay-100">Talks & Events</h1>
+      <p class="page-desc animate-fade-up animate-delay-200">
+        Weekly talks, hack days, and symposia on responsible AI — open to all.
+      </p>
+    </div>
+  </section>
+
+  <div class="container">
+    {upcoming.length > 0 && (
+      <section class="events-section">
+        <h2 class="events-section-title">Upcoming</h2>
+        <div class="events-grid">
+          {upcoming.map((e) => (
+            <div class="reveal">
+              <EventCard slug={e.id} {...e.data} />
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="events-section">
+      <h2 class="events-section-title">Past Events</h2>
+      <div class="events-grid">
+        {past.map((e) => (
+          <div class="reveal">
+            <EventCard slug={e.id} {...e.data} />
+          </div>
+        ))}
+      </div>
+      {past.length === 0 && (
+        <p class="empty-note">No past events yet.</p>
+      )}
+    </section>
+  </div>
+</Base>
+
+<style>
+.page-hero { padding: 4rem 0 2rem; border-bottom: 1px solid var(--color-border); }
+.page-hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; margin: 0.5rem 0 1rem; }
+.page-desc { color: var(--color-muted); max-width: 56ch; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.events-section { padding: 3rem 0; }
+
+.events-section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+
+.empty-note { color: var(--color-muted); font-style: italic; }
+
+@media (max-width: 640px) {
+  .events-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .page-hero { border-bottom-color: var(--color-border-dark); }
+}
+</style>
