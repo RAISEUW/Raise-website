@@ -2,6 +2,7 @@
 import * as cheerio from 'cheerio';
 import { parsePublications } from './parsers/publications.mjs';
 import { parsePeople } from './parsers/people.mjs';
+import { parseEvents } from './parsers/events.mjs';
 
 const UA = 'RAISE-content-migration/1.0 (https://raise.uw.edu)';
 
@@ -28,7 +29,13 @@ async function main() {
     const count = await parsePeople($);
     console.log(`  Wrote ${count} people`);
   }
-  // Plan 02-02 will add --events
+
+  if (runAll || args.has('--events')) {
+    console.log('Scraping events...');
+    const $ = await fetchPage('https://raise.uw.edu/talksevents/');
+    const count = await parseEvents($);
+    console.log(`  Wrote ${count} events`);
+  }
   // Plan 02-03 will add --assets and --article
 }
 
