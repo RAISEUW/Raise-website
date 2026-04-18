@@ -55,7 +55,12 @@
   4. Visitor can read at least one published article authored specifically for the new site (sample content demonstrating the article pipeline)
   5. All author photos and publication PDFs load locally from `public/images/` and `public/pdfs/` (no broken or external-only asset links)
 
-**Plans:** TBD
+**Plans:** 3 plans
+
+Plans:
+- [ ] 02-content-migration/02-01-PLAN.md — MIG-01: scraper foundation (deps, schema fix, orchestrator, libs) + publications parser
+- [ ] 02-content-migration/02-02-PLAN.md — MIG-02, MIG-03: people parser + events parser
+- [ ] 02-content-migration/02-03-PLAN.md — MIG-04, MIG-05: asset downloads, linked-ref wiring, sample article
 
 ---
 
