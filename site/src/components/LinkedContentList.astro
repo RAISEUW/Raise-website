@@ -1,0 +1,83 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  label: string;
+  items: CollectionEntry<'publications'>[] | CollectionEntry<'events'>[];
+  kind: 'publications' | 'events';
+  emptyCopy: string;
+}
+const { label, items, kind, emptyCopy } = Astro.props;
+---
+
+<section class="linked-section">
+  <h2 class="linked-section-label">{label}</h2>
+  {items.length === 0 ? (
+    <p class="linked-empty">{emptyCopy}</p>
+  ) : (
+    <ul class="linked-list" role="list">
+      {items.map((item) => (
+        <li class="linked-item">
+          <a href={`/${kind}/${item.id}/`}>
+            <span class="linked-title">{item.data.title}</span>
+            <span class="linked-meta">
+              {kind === 'publications'
+                ? `${(item as CollectionEntry<'publications'>).data.venue} · ${item.data.date.getFullYear()}`
+                : `${item.data.date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}`}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+</section>
+
+<style>
+.linked-section {
+  padding: 2rem 0;
+  border-top: 1px solid var(--color-border);
+  margin-top: 3rem;
+}
+.linked-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.linked-empty {
+  color: var(--color-muted);
+  font-style: italic;
+  font-size: 0.875rem;
+}
+.linked-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.linked-item a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+  text-decoration: none;
+  transition: padding-left 0.2s var(--ease-out-expo);
+}
+.linked-item a:hover {
+  padding-left: 0.25rem;
+  text-decoration: none;
+}
+.linked-title { font-size: 0.95rem; color: var(--color-base); }
+.linked-meta { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-muted); }
+@media (prefers-color-scheme: dark) {
+  .linked-section { border-top-color: var(--color-border-dark); }
+  .linked-item a { border-bottom-color: var(--color-border-dark); }
+  .linked-title { color: var(--color-surface); }
+}
+</style>
