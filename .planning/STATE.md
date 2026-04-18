@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 2 of 3 (Plan 01 complete; next is Plan 02)
+current_plan: 3
 status: executing
-last_updated: "2026-04-18T04:01:09.896Z"
+last_updated: "2026-04-18T04:10:49.852Z"
 progress:
   total_phases: 3
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
-  percent: 33
+  completed_plans: 2
+  percent: 67
 ---
 
 # STATE: RAISE Website Redesign
@@ -35,14 +35,15 @@ progress:
 ## Current Position
 
 **Phase:** 01 — Complete the Site Surface (EXECUTING)
-**Current Plan:** 2 of 3 (Plan 01 complete; next is Plan 02)
-**Status:** Plan 01-01 complete; ready to execute Plan 01-02
-**Progress:** [███░░░░░░░] 33%
+**Current Plan:** 3
+**Total Plans in Phase:** 3
+**Status:** Ready to execute
+**Progress:** [███████░░░] 67%
 
 ### Phase Breakdown
 
 ```
-Phase 1: Complete the Site Surface     [███░░░░░░░] 33% (1/3 plans complete)
+Phase 1: Complete the Site Surface     [███████░░░] 67% (2/3 plans complete)
 Phase 2: Content Migration             [░░░░░░░░░░] Not started
 Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not started
 ```
@@ -55,7 +56,7 @@ Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not star
 |--------|---------|--------|
 | v1 requirements mapped | 26/26 | 26/26 ✓ |
 | Phases complete | 0/3 | 3/3 |
-| Plans complete | 1/3 | 3/3 |
+| Plans complete | 2/3 | 3/3 |
 | Lighthouse (homepage) | TBD | ≥95 on all four categories |
 | Publications migrated | 0/~40 | ~40/~40 |
 | Events migrated | 0/50+ | 50+/50+ |
@@ -66,6 +67,7 @@ Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not star
 | Plan | Duration | Tasks | Files | Commits |
 |------|----------|-------|-------|---------|
 | Phase 01-complete-the-site-surface P01 | 2min | 3 | 5 | 3adad45, 8d17532, 07f1e7b |
+| Phase 01-complete-the-site-surface P02 | 4min | 3 | 6 | 5d8d3bd, eb7c5d7, 3715ef1 |
 
 ---
 
@@ -89,6 +91,9 @@ Sourced from PROJECT.md key decisions:
 - [Phase 01-complete-the-site-surface]: Use reference() for people.linkedPublications/linkedTalks (not string arrays) — build-time validation + Decap relation-widget compatibility
 - [Phase 01-complete-the-site-surface]: Module-scoped lenisInitialized flag keeps Lenis singleton across astro:page-load firings
 - [Phase 01-complete-the-site-surface]: Keyboard-shortcut listener bound once at module load (NOT inside astro:page-load) to avoid listener accumulation
+- [Phase 01-complete-the-site-surface]: Reading-time computed inline (Math.ceil(words/200), 1-min floor) — avoided remark-reading-time dependency
+- [Phase 01-complete-the-site-surface]: LinkedContentList uses runtime discriminant on 'kind' prop — kind-generic + empty-state-aware; Phase 2 content will populate empty arrays automatically
+- [Phase 01-complete-the-site-surface]: Hero-stagger reserved for index heroes + event-detail hero only (article title is focal anchor, gets no stagger per UI-SPEC)
 
 ### Active Todos
 
@@ -110,13 +115,13 @@ None. Scaffold is complete and building locally.
 
 ### Last Session
 
-- Executed Plan 01-01 (foundation): `<ClientRouter />` wired in `Base.astro`, `setupReveal()` shared IntersectionObserver, people schema extended with `reference()` fields
-- 3 atomic commits: `3adad45`, `8d17532`, `07f1e7b`
-- `cd site && npm run build` passes (exit 0); `dist/index.html` present
+- Executed Plan 01-02 (detail pages + 404): new LinkedContentList component, DET-02 wiring with `getEntries()`, reading-time helper, hero-stagger on event detail, `.reveal` + `data-pagefind-body` on all 4 detail routes, editorial 404 page
+- 3 atomic commits: `5d8d3bd`, `eb7c5d7`, `3715ef1`
+- `cd site && npm run build` passes (exit 0); 16 pages built including `dist/404.html`
 
 ### Stopped At
 
-Completed 01-01-PLAN.md (foundation: ClientRouter + setupReveal + people schema refs)
+Completed 01-02-PLAN.md (DET-01/DET-02/DET-03 + 404 page shipped)
 
 ### Next Session Start
 
@@ -126,7 +131,7 @@ Recommended next command:
 /gsd:execute-phase 01
 ```
 
-Continues with Plan 01-02 (detail pages) and Plan 01-03 (surfaces).
+Continues with Plan 01-03 (surfaces: branding, research pillars, search, RSS).
 
 ### Files of Record
 

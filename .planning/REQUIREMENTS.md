@@ -31,9 +31,9 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 
 ### Detail Pages
 
-- [ ] **DET-01**: Visitor can view an event detail page with speaker, abstract, location/time, recording link, and slides link
-- [ ] **DET-02**: Visitor can view a person profile page with full bio, research areas, linked publications, and linked talks
-- [ ] **DET-03**: Visitor can view an article detail page with full MDX prose, author, date, tags, and reading time
+- [x] **DET-01**: Visitor can view an event detail page with speaker, abstract, location/time, recording link, and slides link
+- [x] **DET-02**: Visitor can view a person profile page with full bio, research areas, linked publications, and linked talks
+- [x] **DET-03**: Visitor can view an article detail page with full MDX prose, author, date, tags, and reading time
 
 ### Content Migration
 
@@ -125,9 +125,9 @@ Every v1 requirement is mapped to exactly one phase.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DET-01 | Phase 1 | Pending |
-| DET-02 | Phase 1 | Pending |
-| DET-03 | Phase 1 | Pending |
+| DET-01 | Phase 1 | Complete |
+| DET-02 | Phase 1 | Complete |
+| DET-03 | Phase 1 | Complete |
 | ANI-01 | Phase 1 | Complete |
 | ANI-02 | Phase 1 | Pending |
 | ANI-03 | Phase 1 | Complete |

@@ -33,8 +33,8 @@
   5. Visitor using the search page can find any publication, event, article, or person from the existing sample content by keyword (Pagefind indexes all collections at build)
 
 **Plans:** 3 plans
-- [ ] 01-complete-the-site-surface/01-01-PLAN.md — Foundation: ClientRouter, scroll-reveal script, extended people schema
-- [ ] 01-complete-the-site-surface/01-02-PLAN.md — Detail pages: DET-01/02/03 polish, LinkedContentList, 404 page
+- [x] 01-complete-the-site-surface/01-01-PLAN.md — Foundation: ClientRouter, scroll-reveal script, extended people schema
+- [x] 01-complete-the-site-surface/01-02-PLAN.md — Detail pages: DET-01/02/03 polish, LinkedContentList, 404 page
 - [ ] 01-complete-the-site-surface/01-03-PLAN.md — Index surfaces, UW branding, RSS + Pagefind, BRD-03 QA checkpoint
 **UI hint:** yes
 
@@ -82,7 +82,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Complete the Site Surface | 0/3 | Planned | — |
+| 1. Complete the Site Surface | 2/3 | In Progress | — |
 | 2. Content Migration | 0/TBD | Not started | — |
 | 3. CMS & Production Launch | 0/TBD | Not started | — |
 
