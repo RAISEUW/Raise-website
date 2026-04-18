@@ -45,11 +45,11 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 
 ### Animation & Polish
 
-- [ ] **ANI-01**: Scroll-triggered reveal animations on content cards and sections (IntersectionObserver + Motion, ≤600ms, subtle translate+fade)
+- [x] **ANI-01**: Scroll-triggered reveal animations on content cards and sections (IntersectionObserver + Motion, ≤600ms, subtle translate+fade)
 - [ ] **ANI-02**: Hero section has a load animation (stagger text reveal, ≤600ms, Fraunces heading)
-- [ ] **ANI-03**: Page transitions use Astro View Transitions between routes
-- [ ] **ANI-04**: All animations respect `prefers-reduced-motion: reduce` — disabled when set
-- [ ] **ANI-05**: Lenis smooth scroll is active on all pages (already started, needs tuning)
+- [x] **ANI-03**: Page transitions use Astro View Transitions between routes
+- [x] **ANI-04**: All animations respect `prefers-reduced-motion: reduce` — disabled when set
+- [x] **ANI-05**: Lenis smooth scroll is active on all pages (already started, needs tuning)
 
 ### Branding
 
@@ -128,11 +128,11 @@ Every v1 requirement is mapped to exactly one phase.
 | DET-01 | Phase 1 | Pending |
 | DET-02 | Phase 1 | Pending |
 | DET-03 | Phase 1 | Pending |
-| ANI-01 | Phase 1 | Pending |
+| ANI-01 | Phase 1 | Complete |
 | ANI-02 | Phase 1 | Pending |
-| ANI-03 | Phase 1 | Pending |
-| ANI-04 | Phase 1 | Pending |
-| ANI-05 | Phase 1 | Pending |
+| ANI-03 | Phase 1 | Complete |
+| ANI-04 | Phase 1 | Complete |
+| ANI-05 | Phase 1 | Complete |
 | BRD-01 | Phase 1 | Pending |
 | BRD-02 | Phase 1 | Pending |
 | BRD-03 | Phase 1 | Pending |

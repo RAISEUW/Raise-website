@@ -1,6 +1,21 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+current_plan: 2 of 3 (Plan 01 complete; next is Plan 02)
+status: executing
+last_updated: "2026-04-18T04:01:09.896Z"
+progress:
+  total_phases: 3
+  completed_phases: 0
+  total_plans: 3
+  completed_plans: 1
+  percent: 33
+---
+
 # STATE: RAISE Website Redesign
 
-**Last Updated:** 2026-04-17
+**Last Updated:** 2026-04-18
 
 ---
 
@@ -13,21 +28,21 @@
 **Mode:** yolo
 **Granularity:** coarse
 
-**Current Focus:** Phase 1 — Complete the Site Surface (detail pages, animation polish, branding, RSS + Pagefind)
+**Current Focus:** Phase 01 — Complete the Site Surface
 
 ---
 
 ## Current Position
 
-**Phase:** 1 — Complete the Site Surface
-**Plan:** None yet (awaiting `/gsd:plan-phase 1`)
-**Status:** Roadmap complete — ready for phase planning
-**Progress:** `[░░░░░░░░░░] 0% (0/3 phases)`
+**Phase:** 01 — Complete the Site Surface (EXECUTING)
+**Current Plan:** 2 of 3 (Plan 01 complete; next is Plan 02)
+**Status:** Plan 01-01 complete; ready to execute Plan 01-02
+**Progress:** [███░░░░░░░] 33%
 
 ### Phase Breakdown
 
 ```
-Phase 1: Complete the Site Surface     [░░░░░░░░░░] Not started
+Phase 1: Complete the Site Surface     [███░░░░░░░] 33% (1/3 plans complete)
 Phase 2: Content Migration             [░░░░░░░░░░] Not started
 Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not started
 ```
@@ -40,11 +55,17 @@ Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not star
 |--------|---------|--------|
 | v1 requirements mapped | 26/26 | 26/26 ✓ |
 | Phases complete | 0/3 | 3/3 |
-| Plans complete | 0/TBD | TBD/TBD |
+| Plans complete | 1/3 | 3/3 |
 | Lighthouse (homepage) | TBD | ≥95 on all four categories |
 | Publications migrated | 0/~40 | ~40/~40 |
 | Events migrated | 0/50+ | 50+/50+ |
 | People migrated | 0/16 | 16/16 |
+
+### Execution History
+
+| Plan | Duration | Tasks | Files | Commits |
+|------|----------|-------|-------|---------|
+| Phase 01-complete-the-site-surface P01 | 2min | 3 | 5 | 3adad45, 8d17532, 07f1e7b |
 
 ---
 
@@ -64,6 +85,10 @@ Sourced from PROJECT.md key decisions:
 | `[slug].astro` routing (not spread routes) | Avoids conflict with index pages | Validated |
 | `.id` not `.slug` for collection entries | Content Layer API breaking change in Astro 6 | Validated |
 | `import tailwindcss from '@tailwindcss/vite'` (default export) | Named export errors in Tailwind v4 | Validated |
+
+- [Phase 01-complete-the-site-surface]: Use reference() for people.linkedPublications/linkedTalks (not string arrays) — build-time validation + Decap relation-widget compatibility
+- [Phase 01-complete-the-site-surface]: Module-scoped lenisInitialized flag keeps Lenis singleton across astro:page-load firings
+- [Phase 01-complete-the-site-surface]: Keyboard-shortcut listener bound once at module load (NOT inside astro:page-load) to avoid listener accumulation
 
 ### Active Todos
 
@@ -85,19 +110,23 @@ None. Scaffold is complete and building locally.
 
 ### Last Session
 
-- Created PROJECT.md, REQUIREMENTS.md, and config.json during `/gsd:new-project` initialization
-- Roadmapped 3 phases covering all 26 remaining v1 requirements
-- Wrote ROADMAP.md and this STATE.md
+- Executed Plan 01-01 (foundation): `<ClientRouter />` wired in `Base.astro`, `setupReveal()` shared IntersectionObserver, people schema extended with `reference()` fields
+- 3 atomic commits: `3adad45`, `8d17532`, `07f1e7b`
+- `cd site && npm run build` passes (exit 0); `dist/index.html` present
+
+### Stopped At
+
+Completed 01-01-PLAN.md (foundation: ClientRouter + setupReveal + people schema refs)
 
 ### Next Session Start
 
 Recommended next command:
 
 ```
-/gsd:plan-phase 1
+/gsd:execute-phase 01
 ```
 
-This will decompose Phase 1 (Complete the Site Surface) into 1-3 concrete plans (granularity: coarse).
+Continues with Plan 01-02 (detail pages) and Plan 01-03 (surfaces).
 
 ### Files of Record
 
