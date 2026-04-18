@@ -1,0 +1,197 @@
+<!-- BRD-01 fallback active — UW official asset pending; swap when uw-w.svg lands in public/images/ -->
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">RAISE</a>
+      <p class="footer-tagline">Advancing AI that serves the public good.</p>
+      <p class="footer-affil">
+        Center for Responsibility in AI Systems and Experiences
+      </p>
+      <p class="footer-affiliation">University of Washington</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-col">
+        <p class="footer-col-heading">Research</p>
+        <ul role="list">
+          <li><a href="/publications">Publications</a></li>
+          <li><a href="/events">Talks & Events</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/research">Research Areas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Community</p>
+        <ul role="list">
+          <li><a href="/people">People</a></li>
+          <li><a href="/ai-for-all">AI for All</a></li>
+          <li><a href="/get-involved">Get Involved</a></li>
+          <li><a href="https://aiclinic.uw.edu" target="_blank" rel="noopener">AI Clinic ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-heading">Connect</p>
+        <ul role="list">
+          <li><a href="/rss.xml">RSS Feed</a></li>
+          <li><a href="https://twitter.com/UW_RAISE" target="_blank" rel="noopener">X / Twitter ↗</a></li>
+          <li><a href="https://facebook.com/uwraise" target="_blank" rel="noopener">Facebook ↗</a></li>
+          <li><a href="https://mailman11.u.washington.edu/mailman/listinfo/raisegroup" target="_blank" rel="noopener">Mailing List ↗</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; {currentYear} RAISE, University of Washington. All rights reserved.</p>
+    <p class="footer-partners">
+      Partners:
+      <a href="https://escience.washington.edu" target="_blank" rel="noopener">eScience Institute</a> ·
+      <a href="https://datalab.uw.edu" target="_blank" rel="noopener">UW Data Lab</a> ·
+      <a href="https://infoseeking.org" target="_blank" rel="noopener">InfoSeeking Lab</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+.footer {
+  margin-top: 6rem;
+  border-top: 1px solid var(--color-border);
+  padding: 4rem 1.5rem 2rem;
+  background: color-mix(in srgb, var(--color-base) 3%, var(--color-surface));
+}
+
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--color-base);
+}
+
+.footer-tagline {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--color-base);
+  font-weight: 500;
+}
+
+.footer-affil {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+.footer-affiliation {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-base);
+  margin: 0.5rem 0 0 0;
+  letter-spacing: 0.01em;
+}
+
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.footer-col-heading {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-col a {
+  font-size: 0.875rem;
+  color: var(--color-base);
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.footer-col a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+.footer-partners {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-partners a {
+  color: var(--color-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-partners a:hover { color: var(--color-base); }
+
+@media (max-width: 768px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .footer-nav { grid-template-columns: repeat(2, 1fr); }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background: color-mix(in srgb, var(--color-surface) 3%, var(--color-base));
+    border-top-color: var(--color-border-dark);
+  }
+  .footer-logo { color: var(--color-surface); }
+  .footer-tagline { color: var(--color-surface); }
+  .footer-affiliation { color: var(--color-surface); }
+  .footer-col a { color: var(--color-surface); }
+  .footer-bottom { border-top-color: var(--color-border-dark); }
+}
+</style>
