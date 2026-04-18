@@ -27,21 +27,28 @@ A beautiful, fast, searchable home for RAISE's research, people, events, and art
 - ✓ Get Involved page with contact channels — Phase 1
 - ✓ Sample MDX content (people, publications, events) — Phase 1
 
+### Validated in Phase 1: Complete the Site Surface
+
+- ✓ Events detail pages ([slug].astro) with speaker bio, abstract, recording link, slides — Phase 1
+- ✓ People detail pages ([slug].astro) with full bio, linked publications/talks via reference() — Phase 1
+- ✓ Articles detail pages ([slug].astro) with MDX prose, reading-time, tags — Phase 1
+- ✓ Publications detail pages ([slug].astro) — Phase 1
+- ✓ 404 page with hero-stagger and CTAs — Phase 1
+- ✓ RSS feed at /rss.xml (articles + events, atom self-link) — Phase 1
+- ✓ Animation: ClientRouter view transitions, scroll-reveal, hero stagger, Lenis (prefers-reduced-motion safe) — Phase 1
+- ✓ UW "University of Washington" affiliation in footer (SVG fallback — Block W URL returned 404) — Phase 1
+- ✓ Pagefind search with zero-results override copy — Phase 1
+- ✓ Light-only theme (dark mode removed per user decision at BRD-03 QA) — Phase 1
+
 ### Active
 
-- [ ] Events detail pages ([slug].astro) with speaker bio, abstract, recording link, slides
-- [ ] People detail pages ([slug].astro) with full bio, linked publications, talks
-- [ ] Articles detail pages ([slug].astro) with MDX prose, author, tags
 - [ ] Full content migration — all ~40 publications, 50+ events, 16 people scraped from raise.uw.edu to MDX
-- [ ] RSS feed at /rss.xml (articles + events)
 - [ ] Decap CMS setup at /admin — web interface for non-dev editors
-- [ ] Animation polish — scroll reveals (IntersectionObserver + Motion), hero load animation, View Transitions tuning
 - [ ] Cloudflare Pages deployment — connect repo, build command, custom domain prep
 - [ ] 301 redirects for old WordPress URLs (/talksevents/ → /events, etc.)
 - [ ] Research section (3 pillars as proper pages)
-- [ ] UW logos and RAISE branding assets integrated (UW seal/wordmark + RAISE logomark)
+- [ ] UW Block W SVG asset (replace text fallback when asset is obtained)
 - [ ] Contact form working (Cloudflare Pages Function or Formspree)
-- [ ] Dark mode verified across all pages
 - [ ] Lighthouse 95+ on all four categories
 
 ### Out of Scope
@@ -101,4 +108,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-17 after initialization*
+*Last updated: 2026-04-18 — Phase 1 complete*
