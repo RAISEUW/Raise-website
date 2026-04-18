@@ -46,16 +46,16 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 ### Animation & Polish
 
 - [x] **ANI-01**: Scroll-triggered reveal animations on content cards and sections (IntersectionObserver + Motion, ≤600ms, subtle translate+fade)
-- [ ] **ANI-02**: Hero section has a load animation (stagger text reveal, ≤600ms, Fraunces heading)
+- [x] **ANI-02**: Hero section has a load animation (stagger text reveal, ≤600ms, Fraunces heading)
 - [x] **ANI-03**: Page transitions use Astro View Transitions between routes
 - [x] **ANI-04**: All animations respect `prefers-reduced-motion: reduce` — disabled when set
 - [x] **ANI-05**: Lenis smooth scroll is active on all pages (already started, needs tuning)
 
 ### Branding
 
-- [ ] **BRD-01**: UW official logo/seal is integrated in Nav and/or Footer (per UW brand guidelines)
-- [ ] **BRD-02**: RAISE logomark is displayed in Nav alongside UW affiliation
-- [ ] **BRD-03**: All pages pass visual QA — typography scale, spacing rhythm, color usage consistent
+- [x] **BRD-01**: UW official logo/seal is integrated in Nav and/or Footer (per UW brand guidelines)
+- [x] **BRD-02**: RAISE logomark is displayed in Nav alongside UW affiliation
+- [x] **BRD-03**: All pages pass visual QA — typography scale, spacing rhythm, color usage consistent
 
 ### CMS
 
@@ -65,8 +65,8 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 
 ### Feed & Discovery
 
-- [ ] **DISC-01**: RSS feed is published at /rss.xml (includes articles + events with correct metadata)
-- [ ] **DISC-02**: Pagefind search indexes all content collections at build time — visitor can find any publication, event, article, or person by keyword
+- [x] **DISC-01**: RSS feed is published at /rss.xml (includes articles + events with correct metadata)
+- [x] **DISC-02**: Pagefind search indexes all content collections at build time — visitor can find any publication, event, article, or person by keyword
 
 ### Deployment
 
@@ -129,15 +129,15 @@ Every v1 requirement is mapped to exactly one phase.
 | DET-02 | Phase 1 | Complete |
 | DET-03 | Phase 1 | Complete |
 | ANI-01 | Phase 1 | Complete |
-| ANI-02 | Phase 1 | Pending |
+| ANI-02 | Phase 1 | Complete |
 | ANI-03 | Phase 1 | Complete |
 | ANI-04 | Phase 1 | Complete |
 | ANI-05 | Phase 1 | Complete |
-| BRD-01 | Phase 1 | Pending |
-| BRD-02 | Phase 1 | Pending |
-| BRD-03 | Phase 1 | Pending |
-| DISC-01 | Phase 1 | Pending |
-| DISC-02 | Phase 1 | Pending |
+| BRD-01 | Phase 1 | Complete |
+| BRD-02 | Phase 1 | Complete |
+| BRD-03 | Phase 1 | Complete |
+| DISC-01 | Phase 1 | Complete |
+| DISC-02 | Phase 1 | Complete |
 | MIG-01 | Phase 2 | Pending |
 | MIG-02 | Phase 2 | Pending |
 | MIG-03 | Phase 2 | Pending |

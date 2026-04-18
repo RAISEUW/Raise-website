@@ -9,7 +9,7 @@
 
 ## Phases
 
-- [ ] **Phase 1: Complete the Site Surface** — Finish detail pages, animation polish, branding integration, and discovery plumbing (RSS + Pagefind).
+- [x] **Phase 1: Complete the Site Surface** — Finish detail pages, animation polish, branding integration, and discovery plumbing (RSS + Pagefind).
 - [ ] **Phase 2: Content Migration** — Migrate all ~40 publications, 50+ events, and 16 people from the existing WordPress site into MDX with assets.
 - [ ] **Phase 3: CMS & Production Launch** — Wire Decap CMS for non-dev editors, deploy to Cloudflare Pages with redirects, verify Lighthouse scores, and ship the contact form.
 
@@ -35,7 +35,7 @@
 **Plans:** 3 plans
 - [x] 01-complete-the-site-surface/01-01-PLAN.md — Foundation: ClientRouter, scroll-reveal script, extended people schema
 - [x] 01-complete-the-site-surface/01-02-PLAN.md — Detail pages: DET-01/02/03 polish, LinkedContentList, 404 page
-- [ ] 01-complete-the-site-surface/01-03-PLAN.md — Index surfaces, UW branding, RSS + Pagefind, BRD-03 QA checkpoint
+- [x] 01-complete-the-site-surface/01-03-PLAN.md — Index surfaces, UW branding, RSS + Pagefind, BRD-03 QA checkpoint
 **UI hint:** yes
 
 ---
@@ -82,7 +82,7 @@
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Complete the Site Surface | 2/3 | In Progress | — |
+| 1. Complete the Site Surface | 3/3 | Complete | 2026-04-18 |
 | 2. Content Migration | 0/TBD | Not started | — |
 | 3. CMS & Production Launch | 0/TBD | Not started | — |
 
@@ -115,4 +115,4 @@ All v1 requirements are mapped exactly once. No orphans, no duplicates.
 ---
 
 *Roadmap defined: 2026-04-17*
-*Last updated: 2026-04-17*
+*Last updated: 2026-04-18 (Phase 1 complete)*
