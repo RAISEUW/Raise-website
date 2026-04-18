@@ -1,0 +1,101 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'RAISE — Center for Responsibility in AI Systems and Experiences',
+  description = 'Advancing AI that serves the public good. Research center at the University of Washington.',
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="RAISE Articles" href="/rss.xml" />
+
+    <!-- Fonts (preload) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    <Nav />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+
+    <!-- Lenis smooth scroll + scroll-reveal (re-run on every view transition) -->
+    <script>
+      import Lenis from 'lenis';
+      import { setupReveal } from '../scripts/reveal';
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Module-scoped: Lenis initializes exactly ONCE even if astro:page-load fires many times.
+      let lenisInitialized = false;
+      function initLenis() {
+        if (lenisInitialized || prefersReducedMotion) return;
+        const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
+        function raf(time: number) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+        lenisInitialized = true;
+      }
+
+      // Fires on initial page load AND after every Astro view transition
+      document.addEventListener('astro:page-load', () => {
+        initLenis();
+        setupReveal();
+      });
+    </script>
+
+    <!-- Keyboard shortcuts -->
+    <script>
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && (e.target as HTMLElement).tagName !== 'INPUT') {
+          e.preventDefault();
+          const searchInput = document.querySelector<HTMLInputElement>('[data-pagefind-ui] input');
+          if (searchInput) searchInput.focus();
+          else window.location.href = '/search';
+        }
+      });
+    </script>
+  </body>
+</html>
