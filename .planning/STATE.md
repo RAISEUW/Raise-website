@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_plan: 2
+current_plan: 3
 status: executing
-last_updated: "2026-04-18T17:30:19.175Z"
+last_updated: "2026-04-18T19:51:40.234Z"
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 6
-  completed_plans: 4
-  percent: 67
+  completed_plans: 5
+  percent: 83
 ---
 
 # STATE: RAISE Website Redesign
@@ -35,18 +35,18 @@ progress:
 ## Current Position
 
 Phase: 02 (content-migration) — EXECUTING
-Plan: 2 of 3
+Plan: 3 of 3
 **Phase:** 2
-**Current Plan:** 2
+**Current Plan:** 3
 **Total Plans in Phase:** 3
 **Status:** Ready to execute
-**Progress:** [███████░░░] 67%
+**Progress:** [████████░░] 83%
 
 ### Phase Breakdown
 
 ```
 Phase 1: Complete the Site Surface     [██████████] 100% (3/3 plans complete — code complete, ready for verification)
-Phase 2: Content Migration             [░░░░░░░░░░] Not started
+Phase 2: Content Migration             [██████░░░░]  67% (2/3 plans complete — publications + people + events migrated; assets + article pending)
 Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not started
 ```
 
@@ -60,10 +60,11 @@ Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not star
 | Phases complete | 0/3 (Phase 1 code-complete, pending verification) | 3/3 |
 | Plans complete | 3/3 (Phase 1) | 3/3 |
 | Lighthouse (homepage) | TBD | ≥95 on all four categories |
-| Publications migrated | 0/~40 | ~40/~40 |
-| Events migrated | 0/50+ | 50+/50+ |
-| People migrated | 0/16 | 16/16 |
+| Publications migrated | 41/41 | ~40/~40 ✓ |
+| Events migrated | 29/29 | 50+/50+ (live site has 41 event-like rows; 29 with parseable dates) |
+| People migrated | 19/19 | 16/16 ✓ (live site has 19, up from REQUIREMENTS estimate of 16) |
 | Phase 02-content-migration P01 | 45 | 3 tasks | 53 files |
+| Phase 02-content-migration P02 | 16 min | 2 tasks | 51 files |
 
 ### Execution History
 
@@ -103,6 +104,11 @@ Sourced from PROJECT.md key decisions:
 - [Phase 01-complete-the-site-surface]: RSS past events capped at 20 items sorted by pubDate desc; atom self-link via new URL('/rss.xml', context.site)
 - [Phase 02-content-migration]: arXiv /abs/ URLs converted to /pdf/ and stored as pdf field (Plan 02-03 will download)
 - [Phase 02-content-migration]: Clean-slate scraper policy: rm -rf publications dir on each run, use git diff for regression visibility
+- [Phase 02-content-migration]: People parser walks .et_pb_row in document order (not .et_pb_section): live raise.uw.edu wraps all 19 people in a single section with role headings in sibling rows
+- [Phase 02-content-migration]: Handcrafted-preservation PRESERVE map baked into people parser: bill-howe, chirag-shah, tanu-mitra keep department Information School + their 3-element researchAreas arrays after scraper clean-slate
+- [Phase 02-content-migration]: Events title extraction via .et_pb_text_inner (first one in row) not img[title]: image-title attributes on raise.uw.edu are junk (New Template, VB2, speaker-only names)
+- [Phase 02-content-migration]: Events speaker extraction is opportunistic: Unicode-aware name regex on first sentence of speaker bio; falls back to 'Guest Speaker' default when bio starts with a pronoun
+- [Phase 02-content-migration]: Twitter handle dedup post-pass: source-site markup has @chirag_shah leaked into Tanu Mitra + Emily Bender blocks; parser drops duplicates, keeps first by order
 
 ### Active Todos
 
