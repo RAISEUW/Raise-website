@@ -1,0 +1,185 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map((e) => ({ params: { slug: e.id }, props: e }));
+}
+
+const event = Astro.props;
+const { Content } = await render(event);
+
+const formattedDate = event.data.date.toLocaleDateString('en-US', {
+  weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'
+});
+---
+
+<Base
+  title={`${event.data.title} — RAISE Events`}
+  description={event.data.abstract ?? `${event.data.speaker} at RAISE`}
+>
+  <article class="event-detail" data-pagefind-body>
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="/events">← Events</a>
+      </nav>
+
+      {event.data.upcoming && (
+        <div class="upcoming-banner animate-fade-up">Upcoming Event</div>
+      )}
+
+      <div class="event-meta-bar animate-fade-up animate-delay-100">
+        <time datetime={event.data.date.toISOString()}>{formattedDate}</time>
+        {event.data.time && <span>· {event.data.time}</span>}
+        {event.data.location && <span>· {event.data.location}</span>}
+      </div>
+
+      <h1 class="event-title animate-fade-up animate-delay-200">{event.data.title}</h1>
+      <p class="event-speaker-line animate-fade-up animate-delay-300">Presented by {event.data.speaker}</p>
+
+      {event.data.speakerBio && (
+        <p class="speaker-bio">{event.data.speakerBio}</p>
+      )}
+
+      <div class="event-actions animate-fade-up animate-delay-400">
+        {event.data.recording && (
+          <a href={event.data.recording} target="_blank" rel="noopener" class="action-btn action-btn--primary">
+            Watch Recording ↗
+          </a>
+        )}
+        {event.data.slides && (
+          <a href={event.data.slides} target="_blank" rel="noopener" class="action-btn">
+            View Slides ↗
+          </a>
+        )}
+        {event.data.upcoming && (
+          <a href="#" class="action-btn action-btn--primary">Register →</a>
+        )}
+      </div>
+
+      {event.data.abstract && (
+        <section class="event-abstract reveal">
+          <h2>Abstract</h2>
+          <p>{event.data.abstract}</p>
+        </section>
+      )}
+
+      <div class="event-body prose reveal">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+.event-detail { padding: 4rem 0 8rem; }
+.container { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+
+.breadcrumb { margin-bottom: 2rem; }
+.breadcrumb a {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+.breadcrumb a:hover { color: var(--color-base); }
+
+.upcoming-banner {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-pill);
+  margin-bottom: 1.25rem;
+}
+
+.event-meta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 1rem;
+}
+
+.event-title {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.event-speaker-line {
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin-bottom: 0.5rem;
+}
+
+.speaker-bio {
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-border);
+}
+
+.event-actions { display: flex; gap: 0.75rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius-btn);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  transition: all 0.2s;
+}
+
+.action-btn:hover { border-color: var(--color-base); color: var(--color-base); text-decoration: none; }
+
+.action-btn--primary {
+  background: var(--color-base);
+  color: var(--color-surface);
+  border-color: var(--color-base);
+}
+
+.action-btn--primary:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-surface);
+}
+
+.event-abstract {
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.event-abstract h2 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 0.75rem;
+}
+
+.event-abstract p { font-size: 0.95rem; line-height: 1.7; }
+
+@media (prefers-color-scheme: dark) {
+  .speaker-bio { border-left-color: var(--color-border-dark); }
+  .event-abstract { border-color: var(--color-border-dark); }
+  .action-btn--primary { background: var(--color-surface); color: var(--color-base); border-color: var(--color-surface); }
+}
+</style>
