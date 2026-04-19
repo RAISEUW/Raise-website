@@ -79,7 +79,12 @@ Plans:
   4. Homepage scores ≥ 95 on all four Lighthouse categories (Performance, Accessibility, Best Practices, SEO) measured against the deployed Cloudflare Pages URL
   5. Visitor submitting the contact form on Get Involved receives a success state and the RAISE team receives a notification (via Cloudflare Pages Function or Formspree)
 
-**Plans:** TBD
+**Plans:** 3 plans
+
+Plans:
+- [ ] 03-cms-production-launch/03-01-PLAN.md — CMS-01..03: Decap CMS at /admin with all 4 collections
+- [ ] 03-cms-production-launch/03-02-PLAN.md — DEPL-03, DEPL-05: _redirects + Formspree form + /thanks page
+- [ ] 03-cms-production-launch/03-03-PLAN.md — DEPL-01, DEPL-02, DEPL-04: Cloudflare Pages deploy + Decap Cloud registration + Lighthouse ≥ 95
 
 ---
 
