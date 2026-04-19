@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 current_plan: 3
 status: verifying
-last_updated: "2026-04-19T23:14:28.973Z"
+last_updated: "2026-04-19T23:29:51.644Z"
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 6
-  completed_plans: 7
+  completed_plans: 8
   percent: 100
 ---
 
@@ -66,6 +66,7 @@ Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not star
 | Phase 02-content-migration P01 | 45 | 3 tasks | 53 files |
 | Phase 02-content-migration P02 | 16 min | 2 tasks | 51 files |
 | Phase 03-cms-production-launch P01 | 8min | 2 tasks | 2 files |
+| Phase 03-cms-production-launch P02 | 3min | 4 tasks | 3 files |
 
 ### Execution History
 
@@ -113,6 +114,9 @@ Sourced from PROJECT.md key decisions:
 - [Phase 03-cms-production-launch]: Dropped events.image from Decap config.yml — field not in content.config.ts schema (plan interfaces section was stale); schema is source of truth
 - [Phase 03-cms-production-launch]: backend.repo in Decap config is 'mayuri-tech/RAISE' placeholder — must be updated in Plan 03-03 when the repo is pushed to its final GitHub location
 - [Phase 03-cms-production-launch]: Added widget: markdown body field to each Decap collection — MDX content body is implicit in Zod schema but Decap needs an explicit widget so editors can write prose
+- [Phase 03-cms-production-launch]: Formspree endpoint https://formspree.io/f/xlgaljyb hardcoded in form action; recipient email configured dashboard-side (D-02) to keep PII out of repo
+- [Phase 03-cms-production-launch]: Form post-submit uses Formspree _next hidden input to land on branded /thanks page (D-03) instead of Formspree's default success page
+- [Phase 03-cms-production-launch]: _redirects catch-alls /people/* and /publications/* redirect to index pages (per D-11): visitors from old WordPress slugs land on the relevant index rather than 404
 
 ### Active Todos
 

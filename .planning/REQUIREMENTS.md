@@ -72,9 +72,9 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 
 - [ ] **DEPL-01**: Site builds successfully on Cloudflare Pages (build command: `pnpm build`, output: `dist/`)
 - [ ] **DEPL-02**: Site is live at a Cloudflare Pages URL (staging before DNS cutover)
-- [ ] **DEPL-03**: Old WordPress URLs redirect correctly: `/talksevents/` → `/events`, `/people/` → `/people`, `/publications/` → `/publications`
+- [x] **DEPL-03**: Old WordPress URLs redirect correctly: `/talksevents/` → `/events`, `/people/` → `/people`, `/publications/` → `/publications`
 - [ ] **DEPL-04**: Lighthouse scores ≥ 95 on Performance, Accessibility, Best Practices, SEO on homepage
-- [ ] **DEPL-05**: Contact form submits successfully and sends a notification to the RAISE team
+- [x] **DEPL-05**: Contact form submits successfully and sends a notification to the RAISE team
 
 ---
 
@@ -148,9 +148,9 @@ Every v1 requirement is mapped to exactly one phase.
 | CMS-03 | Phase 3 | Complete |
 | DEPL-01 | Phase 3 | Pending |
 | DEPL-02 | Phase 3 | Pending |
-| DEPL-03 | Phase 3 | Pending |
+| DEPL-03 | Phase 3 | Complete |
 | DEPL-04 | Phase 3 | Pending |
-| DEPL-05 | Phase 3 | Pending |
+| DEPL-05 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 26 total
