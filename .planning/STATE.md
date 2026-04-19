@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 current_plan: 3
-status: executing
-last_updated: "2026-04-18T19:51:40.234Z"
+status: verifying
+last_updated: "2026-04-19T23:14:28.973Z"
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 6
-  completed_plans: 5
-  percent: 83
+  completed_plans: 7
+  percent: 100
 ---
 
 # STATE: RAISE Website Redesign
@@ -39,8 +39,8 @@ Plan: 3 of 3
 **Phase:** 2
 **Current Plan:** 3
 **Total Plans in Phase:** 3
-**Status:** Ready to execute
-**Progress:** [████████░░] 83%
+**Status:** Phase complete — ready for verification
+**Progress:** [██████████] 100%
 
 ### Phase Breakdown
 
@@ -65,6 +65,7 @@ Phase 3: CMS & Production Launch       [░░░░░░░░░░] Not star
 | People migrated | 19/19 | 16/16 ✓ (live site has 19, up from REQUIREMENTS estimate of 16) |
 | Phase 02-content-migration P01 | 45 | 3 tasks | 53 files |
 | Phase 02-content-migration P02 | 16 min | 2 tasks | 51 files |
+| Phase 03-cms-production-launch P01 | 8min | 2 tasks | 2 files |
 
 ### Execution History
 
@@ -109,6 +110,9 @@ Sourced from PROJECT.md key decisions:
 - [Phase 02-content-migration]: Events title extraction via .et_pb_text_inner (first one in row) not img[title]: image-title attributes on raise.uw.edu are junk (New Template, VB2, speaker-only names)
 - [Phase 02-content-migration]: Events speaker extraction is opportunistic: Unicode-aware name regex on first sentence of speaker bio; falls back to 'Guest Speaker' default when bio starts with a pronoun
 - [Phase 02-content-migration]: Twitter handle dedup post-pass: source-site markup has @chirag_shah leaked into Tanu Mitra + Emily Bender blocks; parser drops duplicates, keeps first by order
+- [Phase 03-cms-production-launch]: Dropped events.image from Decap config.yml — field not in content.config.ts schema (plan interfaces section was stale); schema is source of truth
+- [Phase 03-cms-production-launch]: backend.repo in Decap config is 'mayuri-tech/RAISE' placeholder — must be updated in Plan 03-03 when the repo is pushed to its final GitHub location
+- [Phase 03-cms-production-launch]: Added widget: markdown body field to each Decap collection — MDX content body is implicit in Zod schema but Decap needs an explicit widget so editors can write prose
 
 ### Active Todos
 

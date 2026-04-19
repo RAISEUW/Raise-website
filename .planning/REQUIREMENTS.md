@@ -59,9 +59,9 @@ The following are built and working in `/Users/mayuri/Projects/RAISE/site/`:
 
 ### CMS
 
-- [ ] **CMS-01**: Decap CMS is accessible at /admin — non-dev editors can log in via GitHub OAuth
-- [ ] **CMS-02**: Decap CMS can create, edit, and publish articles (commits MDX to repo, triggers Cloudflare deploy)
-- [ ] **CMS-03**: Decap CMS can create and edit events, people, and publications entries
+- [x] **CMS-01**: Decap CMS is accessible at /admin — non-dev editors can log in via GitHub OAuth
+- [x] **CMS-02**: Decap CMS can create, edit, and publish articles (commits MDX to repo, triggers Cloudflare deploy)
+- [x] **CMS-03**: Decap CMS can create and edit events, people, and publications entries
 
 ### Feed & Discovery
 
@@ -143,9 +143,9 @@ Every v1 requirement is mapped to exactly one phase.
 | MIG-03 | Phase 2 | Complete |
 | MIG-04 | Phase 2 | Pending |
 | MIG-05 | Phase 2 | Pending |
-| CMS-01 | Phase 3 | Pending |
-| CMS-02 | Phase 3 | Pending |
-| CMS-03 | Phase 3 | Pending |
+| CMS-01 | Phase 3 | Complete |
+| CMS-02 | Phase 3 | Complete |
+| CMS-03 | Phase 3 | Complete |
 | DEPL-01 | Phase 3 | Pending |
 | DEPL-02 | Phase 3 | Pending |
 | DEPL-03 | Phase 3 | Pending |
