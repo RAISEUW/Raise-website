@@ -58,10 +58,10 @@ import Base from '../layouts/Base.astro';
         class="contact-form"
         name="contact"
         method="POST"
-        action="/thanks"
-        data-netlify="true"
+        action="https://formspree.io/f/xlgaljyb"
       >
-        <input type="hidden" name="form-name" value="contact" />
+        <input type="hidden" name="_next" value="/thanks" />
+        <input type="hidden" name="_subject" value="New RAISE contact form submission" />
 
         <div class="form-row">
           <div class="form-field">
