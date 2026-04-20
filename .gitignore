@@ -1,0 +1,9 @@
+# Claude Code local session data
+.claude/settings.local.json
+.claude/worktrees/
+
+# Playwright MCP session logs and screenshots
+.playwright-mcp/
+
+# macOS
+.DS_Store

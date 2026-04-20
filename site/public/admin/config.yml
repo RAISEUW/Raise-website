@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: mayuri-tech/RAISE
+  repo: RAISEUW/Raise-website
   branch: main
   base_url: https://api.decapcms.org
   # site_domain intentionally omitted — Decap Cloud infers from referrer for public repos.
