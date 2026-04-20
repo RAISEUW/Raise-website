@@ -1,6 +1,9 @@
 # Claude Code local session data
 .claude/settings.local.json
 .claude/worktrees/
+.claude/
+.planning/
+CLAUDE.md
 
 # Playwright MCP session logs and screenshots
 .playwright-mcp/
