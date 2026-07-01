@@ -6,7 +6,8 @@
 (function () {
   'use strict';
 
-  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+  function safeUrl(u) { try { var url = new URL(u, location.href); return /^https?:$/.test(url.protocol) ? url.href : '#'; } catch (e) { return '#'; } }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
 
   /* ---------- render hero carousel from data ---------- */
@@ -25,7 +26,7 @@
           '<h1 class="display">' + esc(p.title) + '</h1>' +
           '<p class="hero__dek">' + esc(p.authors) + '</p>' +
           '<div class="hero__actions">' +
-            '<a class="btn btn--light" href="' + esc(p.url) + '" target="_blank" rel="noopener">Read the paper <span class="arr">\u2197</span></a>' +
+            '<a class="btn btn--light" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">Read the paper <span class="arr">\u2197</span></a>' +
             '<a class="btn btn--onpurple-ghost" href="publications.html">All publications</a>' +
           '</div>' +
         '</div></article>';
@@ -50,7 +51,7 @@
         '<h3 class="pub-item__title">' + esc(p.title) + '</h3>' +
         '<p class="pub-item__authors">' + esc(p.authors) + '</p>' +
         '<div class="pub-item__foot"><span class="pub-item__venue">' + esc(p.venue) + '</span>' +
-        '<a class="link-arrow" href="' + esc(p.url) + '" target="_blank" rel="noopener">Read <span class="arr">\u2197</span></a></div></article>';
+        '<a class="link-arrow" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">Read <span class="arr">\u2197</span></a></div></article>';
     }).join('');
   }
 

@@ -112,7 +112,8 @@
   var all = [];
   var theme = 'all', query = '';
 
-  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+  function safeUrl(u) { try { var url = new URL(u, location.href); return /^https?:$/.test(url.protocol) ? url.href : '#'; } catch (e) { return '#'; } }
 
   function matches(p) {
     if (theme !== 'all' && (p.themes || []).indexOf(theme) < 0) return false;
@@ -136,7 +137,7 @@
             '<h3 class="pub-item__title">' + esc(p.title) + '</h3>' +
             '<p class="pub-item__authors">' + esc(p.authors) + '</p>' +
             '<div class="pub-item__foot"><span class="pub-item__venue">' + esc(p.venue) + '</span>' +
-            '<a class="link-arrow" href="' + esc(p.url) + '" target="_blank" rel="noopener">Read <span class="arr">↗</span></a></div></article>';
+            '<a class="link-arrow" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">Read <span class="arr">↗</span></a></div></article>';
         }).join('') + '</div></div>';
     }).join('') || '<p class="muted" style="padding:32px 0">Nothing matches — try a different theme or search.</p>';
     document.getElementById('resultCount').textContent = pubs.length + ' of ' + all.length + ' publications';
