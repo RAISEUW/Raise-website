@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RAISE · Site editor</title>
+<meta name="robots" content="noindex" />
+<link rel="stylesheet" href="assets/raise.css" />
+<link rel="icon" href="assets/raise-icon.jpg" />
+<style>
+  body { background: var(--sand); }
+  .adm-header { background: var(--purple-dd); padding: 18px 0; }
+  .adm-header .wrap { display: flex; align-items: center; gap: 16px; }
+  .adm-header img { height: 30px; }
+  .adm-header .adm-tag { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(183,165,122,.45); border-radius: 12px; padding: 3px 11px; white-space: nowrap; }
+  .adm-header a.back { margin-left: auto; font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.85); white-space: nowrap; }
+  .adm-header a.back:hover { color: #fff; }
+
+  .adm-main { max-width: var(--maxw); margin: 0 auto; padding: 32px var(--gutter) 80px; }
+  .adm-intro { font-size: 15px; color: var(--ink-2); max-width: 70ch; margin: 0 0 28px; }
+  .adm-intro code { font-family: var(--mono); font-size: 13px; background: var(--sand-2); padding: 1px 6px; border-radius: 4px; }
+
+  .adm-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 28px; align-items: start; }
+  @media (max-width: 980px) { .adm-grid { grid-template-columns: 1fr; } }
+
+  .adm-card { background: var(--paper); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .adm-card__head { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  .adm-card__title { font-family: var(--serif); font-size: 21px; }
+  .adm-count { font-family: var(--mono); font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+  .adm-count strong { color: var(--purple); font-weight: 600; }
+
+  .adm-list { max-height: 560px; overflow-y: auto; }
+  .adm-row { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; padding: 14px 20px; border-bottom: 1px solid var(--sand-2); }
+  .adm-row:hover { background: var(--sand); }
+  .adm-row__title { font-weight: 600; font-size: 14.5px; line-height: 1.35; }
+  .adm-row__meta { grid-column: 1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-family: var(--mono); font-size: 11.5px; line-height: 1.5; color: var(--ink-3); }
+  .adm-row__meta > span { white-space: nowrap; }
+  .adm-row__meta > span:last-child { white-space: normal; }
+  .adm-badge { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 10px; font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; }
+  .adm-badge--hero { background: #efeaf6; color: var(--purple); }
+  .adm-badge--sel { background: var(--spirit); color: var(--gold-d); }
+  .adm-row__btns { grid-row: 1 / 3; display: flex; align-items: center; gap: 6px; }
+  .adm-ibtn { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--line-2); border-radius: 6px; background: var(--paper); color: var(--ink-2); cursor: pointer; font-size: 13px; transition: all .12s; }
+  .adm-ibtn:hover { border-color: var(--purple); color: var(--purple); }
+  .adm-ibtn--danger:hover { border-color: #b3261e; color: #b3261e; }
+  .adm-ibtn:disabled { opacity: .35; cursor: default; }
+
+  .adm-form { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .adm-field label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 6px; }
+  .adm-field input[type="text"], .adm-field input[type="url"], .adm-field input[type="number"], .adm-field textarea {
+    width: 100%; box-sizing: border-box; font-family: var(--sans); font-size: 14.5px; color: var(--ink);
+    border: 1px solid var(--line-2); border-radius: 5px; padding: 10px 12px; background: var(--paper);
+  }
+  .adm-field textarea { min-height: 64px; resize: vertical; }
+  .adm-field input:focus, .adm-field textarea:focus { outline: 2px solid var(--purple); outline-offset: -1px; }
+  .adm-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .adm-checks { display: flex; flex-wrap: wrap; gap: 10px 18px; }
+  .adm-checks label { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; color: var(--ink); cursor: pointer; }
+  .adm-checks input { accent-color: var(--purple); width: 15px; height: 15px; }
+  .adm-form__btns { display: flex; gap: 10px; padding-top: 4px; }
+  .adm-note { font-size: 12.5px; color: var(--ink-3); line-height: 1.5; }
+
+  .adm-publish { margin-top: 28px; }
+  .adm-publish .adm-form { gap: 16px; }
+  .adm-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .adm-status { font-family: var(--mono); font-size: 12.5px; padding: 10px 14px; border-radius: 5px; display: none; }
+  .adm-status.ok { display: block; background: #e9f3ea; color: #1d6b2e; }
+  .adm-status.err { display: block; background: #fbeae9; color: #b3261e; }
+  .adm-gh { border-top: 1px solid var(--line); padding-top: 16px; display: none; }
+  .adm-gh.open { display: flex; flex-direction: column; gap: 14px; }
+  details.adm-json { border-top: 1px solid var(--line); padding-top: 14px; }
+  details.adm-json summary { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); cursor: pointer; }
+  details.adm-json pre { max-height: 260px; overflow: auto; background: var(--sand-2); border-radius: 6px; padding: 14px; font-family: var(--mono); font-size: 11.5px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="adm-header">
+  <div class="wrap">
+    <img src="assets/raise-logo.png" alt="RAISE" />
+    <span class="adm-tag">Site editor</span>
+    <a class="back" href="index.html">← Back to site</a>
+  </div>
+</div>
+
+<main class="adm-main">
+  <p class="adm-intro">
+    Update the website without touching HTML. Edit publications below, choose up to five to feature in the homepage
+    carousel, then publish. The site reads everything from <code>data/site-data.json</code> — committing that one file
+    to the GitHub repository puts your changes live.
+  </p>
+
+  <div class="adm-grid">
+    <!-- ===== list ===== -->
+    <section class="adm-card">
+      <div class="adm-card__head">
+        <span class="adm-card__title">Publications</span>
+        <span class="adm-count"><span id="heroCount">0</span>/5 in hero · <strong id="pubCount">0</strong> total</span>
+      </div>
+      <div class="adm-list" id="admList"></div>
+    </section>
+
+    <!-- ===== form ===== -->
+    <section class="adm-card">
+      <div class="adm-card__head">
+        <span class="adm-card__title" id="formTitle">Add a publication</span>
+      </div>
+      <form class="adm-form" id="admForm">
+        <div class="adm-field"><label for="f-title">Title</label><textarea id="f-title" required></textarea></div>
+        <div class="adm-field"><label for="f-short">Short title <span style="text-transform:none;letter-spacing:0">(for the hero rail)</span></label><input type="text" id="f-short" /></div>
+        <div class="adm-field"><label for="f-authors">Authors</label><textarea id="f-authors" required></textarea></div>
+        <div class="adm-2col">
+          <div class="adm-field"><label for="f-venue">Venue</label><input type="text" id="f-venue" placeholder="ICWSM 2025" required /></div>
+          <div class="adm-field"><label for="f-year">Year</label><input type="number" id="f-year" min="2000" max="2100" required /></div>
+        </div>
+        <div class="adm-field"><label for="f-url">Link (paper URL)</label><input type="url" id="f-url" required /></div>
+        <div class="adm-field"><label for="f-tags">Tags <span style="text-transform:none;letter-spacing:0">(comma-separated)</span></label><input type="text" id="f-tags" placeholder="llm, misinformation" /></div>
+        <div class="adm-field">
+          <label>Filter themes</label>
+          <div class="adm-checks" id="f-themes">
+            <label><input type="checkbox" value="alignment" />alignment</label>
+            <label><input type="checkbox" value="misinformation" />misinformation</label>
+            <label><input type="checkbox" value="llm" />llm</label>
+            <label><input type="checkbox" value="fairness" />fairness</label>
+          </div>
+        </div>
+        <div class="adm-field">
+          <label>Placement</label>
+          <div class="adm-checks">
+            <label><input type="checkbox" id="f-hero" />Feature in homepage hero</label>
+            <label><input type="checkbox" id="f-selected" />Show in “Recent publications”</label>
+          </div>
+        </div>
+        <div class="adm-form__btns">
+          <button class="btn btn--primary" type="submit" id="saveBtn">Add publication</button>
+          <button class="btn btn--ghost" type="button" id="cancelBtn" style="display:none">Cancel</button>
+        </div>
+        <p class="adm-note">New entries are added to the top of the list. The hero shows the first five entries marked “hero”; the homepage list shows the first six marked “recent”.</p>
+      </form>
+    </section>
+  </div>
+
+  <!-- ===== publish ===== -->
+  <section class="adm-card adm-publish">
+    <div class="adm-card__head"><span class="adm-card__title">Publish changes</span></div>
+    <div class="adm-form">
+      <div class="adm-actions">
+        <button class="btn btn--primary" id="ghToggle" type="button">Publish to GitHub <span class="arr">→</span></button>
+        <button class="btn btn--ghost" id="dlBtn" type="button">Download site-data.json</button>
+        <button class="btn btn--ghost" id="copyBtn" type="button">Copy JSON</button>
+      </div>
+      <div class="adm-status" id="status"></div>
+
+      <div class="adm-gh" id="ghPanel">
+        <div class="adm-2col">
+          <div class="adm-field"><label for="gh-repo">Repository <span style="text-transform:none;letter-spacing:0">(owner/name)</span></label><input type="text" id="gh-repo" placeholder="uw-raise/raise-website" /></div>
+          <div class="adm-field"><label for="gh-branch">Branch</label><input type="text" id="gh-branch" value="main" /></div>
+        </div>
+        <div class="adm-field"><label for="gh-token">Fine-grained access token <span style="text-transform:none;letter-spacing:0">(contents: read &amp; write — stored only in this browser)</span></label><input type="text" id="gh-token" placeholder="github_pat_…" /></div>
+        <div class="adm-actions">
+          <button class="btn btn--primary" id="ghPublish" type="button">Commit data/site-data.json</button>
+        </div>
+        <p class="adm-note">Creates a commit “Update site content via editor” on the chosen branch. GitHub Pages redeploys automatically (≈1 minute). Create a token at GitHub → Settings → Developer settings → Fine-grained tokens, scoped to just this repository.</p>
+      </div>
+
+      <details class="adm-json">
+        <summary>Preview JSON</summary>
+        <pre id="jsonPreview"></pre>
+      </details>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var DATA_PATH = 'data/site-data.json';
+  var state = { publications: [] };
+  var editIndex = -1;
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+  /* ---------- list rendering ---------- */
+  function render() {
+    var list = $('admList');
+    var pubs = state.publications;
+    list.innerHTML = pubs.map(function (p, i) {
+      return '<div class="adm-row">' +
+        '<div class="adm-row__title">' + esc(p.title) + '</div>' +
+        '<div class="adm-row__btns">' +
+          '<button class="adm-ibtn" data-act="up" data-i="' + i + '" title="Move up"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
+          '<button class="adm-ibtn" data-act="down" data-i="' + i + '" title="Move down"' + (i === pubs.length - 1 ? ' disabled' : '') + '>↓</button>' +
+          '<button class="adm-ibtn" data-act="edit" data-i="' + i + '" title="Edit">✎</button>' +
+          '<button class="adm-ibtn adm-ibtn--danger" data-act="del" data-i="' + i + '" title="Delete">✕</button>' +
+        '</div>' +
+        '<div class="adm-row__meta">' +
+          '<span>' + esc(p.venue) + '</span>' +
+          (p.hero ? '<span class="adm-badge adm-badge--hero">hero</span>' : '') +
+          (p.selected ? '<span class="adm-badge adm-badge--sel">recent</span>' : '') +
+          (p.tags && p.tags.length ? '<span>' + esc(p.tags.join(' · ')) + '</span>' : '') +
+        '</div></div>';
+    }).join('') || '<div class="adm-row"><div class="adm-row__meta">No publications yet — add one with the form.</div></div>';
+    $('pubCount').textContent = pubs.length;
+    $('heroCount').textContent = pubs.filter(function (p) { return p.hero; }).length;
+    $('jsonPreview').textContent = JSON.stringify(state, null, 2);
+  }
+
+  /* ---------- form ---------- */
+  function themeBoxes() { return Array.prototype.slice.call($('f-themes').querySelectorAll('input')); }
+  function fillForm(p) {
+    $('f-title').value = p ? p.title : '';
+    $('f-short').value = p ? (p.shortTitle || '') : '';
+    $('f-authors').value = p ? p.authors : '';
+    $('f-venue').value = p ? p.venue : '';
+    $('f-year').value = p ? p.year : new Date().getFullYear();
+    $('f-url').value = p ? p.url : '';
+    $('f-tags').value = p && p.tags ? p.tags.join(', ') : '';
+    themeBoxes().forEach(function (b) { b.checked = !!(p && p.themes && p.themes.indexOf(b.value) > -1); });
+    $('f-hero').checked = !!(p && p.hero);
+    $('f-selected').checked = p ? !!p.selected : true;
+  }
+  function setMode(i) {
+    editIndex = i;
+    $('formTitle').textContent = i < 0 ? 'Add a publication' : 'Edit publication';
+    $('saveBtn').textContent = i < 0 ? 'Add publication' : 'Save changes';
+    $('cancelBtn').style.display = i < 0 ? 'none' : 'inline-flex';
+    fillForm(i < 0 ? null : state.publications[i]);
+    if (i >= 0) $('f-title').focus();
+  }
+
+  $('admForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var p = {
+      title: $('f-title').value.trim(),
+      shortTitle: $('f-short').value.trim() || undefined,
+      authors: $('f-authors').value.trim(),
+      venue: $('f-venue').value.trim(),
+      year: +$('f-year').value,
+      tags: $('f-tags').value.split(',').map(function (t) { return t.trim(); }).filter(Boolean),
+      themes: themeBoxes().filter(function (b) { return b.checked; }).map(function (b) { return b.value; }),
+      url: $('f-url').value.trim(),
+      hero: $('f-hero').checked,
+      selected: $('f-selected').checked
+    };
+    if (p.hero && state.publications.filter(function (x, k) { return x.hero && k !== editIndex; }).length >= 5) {
+      status('err', 'Five publications are already marked “hero” — untick one first.');
+      return;
+    }
+    if (editIndex < 0) state.publications.unshift(p);
+    else state.publications[editIndex] = p;
+    setMode(-1);
+    render();
+    status('ok', editIndex < 0 ? 'Added. Remember to publish.' : 'Saved. Remember to publish.');
+  });
+  $('cancelBtn').addEventListener('click', function () { setMode(-1); });
+
+  $('admList').addEventListener('click', function (e) {
+    var b = e.target.closest('.adm-ibtn'); if (!b) return;
+    var i = +b.dataset.i, act = b.dataset.act, pubs = state.publications;
+    if (act === 'up' && i > 0) { pubs.splice(i - 1, 0, pubs.splice(i, 1)[0]); }
+    else if (act === 'down' && i < pubs.length - 1) { pubs.splice(i + 1, 0, pubs.splice(i, 1)[0]); }
+    else if (act === 'edit') { setMode(i); return; }
+    else if (act === 'del') { if (confirm('Delete “' + pubs[i].title.slice(0, 60) + '…”?')) { pubs.splice(i, 1); if (editIndex === i) setMode(-1); } }
+    render();
+  });
+
+  /* ---------- publish ---------- */
+  function status(kind, msg) { var s = $('status'); s.className = 'adm-status ' + kind; s.textContent = msg; }
+  function jsonString() { return JSON.stringify(state, null, 2) + '\n'; }
+
+  $('dlBtn').addEventListener('click', function () {
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([jsonString()], { type: 'application/json' }));
+    a.download = 'site-data.json';
+    a.click();
+    status('ok', 'Downloaded — place it at data/site-data.json in the repository and commit.');
+  });
+  $('copyBtn').addEventListener('click', function () {
+    navigator.clipboard.writeText(jsonString()).then(function () { status('ok', 'JSON copied to clipboard.'); },
+      function () { status('err', 'Could not copy — use Download instead.'); });
+  });
+  $('ghToggle').addEventListener('click', function () { $('ghPanel').classList.toggle('open'); });
+
+  ['gh-repo', 'gh-branch', 'gh-token'].forEach(function (id) {
+    var el = $(id);
+    el.value = localStorage.getItem('raise-adm-' + id) || el.value;
+    el.addEventListener('change', function () { localStorage.setItem('raise-adm-' + id, el.value); });
+  });
+
+  $('ghPublish').addEventListener('click', function () {
+    var repo = $('gh-repo').value.trim(), branch = $('gh-branch').value.trim() || 'main', token = $('gh-token').value.trim();
+    if (!repo || repo.indexOf('/') < 0 || !token) { status('err', 'Fill in repository (owner/name) and token.'); return; }
+    var api = 'https://api.github.com/repos/' + repo + '/contents/' + DATA_PATH;
+    var headers = { 'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github+json' };
+    status('ok', 'Publishing…');
+    fetch(api + '?ref=' + encodeURIComponent(branch), { headers: headers })
+      .then(function (r) { return r.ok ? r.json() : (r.status === 404 ? null : Promise.reject(new Error('GitHub said ' + r.status + ' reading the file'))); })
+      .then(function (existing) {
+        var bytes = new TextEncoder().encode(jsonString());
+        var bin = ''; bytes.forEach(function (b) { bin += String.fromCharCode(b); });
+        var body = { message: 'Update site content via editor', content: btoa(bin), branch: branch };
+        if (existing && existing.sha) body.sha = existing.sha;
+        return fetch(api, { method: 'PUT', headers: headers, body: JSON.stringify(body) });
+      })
+      .then(function (r) {
+        if (!r.ok) return r.json().then(function (j) { throw new Error('GitHub said ' + r.status + (j && j.message ? ': ' + j.message : '')); });
+        status('ok', 'Committed ✓ — GitHub Pages will deploy the change in about a minute.');
+      })
+      .catch(function (e) { status('err', 'Publish failed — ' + e.message); });
+  });
+
+  /* ---------- boot ---------- */
+  fetch(DATA_PATH, { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (data) { state = data && data.publications ? data : { publications: [] }; })
+    .catch(function () { status('err', 'Could not load ' + DATA_PATH + ' — starting with an empty list.'); })
+    .then(function () { setMode(-1); render(); });
+})();
+</script>
+</body>
+</html>

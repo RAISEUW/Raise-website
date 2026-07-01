@@ -1,0 +1,108 @@
+RAISE WEBSITE — TECHNOLOGIES & THIRD PARTIES
+(How the NEW static site is built, hosted, and updated)
+Generated 2026-06-30, before replacing the old site.
+
+=====================================================================
+1. ARCHITECTURE / BUILD
+=====================================================================
+- Plain static HTML + CSS + JavaScript.
+- NO framework, NO build step, NO package.json, NO node_modules.
+- Hand-authored pages:
+    index.html          homepage (hero carousel + recent publications)
+    research-aims.html  the three research aims
+    publications.html   full archive (filter + search)
+    people.html         leadership, affiliates, staff
+    talks.html          speaker series
+    ai-for-all.html     public programs / hack day
+    get-involved.html   contact + community links
+    admin.html          in-browser editor (see GitHub API below)
+- One stylesheet:  assets/raise.css  (imports assets/fonts.css)
+- One script:      assets/site.js    (nav, hero carousel, publications render)
+- Data-driven parts fetch  data/site-data.json  at page load.
+
+=====================================================================
+2. HOSTING / DEPLOYMENT
+=====================================================================
+- GitHub Pages — free static hosting. Deploy from `main` branch, /(root).
+- .nojekyll present -> GitHub serves files verbatim (no Jekyll, no build).
+- Custom domain raise.uw.edu via CNAME + DNS (requires UW IT coordination).
+- Git remote: https://github.com/mayuresh747/Raise-website.git
+
+=====================================================================
+3. THIRD-PARTY SERVICES / INTEGRATIONS (actual dependencies)
+=====================================================================
+- GitHub REST API  (api.github.com)
+    Used ONLY by admin.html. Non-technical editors paste a fine-grained
+    Personal Access Token (scope: this repo, Contents: read & write),
+    stored only in the browser. The editor commits data/site-data.json
+    directly; GitHub Pages redeploys (~1 min).
+- NO CDNs.
+- NO analytics / tracking (no Google Analytics, Plausible, Sentry, etc.).
+- NO cookies, NO external runtime scripts. "Zero external dependencies."
+
+=====================================================================
+4. FONTS (self-hosted — local .woff2 in assets/fonts/, no runtime call)
+=====================================================================
+- Source Serif 4  (Adobe, SIL Open Font License)  weights 400/500/600
+- Source Sans 3   (Adobe, SIL Open Font License)  weights 400/500/600/700/800
+- IBM Plex Mono   (IBM,   SIL Open Font License)  weights 400/500/600
+
+=====================================================================
+5. EXTERNAL LINKS IN CONTENT (destinations only — NOT dependencies)
+=====================================================================
+- Slack workspace invite      join.slack.com/t/responsible-ai
+- UW Mailman mailing list      mailman11.u.washington.edu (raisegroup)
+- Facebook / Twitter (X) @uwresponsibleai / LinkedIn
+- Zoom                         washington.zoom.us  (talks)
+- Google Docs                  docs.google.com     (shared docs)
+- Publications: arXiv, ACM Digital Library, AAAI OJS/ICWSM, OpenReview, DOI
+- aiclinic.uw.edu
+
+=====================================================================
+6. PREVIOUS SITE (the Astro build being deleted) — HOW IT WAS DEPENDENT
+=====================================================================
+The old site under site/ was NOT self-contained. It depended on a full
+npm build toolchain PLUS several live third-party services at runtime.
+
+6a. BUILD TOOLCHAIN (npm — from site/package.json, needs Node >= 22.12)
+    Framework / content:
+      - astro ^6.1.7                 site framework + build step
+      - @astrojs/mdx ^5              MDX content pages
+      - @astrojs/rss ^4             RSS feed generation
+      - zod ^4                       content schema validation
+    Styling:
+      - tailwindcss ^4 + @tailwindcss/vite   utility CSS (build-time)
+    Search:
+      - pagefind ^1.5 + astro-pagefind ^1.8   static search index
+    Animation (all bundled into the build):
+      - gsap ^3.15
+      - motion ^12  +  @vueuse/motion ^3
+      - lenis ^1.3  (smooth scroll)
+    Content-scraper dev tooling (scripts/):
+      - cheerio, gray-matter, date-fns, slug, p-limit, @types/slug, @types/node
+
+6b. LIVE THIRD-PARTY SERVICES IT CALLED (the real external dependencies)
+    - Google Fonts (CDN)  fonts.googleapis.com + fonts.gstatic.com
+        Loaded at runtime in src/layouts/Base.astro:
+        Fraunces, Inter, JetBrains Mono. (NOT self-hosted — public/fonts was
+        empty, so every visitor fetched fonts from Google.)
+    - Decap CMS 3.8.0 (CDN)  unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js
+        The /admin editor script was pulled from the unpkg CDN.
+    - GitHub OAuth  github.com/login/oauth  (scope: repo,user)
+        Editors logged into the CMS via GitHub OAuth.
+    - Cloudflare Worker  raise-cms-auth.mayuresh33.workers.dev  (oauth-worker/)
+        Custom Worker holding GITHUB_CLIENT_ID / GITHUB_CLIENT_SECRET that
+        brokered the Decap <-> GitHub OAuth handshake. Deployed via wrangler.
+    - Decap Cloud / GitHub backend
+        Decap config (public/admin/config.yml) committed MDX straight to the
+        mayuresh747/Raise-website repo, branch main.
+    - Cloudflare Pages  = the hosting platform (public/_headers, _redirects,
+        .wrangler/ state).
+    - Formspree  formspree.io  = backend for the get-involved contact form.
+
+6c. NET DIFFERENCE
+    OLD: Node build + Cloudflare Pages + Cloudflare Worker + Decap CMS (unpkg)
+         + Decap Cloud + GitHub OAuth + Google Fonts CDN + Formspree.
+    NEW: static files on GitHub Pages, self-hosted fonts, and ONE optional
+         call to the GitHub REST API from admin.html. Everything in 6a and
+         6b is removed.

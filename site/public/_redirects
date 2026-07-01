@@ -1,4 +1,0 @@
-# Legacy WordPress URL redirects (per D-11)
-/talksevents/*           /events          301
-/people/*                /people          301
-/publications/*          /publications    301
