@@ -1,2 +1,7 @@
 # macOS
 .DS_Store
+.codex/
+
+# Python validation artifacts
+__pycache__/
+*.py[cod]

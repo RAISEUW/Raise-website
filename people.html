@@ -3,21 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; connect-src 'self'; font-src 'self'; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>People · RAISE — University of Washington</title>
 <meta name="description" content="The people of RAISE — leadership, affiliates, and staff at the University of Washington." />
 <link rel="stylesheet" href="assets/raise.css" />
 <link rel="icon" href="assets/raise-icon.jpg" />
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="site-header" data-mode="solid" data-fixed-mode="solid" id="header">
   <div class="site-header__inner">
     <a class="brand" href="index.html" aria-label="RAISE — home">
-      <img class="brand__logo brand__logo--light" src="assets/raise-logo.png" alt="RAISE" width="80" height="34" />
-      <img class="brand__logo brand__logo--dark" src="assets/raise-logo-purple.png" alt="RAISE" width="80" height="34" />
+      <img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="" width="1284" height="109" />
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="research-aims.html">Research</a>
+      <a href="index.html#research">Research</a>
       <a href="publications.html">Publications</a>
       <a href="people.html" aria-current="page">People</a>
       <a href="talks.html">Talks</a>
@@ -27,24 +29,25 @@
       <a class="btn btn--ghost" href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
       <a class="btn btn--primary" href="get-involved.html">Get involved</a>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 1h20M0 7h20M0 13h20"/></svg>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile" aria-hidden="true">
   <button class="close" id="menuClose" aria-label="Close menu">×</button>
   <a href="index.html">Home</a>
-  <a href="research-aims.html">Research</a>
+  <a href="index.html#research">Research</a>
   <a href="publications.html">Publications</a>
-  <a href="people.html">People</a>
+  <a href="people.html" aria-current="page">People</a>
   <a href="talks.html">Talks</a>
   <a href="ai-for-all.html">AI for All</a>
   <a href="get-involved.html">Get involved</a>
-</div>
+  <a href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
+</nav>
 
-<main>
+<main id="main-content">
   <div class="page-hero">
     <div class="wrap">
       <span class="eyebrow">People</span>
@@ -57,30 +60,30 @@
   <section class="section--tight" style="padding-top: clamp(40px, 6vw, 64px)">
     <div class="wrap">
       <div class="people-section">
-        <div class="people-section__head"><span class="h3 serif">Leadership</span><span class="people-section__count">3</span></div>
+        <div class="people-section__head"><h2 class="h3 serif">Leadership</h2><span class="people-section__count">3</span></div>
         <div class="people-grid">
           <article class="person">
-            <img class="person__photo" src="assets/people/bill-howe.png" alt="Bill Howe" />
+            <img class="person__photo" src="assets/people/bill-howe.png" alt="Bill Howe" width="200" height="300" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Bill Howe</div>
+              <h3 class="person__name">Bill Howe</h3>
               <div class="person__role">Faculty Director · Co-Founder</div>
               <p class="person__bio">Associate Professor in the iSchool, Adjunct Associate Professor in Computer Science &amp; Engineering, and Founding Associate Director of the eScience Institute.</p>
               <div class="person__links"><a class="person__email" href="mailto:billhowe@uw.edu">billhowe@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/tanu-mitra.jpg" alt="Tanu Mitra" />
+            <img class="person__photo" src="assets/people/tanu-mitra.jpg" alt="Tanu Mitra" width="200" height="300" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Tanu Mitra</div>
+              <h3 class="person__name">Tanu Mitra</h3>
               <div class="person__role">Co-Founder</div>
               <p class="person__bio">Professor at the Information School, leading the Social Computing research group — building large-scale systems to understand and counter problematic information online.</p>
               <div class="person__links"><a class="person__email" href="mailto:tmitra@uw.edu">tmitra@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/chirag-shah.jpg" alt="Chirag Shah" />
+            <img class="person__photo" src="assets/people/chirag-shah.jpg" alt="Chirag Shah" width="200" height="300" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Chirag Shah</div>
+              <h3 class="person__name">Chirag Shah</h3>
               <div class="person__role">Co-Founder</div>
               <p class="person__bio">Professor in the Information School and Founding Director of the InfoSeeking Lab, working on information seeking, human-computer interaction, and social media.</p>
               <div class="person__links"><a class="person__email" href="mailto:chirags@uw.edu">chirags@uw.edu</a></div>
@@ -91,128 +94,128 @@
 
       <!-- ===== AFFILIATES ===== -->
       <div class="people-section">
-        <div class="people-section__head"><span class="h3 serif">Affiliates</span><span class="people-section__count">14</span></div>
+        <div class="people-section__head"><h2 class="h3 serif">Affiliates</h2><span class="people-section__count">14</span></div>
         <div class="people-grid people-grid--4">
           <article class="person">
-            <img class="person__photo" src="assets/people/jamie-morgenstern.png" alt="Jamie Morgenstern" />
+            <img class="person__photo" src="assets/people/jamie-morgenstern.webp" alt="Jamie Morgenstern" width="640" height="480" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Jamie Morgenstern</div>
+              <h3 class="person__name">Jamie Morgenstern</h3>
               <div class="person__role">Assistant Professor</div>
               <p class="person__bio">Paul G. Allen School of Computer Science &amp; Engineering, working on the social impacts of machine learning.</p>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/emily-bender.png" alt="Emily M. Bender" />
+            <img class="person__photo" src="assets/people/emily-bender.webp" alt="Emily M. Bender" width="640" height="480" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Emily M. Bender</div>
+              <h3 class="person__name">Emily M. Bender</h3>
               <div class="person__role">Professor</div>
               <p class="person__bio">Linguistics; computational semantics, data statements, and critical engagement with large language models.</p>
               <div class="person__links"><a class="person__email" href="mailto:ebender@uw.edu">ebender@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/afra-mashhadi.png" alt="Afra Mashhadi" />
+            <img class="person__photo" src="assets/people/afra-mashhadi.webp" alt="Afra Mashhadi" width="640" height="480" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Afra Mashhadi</div>
+              <h3 class="person__name">Afra Mashhadi</h3>
               <div class="person__role">Assistant Professor</div>
               <p class="person__bio">Computing &amp; Software Systems, UW Bothell; ubiquitous computing and applied machine learning.</p>
               <div class="person__links"><a class="person__email" href="mailto:mashhadi@uw.edu">mashhadi@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/andrew-connolly.png" alt="Andrew J. Connolly" />
+            <img class="person__photo" src="assets/people/andrew-connolly.webp" alt="Andrew J. Connolly" width="640" height="480" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Andrew J. Connolly</div>
+              <h3 class="person__name">Andrew J. Connolly</h3>
               <div class="person__role">Professor</div>
               <p class="person__bio">Astronomy; Director of the eScience Institute and founding director of the DIRAC Institute.</p>
               <div class="person__links"><a class="person__email" href="mailto:ajc@astro.washington.edu">ajc@astro.washington.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/aylin-caliskan.png" alt="Aylin Caliskan" />
+            <img class="person__photo" src="assets/people/aylin-caliskan.webp" alt="Aylin Caliskan" width="640" height="479" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Aylin Caliskan</div>
+              <h3 class="person__name">Aylin Caliskan</h3>
               <div class="person__role">Assistant Professor</div>
               <p class="person__bio">Information School; AI ethics, bias in AI, and the implications of machine intelligence for privacy and equity.</p>
               <div class="person__links"><a class="person__email" href="mailto:aylin@uw.edu">aylin@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/tyler-mccormick.png" alt="Tyler H. McCormick" />
+            <img class="person__photo" src="assets/people/tyler-mccormick.webp" alt="Tyler H. McCormick" width="640" height="473" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Tyler H. McCormick</div>
+              <h3 class="person__name">Tyler H. McCormick</h3>
               <div class="person__role">Professor</div>
               <p class="person__bio">Statistical models for messy, incomplete data — social networks, verbal autopsy, and uncertainty in global health.</p>
               <div class="person__links"><a class="person__email" href="mailto:tylermc@uw.edu">tylermc@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/yunhe-feng.png" alt="Yunhe Feng" />
+            <img class="person__photo" src="assets/people/yunhe-feng.webp" alt="Yunhe Feng" width="640" height="480" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Yunhe Feng</div>
+              <h3 class="person__name">Yunhe Feng</h3>
               <div class="person__role">Postdoctoral Scholar</div>
               <p class="person__bio">Data mining, usable security and privacy, machine learning, and human-computer interaction.</p>
               <div class="person__links"><a class="person__email" href="mailto:yunhe@uw.edu">yunhe@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/dingwen-tao.png" alt="Dingwen Tao" />
+            <img class="person__photo" src="assets/people/dingwen-tao.webp" alt="Dingwen Tao" width="640" height="478" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Dingwen Tao</div>
+              <h3 class="person__name">Dingwen Tao</h3>
               <div class="person__role">Assistant Professor</div>
               <p class="person__bio">EECS, Washington State University; founding director of the HiPDAC Lab for HPC and big-data analytics.</p>
               <div class="person__links"><a class="person__email" href="mailto:dingwen.tao@wsu.edu">dingwen.tao@wsu.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/ott-toomet.png" alt="Ott Toomet" />
+            <img class="person__photo" src="assets/people/ott-toomet.webp" alt="Ott Toomet" width="640" height="477" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Ott Toomet</div>
+              <h3 class="person__name">Ott Toomet</h3>
               <div class="person__role">Assistant Teaching Professor</div>
               <p class="person__bio">Information School; computational social science — social networks, ethnic groups, and housing markets.</p>
               <div class="person__links"><a class="person__email" href="mailto:otoomet@uw.edu">otoomet@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/yulia-tsvetkov.png" alt="Yulia Tsvetkov" />
+            <img class="person__photo" src="assets/people/yulia-tsvetkov.webp" alt="Yulia Tsvetkov" width="640" height="477" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Yulia Tsvetkov</div>
+              <h3 class="person__name">Yulia Tsvetkov</h3>
               <div class="person__role">Assistant Professor</div>
               <p class="person__bio">Paul G. Allen School of Computer Science &amp; Engineering; natural language processing.</p>
               <div class="person__links"><a class="person__email" href="mailto:yuliats@cs.washington.edu">yuliats@cs.washington.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/leilani-battle.png" alt="Leilani Battle" />
+            <img class="person__photo" src="assets/people/leilani-battle.webp" alt="Leilani Battle" width="640" height="482" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Leilani Battle</div>
+              <h3 class="person__name">Leilani Battle</h3>
               <div class="person__role">Assistant Professor</div>
               <p class="person__bio">Paul G. Allen School of Computer Science &amp; Engineering; interactive data-intensive systems.</p>
               <div class="person__links"><a class="person__email" href="mailto:leibatt@cs.washington.edu">leibatt@cs.washington.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/mike-teodorescu.png" alt="Mike Teodorescu" />
+            <img class="person__photo" src="assets/people/mike-teodorescu.webp" alt="Mike Teodorescu" width="640" height="476" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Mike Teodorescu</div>
+              <h3 class="person__name">Mike Teodorescu</h3>
               <div class="person__role">Assistant Professor</div>
               <p class="person__bio">Information School; machine learning fairness, technology innovation, intellectual property, and entrepreneurship.</p>
               <div class="person__links"><a class="person__email" href="mailto:miketeod@uw.edu">miketeod@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/muhammad-ahmad.jpg" alt="Muhammad Aurangzeb Ahmad" />
+            <img class="person__photo" src="assets/people/muhammad-ahmad.webp" alt="Muhammad Aurangzeb Ahmad" width="640" height="502" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Muhammad Aurangzeb Ahmad</div>
+              <h3 class="person__name">Muhammad Aurangzeb Ahmad</h3>
               <div class="person__role">Research Fellow · Adjunct Professor</div>
               <p class="person__bio">Harborview Medical Center (UW Medicine); responsible AI in healthcare, digital twins, and personality emulation.</p>
               <div class="person__links"><a class="person__email" href="mailto:maahmad@uw.edu">maahmad@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/alex-abplanalp.jpg" alt="Alex Abplanalp" />
+            <img class="person__photo" src="assets/people/alex-abplanalp.webp" alt="Alex Abplanalp" width="640" height="427" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Alex Abplanalp</div>
+              <h3 class="person__name">Alex Abplanalp</h3>
               <div class="person__role">Faculty Lecturer</div>
               <p class="person__bio">CommLead; AI, change theory and emerging technology, and ethical digital transformation.</p>
               <div class="person__links"><a class="person__email" href="mailto:ann08@uw.edu">ann08@uw.edu</a></div>
@@ -223,21 +226,21 @@
 
       <!-- ===== STAFF ===== -->
       <div class="people-section">
-        <div class="people-section__head"><span class="h3 serif">Staff</span><span class="people-section__count">2</span></div>
+        <div class="people-section__head"><h2 class="h3 serif">Staff</h2><span class="people-section__count">2</span></div>
         <div class="people-grid people-grid--4">
           <article class="person">
-            <img class="person__photo" src="assets/people/ashlyn-luo.jpg" alt="Ashlyn Luo" />
+            <img class="person__photo" src="assets/people/ashlyn-luo.webp" alt="Ashlyn Luo" width="640" height="428" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Ashlyn Luo</div>
+              <h3 class="person__name">Ashlyn Luo</h3>
               <div class="person__role">Communications Manager</div>
               <p class="person__bio">Graduate student in the Communication Leadership program.</p>
               <div class="person__links"><a class="person__email" href="mailto:yaxinluo@uw.edu">yaxinluo@uw.edu</a></div>
             </div>
           </article>
           <article class="person">
-            <img class="person__photo" src="assets/people/kirandeep-kaur.jpg" alt="Kirandeep Kaur" />
+            <img class="person__photo" src="assets/people/kirandeep-kaur.webp" alt="Kirandeep Kaur" width="640" height="427" loading="lazy" decoding="async" />
             <div class="person__body">
-              <div class="person__name">Kirandeep Kaur</div>
+              <h3 class="person__name">Kirandeep Kaur</h3>
               <div class="person__role">Student Organizer</div>
               <p class="person__bio">PhD student at the Paul G. Allen School, associated with the InfoSeeking Lab and RAISE.</p>
               <div class="person__links"><a class="person__email" href="mailto:kaur13@cs.washington.edu">kaur13@cs.washington.edu</a></div>
@@ -267,14 +270,14 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo.png" alt="RAISE" width="92" height="39" /></a>
+        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="Responsibility in AI Systems &amp; Experiences, University of Washington" width="1284" height="109" /></a>
         <p class="footer-blurb">The Center for Responsibility in AI Systems &amp; Experiences — advancing AI that serves the public good, builds trust, and supports open innovation.</p>
         <div class="footer-aff">University of Washington · Seattle, WA 98105</div>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
           <h4>Explore</h4>
-          <ul><li><a href="research-aims.html">Research aims</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="talks.html">Talks</a></li></ul>
+          <ul><li><a href="index.html#research">Research aims</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="talks.html">Talks</a></li></ul>
         </div>
         <div class="footer-col">
           <h4>Community</h4>
@@ -287,7 +290,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2024 University of Washington · RAISE</span>
+      <span>© 2024–2026 University of Washington · RAISE</span>
       <a href="https://www.raise.uw.edu/">raise.uw.edu</a>
     </div>
   </div>

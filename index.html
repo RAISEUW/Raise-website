@@ -3,19 +3,22 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; connect-src 'self'; font-src 'self'; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>RAISE · Responsibility in AI Systems &amp; Experiences — University of Washington</title>
 <meta name="description" content="The Center for Responsibility in AI Systems and Experiences (RAISE) at the University of Washington advances AI that serves the public good, builds trust, and supports open innovation." />
+<link rel="preload" as="image" href="assets/hero/oud-myths-paper-collage.webp" type="image/webp" />
 <link rel="stylesheet" href="assets/raise.css" />
 <link rel="icon" href="assets/raise-icon.jpg" />
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <!-- ============ HEADER ============ -->
 <header class="site-header" data-mode="over" id="header">
   <div class="site-header__inner">
     <a class="brand" href="index.html" aria-label="RAISE — home">
-      <img class="brand__logo brand__logo--light" src="assets/raise-logo.png" alt="RAISE" width="80" height="34" />
-      <img class="brand__logo brand__logo--dark" src="assets/raise-logo-purple.png" alt="RAISE" width="80" height="34" />
+      <img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="" width="1284" height="109" />
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="#research">Research</a>
@@ -28,14 +31,15 @@
       <a class="btn btn--ghost" href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
       <a class="btn btn--primary" href="get-involved.html">Get involved</a>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 1h20M0 7h20M0 13h20"/></svg>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile" aria-hidden="true">
   <button class="close" id="menuClose" aria-label="Close menu">×</button>
+  <a href="index.html" aria-current="page">Home</a>
   <a href="#research">Research</a>
   <a href="publications.html">Publications</a>
   <a href="people.html">People</a>
@@ -43,14 +47,14 @@
   <a href="ai-for-all.html">AI for All</a>
   <a href="get-involved.html">Get involved</a>
   <a href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
-</div>
+</nav>
 
-<main>
+<main id="main-content">
   <!-- ============ HERO — latest research carousel ============ -->
   <section class="hero" id="hero">
     <div class="hero__slides">
       <article class="hero-slide active" data-slide="0">
-        <div class="hero-slide__bg hero-slide__bg--1"></div>
+        <div class="hero-slide__bg hero-slide__bg--1" aria-hidden="true" style="background-image:url('assets/hero/oud-myths-paper-collage.webp')"></div>
         <div class="hero__scrim"></div>
         <div class="hero-slide__content">
           <span class="hero__kicker">Recent research · ICWSM 2025</span>
@@ -64,7 +68,7 @@
       </article>
 
       <article class="hero-slide" data-slide="1">
-        <div class="hero-slide__bg hero-slide__bg--2"></div>
+        <div class="hero-slide__bg hero-slide__bg--2" aria-hidden="true" style="background-image:url('assets/hero/geolocation-search-audit-paper.webp')"></div>
         <div class="hero__scrim"></div>
         <div class="hero-slide__content">
           <span class="hero__kicker">Recent research · ICWSM 2025</span>
@@ -78,7 +82,7 @@
       </article>
 
       <article class="hero-slide" data-slide="2">
-        <div class="hero-slide__bg hero-slide__bg--3"></div>
+        <div class="hero-slide__bg hero-slide__bg--3" aria-hidden="true" style="background-image:url('assets/hero/myth-triage-switchyard.webp')"></div>
         <div class="hero__scrim"></div>
         <div class="hero-slide__content">
           <span class="hero__kicker">Recent research · EMNLP 2025</span>
@@ -92,7 +96,7 @@
       </article>
 
       <article class="hero-slide" data-slide="3">
-        <div class="hero-slide__bg hero-slide__bg--4"></div>
+        <div class="hero-slide__bg hero-slide__bg--4" aria-hidden="true" style="background-image:url('assets/hero/bidirectional-alignment-apparatus.webp')"></div>
         <div class="hero__scrim"></div>
         <div class="hero-slide__content">
           <span class="hero__kicker">Recent research · CHI 2025</span>
@@ -106,7 +110,7 @@
       </article>
 
       <article class="hero-slide" data-slide="4">
-        <div class="hero-slide__bg hero-slide__bg--5"></div>
+        <div class="hero-slide__bg hero-slide__bg--5" aria-hidden="true" style="background-image:url('assets/hero/epistemic-library-viewer.webp')"></div>
         <div class="hero__scrim"></div>
         <div class="hero-slide__content">
           <span class="hero__kicker">Recent research · COLM 2025</span>
@@ -130,6 +134,7 @@
           <button class="rail-item" data-go="3" aria-current="false"><span class="rail-item__bar"></span><span class="rail-item__num">04 / 05 · CHI</span><span class="rail-item__title">Bidirectional human–AI alignment</span></button>
           <button class="rail-item" data-go="4" aria-current="false"><span class="rail-item__bar"></span><span class="rail-item__num">05 / 05 · COLM</span><span class="rail-item__title">Epistemic alignment for user–LLM delivery</span></button>
         </div>
+        <button class="carousel-toggle" id="carouselToggle" type="button" aria-pressed="false" aria-label="Pause research carousel">Pause</button>
       </div>
     </nav>
   </section>
@@ -157,27 +162,23 @@
           <span class="eyebrow">Three research aims</span>
           <h2 class="h2">Responsible AI in practice</h2>
         </div>
-        <a class="link-arrow" href="research-aims.html">More about our research <span class="arr">↗</span></a>
       </div>
       <div class="aims-grid">
-        <a class="aim-card aim-1 reveal" href="research-aims.html#applied">
+        <article class="aim-card aim-1 reveal">
           <div class="aim-card__top"><span class="aim-card__num">I</span><span class="aim-card__count">Aim I</span></div>
           <h3>Applied AI in Underserved Areas</h3>
           <p>We study applications of AI in areas underserved by market incentives — especially the public sector and the physical, life, and social sciences — to improve equitable access as the world adapts to AI.</p>
-          <span class="link-arrow">Explore this aim <span class="arr">→</span></span>
-        </a>
-        <a class="aim-card aim-2 reveal" href="research-aims.html#foundations">
+        </article>
+        <article class="aim-card aim-2 reveal">
           <div class="aim-card__top"><span class="aim-card__num">II</span><span class="aim-card__count">Aim II</span></div>
           <h3>Epistemological Foundations of AI</h3>
           <p>We study how AI systems generate and justify claims across pre-, mid-, and post-training. Our focus is the epistemology of trust: how errors arise, when to abstain, how uncertainty is communicated, and how explanations support human oversight.</p>
-          <span class="link-arrow">Explore this aim <span class="arr">→</span></span>
-        </a>
-        <a class="aim-card aim-3 reveal" href="research-aims.html#open">
+        </article>
+        <article class="aim-card aim-3 reveal">
           <div class="aim-card__top"><span class="aim-card__num">III</span><span class="aim-card__count">Aim III</span></div>
           <h3>Open &amp; Specialized Systems</h3>
           <p>We advance smaller, open-weight, open-source models that can be adapted in specialized settings — reducing dependency on closed APIs, lowering costs, and letting communities govern AI on their own terms.</p>
-          <span class="link-arrow">Explore this aim <span class="arr">→</span></span>
-        </a>
+        </article>
       </div>
     </div>
   </section>
@@ -266,9 +267,9 @@
       </div>
       <div class="people-grid">
         <article class="person reveal">
-          <img class="person__photo" src="assets/people/bill-howe.png" alt="Bill Howe" />
+          <img class="person__photo" src="assets/people/bill-howe.png" alt="Bill Howe" width="400" height="500" loading="lazy" decoding="async" />
           <div class="person__body">
-            <div class="person__name">Bill Howe</div>
+            <h3 class="person__name">Bill Howe</h3>
             <div class="person__role">Co-Founding Director</div>
             <p class="person__bio">Associate Professor in the iSchool, Adjunct Associate Professor in Computer Science &amp; Engineering, and Founding Associate Director of the eScience Institute.</p>
             <div class="person__links">
@@ -282,9 +283,9 @@
         </article>
 
         <article class="person reveal">
-          <img class="person__photo" src="assets/people/tanu-mitra.jpg" alt="Tanu Mitra" />
+          <img class="person__photo" src="assets/people/tanu-mitra.jpg" alt="Tanu Mitra" width="400" height="500" loading="lazy" decoding="async" />
           <div class="person__body">
-            <div class="person__name">Tanu Mitra</div>
+            <h3 class="person__name">Tanu Mitra</h3>
             <div class="person__role">Co-Founding Director</div>
             <p class="person__bio">Associate Professor at the Information School, where she leads the Social Computing research group studying and building large-scale social computing systems to counter problematic information online.</p>
             <div class="person__links">
@@ -297,9 +298,9 @@
         </article>
 
         <article class="person reveal">
-          <img class="person__photo" src="assets/people/chirag-shah.jpg" alt="Chirag Shah" />
+          <img class="person__photo" src="assets/people/chirag-shah.jpg" alt="Chirag Shah" width="400" height="500" loading="lazy" decoding="async" />
           <div class="person__body">
-            <div class="person__name">Chirag Shah</div>
+            <h3 class="person__name">Chirag Shah</h3>
             <div class="person__role">Co-Founding Director</div>
             <p class="person__bio">Professor in the Information School and Founding Director of the InfoSeeking Lab, focusing on information seeking, human-computer interaction, and social media.</p>
             <div class="person__links">
@@ -350,7 +351,7 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo.png" alt="RAISE" width="92" height="39" /></a>
+        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="Responsibility in AI Systems &amp; Experiences, University of Washington" width="1284" height="109" /></a>
         <p class="footer-blurb">The Center for Responsibility in AI Systems &amp; Experiences — advancing AI that serves the public good, builds trust, and supports open innovation.</p>
         <div class="footer-aff">University of Washington · Seattle, WA 98105</div>
       </div>
@@ -370,12 +371,13 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2024 University of Washington · RAISE</span>
+      <span>© 2024–2026 University of Washington · RAISE</span>
       <a href="https://www.raise.uw.edu/">raise.uw.edu</a>
     </div>
   </div>
 </footer>
 
+<script src="data/site-data.js"></script>
 <script src="assets/site.js"></script>
 </body>
 </html>

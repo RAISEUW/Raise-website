@@ -1,14 +1,23 @@
 /* ============================================================
    RAISE site behaviors + data-driven rendering
-   Content lives in data/site-data.json — edit it (or use
-   admin.html) and the site updates. No build step.
+   Publication content lives in data/site-data.js — edit that
+   file directly and the site updates. No build step.
    ============================================================ */
 (function () {
   'use strict';
 
   function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
-  function safeUrl(u) { try { var url = new URL(u, location.href); return /^https?:$/.test(url.protocol) ? url.href : '#'; } catch (e) { return '#'; } }
+  function safeUrl(u) { try { var url = new URL(u, location.href); return url.protocol === 'https:' ? url.href : '#'; } catch (e) { return '#'; } }
+  function safeHeroImage(path) { return typeof path === 'string' && /^assets\/hero\/[a-z0-9-]+\.webp$/.test(path) ? path : ''; }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function renderPublicationActions(p) {
+    var resources = Array.isArray(p.resources) ? p.resources : [];
+    return '<div class="pub-item__actions">' +
+      '<a class="link-arrow" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">Read <span class="arr">\u2197</span></a>' +
+      resources.map(function (resource) {
+        return '<a class="link-arrow" href="' + esc(safeUrl(resource && resource.url)) + '" target="_blank" rel="noopener">' + esc(resource && resource.label) + ' <span class="arr">\u2197</span></a>';
+      }).join('') + '</div>';
+  }
 
   /* ---------- render hero carousel from data ---------- */
   function renderHero(pubs) {
@@ -18,8 +27,9 @@
     var feats = pubs.filter(function (p) { return p.hero; }).slice(0, 5);
     if (!feats.length) return;
     slides.innerHTML = feats.map(function (p, i) {
+      var heroImage = safeHeroImage(p.heroImage);
       return '<article class="hero-slide' + (i === 0 ? ' active' : '') + '" data-slide="' + i + '">' +
-        '<div class="hero-slide__bg hero-slide__bg--' + (i + 1) + '"></div>' +
+        '<div class="hero-slide__bg hero-slide__bg--' + (i + 1) + '" aria-hidden="true"' + (heroImage ? ' style="background-image:url(&quot;' + heroImage + '&quot;)"' : '') + '></div>' +
         '<div class="hero__scrim"></div>' +
         '<div class="hero-slide__content">' +
           '<span class="hero__kicker">Recent research \u00b7 ' + esc(p.venue) + '</span>' +
@@ -51,7 +61,7 @@
         '<h3 class="pub-item__title">' + esc(p.title) + '</h3>' +
         '<p class="pub-item__authors">' + esc(p.authors) + '</p>' +
         '<div class="pub-item__foot"><span class="pub-item__venue">' + esc(p.venue) + '</span>' +
-        '<a class="link-arrow" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">Read <span class="arr">\u2197</span></a></div></article>';
+        renderPublicationActions(p) + '</div></article>';
     }).join('');
   }
 
@@ -66,6 +76,18 @@
     var DUR = 6500;
     hero.style.setProperty('--hero-dur', DUR + 'ms');
     var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var pauseBtn = document.getElementById('carouselToggle');
+    var userPaused = reduced;
+    var focusInside = false;
+    if (reduced && pauseBtn) pauseBtn.hidden = true;
+
+    function clearTimer() { if (timer) clearInterval(timer); timer = null; }
+    function syncPauseButton() {
+      if (!pauseBtn) return;
+      pauseBtn.setAttribute('aria-pressed', userPaused ? 'true' : 'false');
+      pauseBtn.textContent = userPaused ? 'Play' : 'Pause';
+      pauseBtn.setAttribute('aria-label', userPaused ? 'Play research carousel' : 'Pause research carousel');
+    }
 
     function go(i, user) {
       cur = (i + n) % n;
@@ -84,14 +106,23 @@
       if (user) restart();
     }
     function tick() { go(cur + 1); }
-    function restart() { if (timer) clearInterval(timer); if (!reduced) timer = setInterval(tick, DUR); }
+    function restart() {
+      clearTimer();
+      var paused = userPaused || focusInside;
+      hero.classList.toggle('paused', paused);
+      if (!reduced && !paused) timer = setInterval(tick, DUR);
+    }
 
     rail.addEventListener('click', function (e) {
       var b = e.target.closest('.rail-item'); if (b) go(+b.dataset.go, true);
     });
-    hero.addEventListener('mouseenter', function () { hero.classList.add('paused'); if (timer) clearInterval(timer); timer = null; });
-    hero.addEventListener('mouseleave', function () { hero.classList.remove('paused'); restart(); });
-    document.addEventListener('visibilitychange', function () { if (document.hidden) { if (timer) clearInterval(timer); timer = null; } else if (!hero.matches(':hover')) restart(); });
+    hero.addEventListener('focusin', function (e) { focusInside = e.target !== pauseBtn; restart(); });
+    hero.addEventListener('focusout', function (e) {
+      if (!hero.contains(e.relatedTarget) || e.relatedTarget === pauseBtn) { focusInside = false; restart(); }
+    });
+    if (pauseBtn) pauseBtn.addEventListener('click', function () { userPaused = !userPaused; syncPauseButton(); restart(); });
+    document.addEventListener('visibilitychange', function () { if (document.hidden) clearTimer(); else restart(); });
+    syncPauseButton();
     restart();
   }
 
@@ -109,27 +140,29 @@
     }
     var mobileNav = document.getElementById('mobileNav'), menuBtn = document.getElementById('menuBtn');
     if (mobileNav && menuBtn) {
-      var setMenu = function (open) { mobileNav.classList.toggle('open', open); menuBtn.setAttribute('aria-expanded', open); document.body.style.overflow = open ? 'hidden' : ''; };
-      menuBtn.addEventListener('click', function () { setMenu(true); });
-      document.getElementById('menuClose').addEventListener('click', function () { setMenu(false); });
+      var menuClose = document.getElementById('menuClose');
+      var setMenu = function (open, restoreFocus) {
+        mobileNav.classList.toggle('open', open);
+        mobileNav.setAttribute('aria-hidden', open ? 'false' : 'true');
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.classList.toggle('menu-open', open);
+        if (open) menuClose.focus();
+        else if (restoreFocus) menuBtn.focus();
+      };
+      menuBtn.addEventListener('click', function () { setMenu(menuBtn.getAttribute('aria-expanded') !== 'true', false); });
+      menuClose.addEventListener('click', function () { setMenu(false, true); });
       mobileNav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
-    }
-  }
-
-  /* ---------- publication theme filter ---------- */
-  function initFilters() {
-    var filters = document.getElementById('filters');
-    if (!filters) return;
-    var items = document.querySelectorAll('#pubList .pub-item');
-    filters.addEventListener('click', function (e) {
-      var btn = e.target.closest('.filter'); if (!btn) return;
-      filters.querySelectorAll('.filter').forEach(function (f) { f.setAttribute('aria-pressed', f === btn); });
-      var f = btn.dataset.filter;
-      items.forEach(function (it) {
-        var show = f === 'all' || (' ' + it.dataset.theme + ' ').indexOf(' ' + f + ' ') > -1;
-        it.classList.toggle('hidden', !show);
+      document.addEventListener('keydown', function (e) {
+        if (menuBtn.getAttribute('aria-expanded') !== 'true') return;
+        if (e.key === 'Escape') { e.preventDefault(); setMenu(false, true); return; }
+        if (e.key !== 'Tab') return;
+        var focusable = Array.prototype.slice.call(mobileNav.querySelectorAll('a, button')).filter(function (el) { return !el.disabled; });
+        var first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       });
-    });
+    }
   }
 
   /* ---------- reveal on scroll ---------- */
@@ -147,18 +180,11 @@
 
   /* ---------- boot: load data, render, init ---------- */
   initChrome();
-  fetch('data/site-data.json', { cache: 'no-cache' })
-    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(function (data) {
-      renderHero(data.publications || []);
-      renderPubs(data.publications || []);
-    })
-    .catch(function (e) {
-      console.warn('site-data.json not loaded (' + e.message + ') \u2014 showing built-in fallback content.');
-    })
-    .then(function () {
-      initCarousel();
-      initFilters();
-      initReveal();
-    });
+  var siteData = window.RAISE_SITE_DATA;
+  if (siteData && Array.isArray(siteData.publications)) {
+    renderHero(siteData.publications);
+    renderPubs(siteData.publications);
+  }
+  initCarousel();
+  initReveal();
 })();

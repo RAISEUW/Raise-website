@@ -3,21 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; connect-src 'self'; font-src 'self'; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>Publications · RAISE — University of Washington</title>
 <meta name="description" content="Publications from the Center for Responsibility in AI Systems and Experiences (RAISE) at the University of Washington." />
 <link rel="stylesheet" href="assets/raise.css" />
 <link rel="icon" href="assets/raise-icon.jpg" />
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="site-header" data-mode="solid" data-fixed-mode="solid" id="header">
   <div class="site-header__inner">
     <a class="brand" href="index.html" aria-label="RAISE — home">
-      <img class="brand__logo brand__logo--light" src="assets/raise-logo.png" alt="RAISE" width="80" height="34" />
-      <img class="brand__logo brand__logo--dark" src="assets/raise-logo-purple.png" alt="RAISE" width="80" height="34" />
+      <img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="" width="1284" height="109" />
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="research-aims.html">Research</a>
+      <a href="index.html#research">Research</a>
       <a href="publications.html" aria-current="page">Publications</a>
       <a href="people.html">People</a>
       <a href="talks.html">Talks</a>
@@ -27,24 +29,25 @@
       <a class="btn btn--ghost" href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
       <a class="btn btn--primary" href="get-involved.html">Get involved</a>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 1h20M0 7h20M0 13h20"/></svg>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile" aria-hidden="true">
   <button class="close" id="menuClose" aria-label="Close menu">×</button>
   <a href="index.html">Home</a>
-  <a href="research-aims.html">Research</a>
-  <a href="publications.html">Publications</a>
+  <a href="index.html#research">Research</a>
+  <a href="publications.html" aria-current="page">Publications</a>
   <a href="people.html">People</a>
   <a href="talks.html">Talks</a>
   <a href="ai-for-all.html">AI for All</a>
   <a href="get-involved.html">Get involved</a>
-</div>
+  <a href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
+</nav>
 
-<main>
+<main id="main-content">
   <div class="page-hero">
     <div class="wrap">
       <span class="eyebrow">Research output</span>
@@ -69,7 +72,7 @@
         </div>
         <div class="pub-search"><input type="search" id="pubSearch" placeholder="Search title or author…" aria-label="Search publications" /></div>
       </div>
-      <div class="pub-result-count" id="resultCount"></div>
+      <div class="pub-result-count" id="resultCount" role="status" aria-live="polite">Loading publications…</div>
       <div id="pubGroups"></div>
     </div>
   </section>
@@ -79,14 +82,14 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo.png" alt="RAISE" width="92" height="39" /></a>
+        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="Responsibility in AI Systems &amp; Experiences, University of Washington" width="1284" height="109" /></a>
         <p class="footer-blurb">The Center for Responsibility in AI Systems &amp; Experiences — advancing AI that serves the public good, builds trust, and supports open innovation.</p>
         <div class="footer-aff">University of Washington · Seattle, WA 98105</div>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
           <h4>Explore</h4>
-          <ul><li><a href="research-aims.html">Research aims</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="talks.html">Talks</a></li></ul>
+          <ul><li><a href="index.html#research">Research aims</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="talks.html">Talks</a></li></ul>
         </div>
         <div class="footer-col">
           <h4>Community</h4>
@@ -99,68 +102,14 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2024 University of Washington · RAISE</span>
+      <span>© 2024–2026 University of Washington · RAISE</span>
       <a href="https://www.raise.uw.edu/">raise.uw.edu</a>
     </div>
   </div>
 </footer>
 
+<script src="data/site-data.js"></script>
 <script src="assets/site.js"></script>
-<script>
-(function () {
-  'use strict';
-  var all = [];
-  var theme = 'all', query = '';
-
-  function esc(s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
-  function safeUrl(u) { try { var url = new URL(u, location.href); return /^https?:$/.test(url.protocol) ? url.href : '#'; } catch (e) { return '#'; } }
-
-  function matches(p) {
-    if (theme !== 'all' && (p.themes || []).indexOf(theme) < 0) return false;
-    if (query) {
-      var hay = (p.title + ' ' + p.authors + ' ' + p.venue).toLowerCase();
-      if (hay.indexOf(query) < 0) return false;
-    }
-    return true;
-  }
-
-  function render() {
-    var pubs = all.filter(matches);
-    var byYear = {};
-    pubs.forEach(function (p) { (byYear[p.year] = byYear[p.year] || []).push(p); });
-    var years = Object.keys(byYear).sort(function (a, b) { return b - a; });
-    document.getElementById('pubGroups').innerHTML = years.map(function (y) {
-      return '<div class="year-group"><div class="year-group__year">' + y + '</div><div>' +
-        byYear[y].map(function (p) {
-          return '<article class="pub-item">' +
-            '<div class="pub-item__tags">' + (p.tags || []).map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' +
-            '<h3 class="pub-item__title">' + esc(p.title) + '</h3>' +
-            '<p class="pub-item__authors">' + esc(p.authors) + '</p>' +
-            '<div class="pub-item__foot"><span class="pub-item__venue">' + esc(p.venue) + '</span>' +
-            '<a class="link-arrow" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">Read <span class="arr">↗</span></a></div></article>';
-        }).join('') + '</div></div>';
-    }).join('') || '<p class="muted" style="padding:32px 0">Nothing matches — try a different theme or search.</p>';
-    document.getElementById('resultCount').textContent = pubs.length + ' of ' + all.length + ' publications';
-  }
-
-  document.getElementById('filters').addEventListener('click', function (e) {
-    var btn = e.target.closest('.filter'); if (!btn) return;
-    this.querySelectorAll('.filter').forEach(function (f) { f.setAttribute('aria-pressed', f === btn); });
-    theme = btn.dataset.filter;
-    render();
-  });
-  document.getElementById('pubSearch').addEventListener('input', function () {
-    query = this.value.trim().toLowerCase();
-    render();
-  });
-
-  fetch('data/site-data.json', { cache: 'no-cache' })
-    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(function (data) { all = data.publications || []; render(); })
-    .catch(function (e) {
-      document.getElementById('pubGroups').innerHTML = '<p class="muted" style="padding:32px 0">Could not load publications (' + esc(e.message) + ').</p>';
-    });
-})();
-</script>
+<script src="assets/publications.js"></script>
 </body>
 </html>

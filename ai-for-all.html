@@ -3,21 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; connect-src 'self'; font-src 'self'; form-action 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>AI for All · RAISE — University of Washington</title>
 <meta name="description" content="AI for All — RAISE's public programs, including the Pop-up Hack Day on civic tech and public-sector AI." />
 <link rel="stylesheet" href="assets/raise.css" />
 <link rel="icon" href="assets/raise-icon.jpg" />
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <header class="site-header" data-mode="solid" data-fixed-mode="solid" id="header">
   <div class="site-header__inner">
     <a class="brand" href="index.html" aria-label="RAISE — home">
-      <img class="brand__logo brand__logo--light" src="assets/raise-logo.png" alt="RAISE" width="80" height="34" />
-      <img class="brand__logo brand__logo--dark" src="assets/raise-logo-purple.png" alt="RAISE" width="80" height="34" />
+      <img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="" width="1284" height="109" />
     </a>
     <nav class="nav" aria-label="Primary">
-      <a href="research-aims.html">Research</a>
+      <a href="index.html#research">Research</a>
       <a href="publications.html">Publications</a>
       <a href="people.html">People</a>
       <a href="talks.html">Talks</a>
@@ -27,29 +29,30 @@
       <a class="btn btn--ghost" href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
       <a class="btn btn--primary" href="get-involved.html">Get involved</a>
     </div>
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M0 1h20M0 7h20M0 13h20"/></svg>
     </button>
   </div>
 </header>
 
-<div class="mobile-nav" id="mobileNav">
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile" aria-hidden="true">
   <button class="close" id="menuClose" aria-label="Close menu">×</button>
   <a href="index.html">Home</a>
-  <a href="research-aims.html">Research</a>
+  <a href="index.html#research">Research</a>
   <a href="publications.html">Publications</a>
   <a href="people.html">People</a>
   <a href="talks.html">Talks</a>
-  <a href="ai-for-all.html">AI for All</a>
+  <a href="ai-for-all.html" aria-current="page">AI for All</a>
   <a href="get-involved.html">Get involved</a>
-</div>
+  <a href="https://aiclinic.uw.edu/" target="_blank" rel="noopener">AI Clinic ↗</a>
+</nav>
 
-<main>
+<main id="main-content">
   <div class="page-hero">
     <div class="wrap">
       <span class="eyebrow">AI for All</span>
       <h1>RAISE Pop-up Hack Day</h1>
-      <p class="dek">A hands-on day of AI projects in the public interest — students, professionals, faculty, postdocs, and staff all welcome. Work on a curated civic-tech project or bring your own.</p>
+      <p class="dek">A hands-on program for AI projects in the public interest. Explore the first event below and join our community channels for the next date.</p>
     </div>
   </div>
 
@@ -57,8 +60,8 @@
     <div class="wrap">
       <div class="event-meta">
         <div class="event-meta__cell">
-          <div class="event-meta__label">When</div>
-          <div class="event-meta__value">December 3rd · 1–4 PM</div>
+          <div class="event-meta__label">Next event</div>
+          <div class="event-meta__value">Date to be announced<br /><span style="font-family:var(--sans);font-size:14px;color:var(--ink-2)">The first session was held December 3 · 1–4 PM</span></div>
         </div>
         <div class="event-meta__cell">
           <div class="event-meta__label">Where</div>
@@ -71,8 +74,8 @@
       </div>
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom: clamp(36px,5vw,56px)">
-        <a class="btn btn--primary" href="https://docs.google.com/document/d/14_7wBJJOlx_WqKaDmt3a1wssixLibA9CdMVduIw-Je4/edit?usp=sharing" target="_blank" rel="noopener">RSVP &amp; agenda <span class="arr">↗</span></a>
-        <a class="btn btn--ghost" href="https://docs.google.com/document/d/14_7wBJJOlx_WqKaDmt3a1wssixLibA9CdMVduIw-Je4/edit?usp=sharing" target="_blank" rel="noopener">Submit a project idea ↗</a>
+        <a class="btn btn--primary" href="https://docs.google.com/document/d/14_7wBJJOlx_WqKaDmt3a1wssixLibA9CdMVduIw-Je4/edit?usp=sharing" target="_blank" rel="noopener">View the first event agenda <span class="arr">↗</span></a>
+        <a class="btn btn--ghost" href="get-involved.html">Propose a future project <span class="arr">→</span></a>
       </div>
 
       <div class="prose" style="margin-bottom: clamp(36px,5vw,56px)">
@@ -129,14 +132,14 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo.png" alt="RAISE" width="92" height="39" /></a>
+        <a class="brand" href="index.html"><img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="Responsibility in AI Systems &amp; Experiences, University of Washington" width="1284" height="109" /></a>
         <p class="footer-blurb">The Center for Responsibility in AI Systems &amp; Experiences — advancing AI that serves the public good, builds trust, and supports open innovation.</p>
         <div class="footer-aff">University of Washington · Seattle, WA 98105</div>
       </div>
       <div class="footer-cols">
         <div class="footer-col">
           <h4>Explore</h4>
-          <ul><li><a href="research-aims.html">Research aims</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="talks.html">Talks</a></li></ul>
+          <ul><li><a href="index.html#research">Research aims</a></li><li><a href="publications.html">Publications</a></li><li><a href="people.html">People</a></li><li><a href="talks.html">Talks</a></li></ul>
         </div>
         <div class="footer-col">
           <h4>Community</h4>
@@ -149,7 +152,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2024 University of Washington · RAISE</span>
+      <span>© 2024–2026 University of Washington · RAISE</span>
       <a href="https://www.raise.uw.edu/">raise.uw.edu</a>
     </div>
   </div>

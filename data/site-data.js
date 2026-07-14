@@ -1,4 +1,4 @@
-{
+window.RAISE_SITE_DATA = {
   "publications": [
     {
       "title": "Online myths on opioid use disorder: A comparison of Reddit and large language models",
@@ -16,6 +16,7 @@
         "llm"
       ],
       "url": "https://ojs.aaai.org/index.php/ICWSM/article/view/35870",
+      "heroImage": "assets/hero/oud-myths-paper-collage.webp",
       "hero": true,
       "selected": false
     },
@@ -34,6 +35,7 @@
         "misinformation"
       ],
       "url": "https://ojs.aaai.org/index.php/ICWSM/article/view/35854",
+      "heroImage": "assets/hero/geolocation-search-audit-paper.webp",
       "hero": true,
       "selected": false
     },
@@ -52,6 +54,7 @@
         "misinformation"
       ],
       "url": "https://arxiv.org/abs/2506.00308",
+      "heroImage": "assets/hero/myth-triage-switchyard.webp",
       "hero": true,
       "selected": true
     },
@@ -71,6 +74,7 @@
         "llm"
       ],
       "url": "https://dl.acm.org/doi/abs/10.1145/3706599.3716291",
+      "heroImage": "assets/hero/bidirectional-alignment-apparatus.webp",
       "hero": true,
       "selected": true
     },
@@ -109,6 +113,7 @@
         "llm"
       ],
       "url": "https://openreview.net/pdf?id=Orvjm9UqH2",
+      "heroImage": "assets/hero/epistemic-library-viewer.webp",
       "hero": true,
       "selected": true
     },
@@ -150,6 +155,61 @@
       "selected": true
     },
     {
+      "title": "Escaping the SpuriVerse",
+      "authors": "Yiwei Yang, Chung Peng Lee, Shangbin Feng, Dora Zhao, Bingbing Wen, Anthony Z. Liu, Yulia Tsvetkov, Bill Howe",
+      "venue": "NeurIPS 2025, Datasets and Benchmarks Track",
+      "year": 2025,
+      "tags": [
+        "spurious correlations",
+        "vision-language models",
+        "fairness"
+      ],
+      "themes": [
+        "llm",
+        "fairness"
+      ],
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2025/hash/3b6d18473eb525df8008868f1390cc8c-Abstract-Datasets_and_Benchmarks_Track.html",
+      "resources": [
+        {
+          "label": "Project site",
+          "url": "https://yanyiwei.github.io/projects/spuriverse/index.html"
+        },
+        {
+          "label": "Dataset",
+          "url": "https://huggingface.co/datasets/yanyiwei/SpuriVerse"
+        }
+      ],
+      "hero": false,
+      "selected": false
+    },
+    {
+      "title": "Can Large Language Models Integrate Spatial Data?",
+      "authors": "Bin Han, Robert Wolfe, Anat Caspi, Bill Howe",
+      "venue": "COLM 2025",
+      "year": 2025,
+      "tags": [
+        "spatial reasoning",
+        "urban computing",
+        "llm"
+      ],
+      "themes": [
+        "llm"
+      ],
+      "url": "https://openreview.net/forum?id=QNaHC8njYt",
+      "resources": [
+        {
+          "label": "Project hub",
+          "url": "https://beanham.github.io/urban-projects/"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/BeanHam/2024-spatial-data-integration"
+        }
+      ],
+      "hero": false,
+      "selected": false
+    },
+    {
       "title": "Envisioning Information Access Systems: What Makes for Good Tools and a Healthy Web?",
       "authors": "Chirag Shah, Emily M. Bender",
       "venue": "ACM Transactions on the Web 2024",
@@ -179,7 +239,7 @@
       "themes": [
         "misinformation"
       ],
-      "url": "http://arxiv.org/abs/2401.03533",
+      "url": "https://arxiv.org/abs/2401.03533",
       "hero": false,
       "selected": false
     },
@@ -250,6 +310,92 @@
         "llm"
       ],
       "url": "https://doi.org/10.1177/09637214231217286",
+      "hero": false,
+      "selected": false
+    },
+    {
+      "title": "Label-Efficient Group Robustness via Out-of-Distribution Concept Curation",
+      "authors": "Yiwei Yang, Anthony Z. Liu, Robert Wolfe, Aylin Caliskan, Bill Howe",
+      "venue": "CVPR 2024",
+      "year": 2024,
+      "tags": [
+        "group robustness",
+        "spurious correlations",
+        "fairness"
+      ],
+      "themes": [
+        "fairness"
+      ],
+      "url": "https://openaccess.thecvf.com/content/CVPR2024/html/Yang_Label-Efficient_Group_Robustness_via_Out-of-Distribution_Concept_Curation_CVPR_2024_paper.html",
+      "resources": [
+        {
+          "label": "Project site",
+          "url": "https://yanyiwei.github.io/projects/concept-correction/index.html"
+        }
+      ],
+      "hero": false,
+      "selected": false
+    },
+    {
+      "title": "Towards Zero-Shot Annotation of the Built Environment with Vision-Language Models",
+      "authors": "Bin Han, Yiwei Yang, Anat Caspi, Bill Howe",
+      "venue": "ACM SIGSPATIAL 2024",
+      "year": 2024,
+      "tags": [
+        "vision-language models",
+        "urban computing",
+        "accessibility"
+      ],
+      "themes": [
+        "llm",
+        "fairness"
+      ],
+      "url": "https://doi.org/10.1145/3678717.3691296",
+      "resources": [
+        {
+          "label": "Project hub",
+          "url": "https://beanham.github.io/urban-projects/"
+        },
+        {
+          "label": "Open paper",
+          "url": "https://volitionalai.uw.edu/paper/vl_annotation_24.pdf"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/BeanHam/2024-vl-annotation"
+        }
+      ],
+      "hero": false,
+      "selected": false
+    },
+    {
+      "title": "SARN: Structurally-Aware Recurrent Network for Spatio-Temporal Disaggregation",
+      "authors": "Bin Han, Bill Howe",
+      "venue": "ACM SIGSPATIAL 2024",
+      "year": 2024,
+      "tags": [
+        "spatiotemporal data",
+        "urban computing",
+        "privacy"
+      ],
+      "themes": [
+        "privacy"
+      ],
+      "url": "https://doi.org/10.1145/3678717.3691295",
+      "resources": [
+        {
+          "label": "Project hub",
+          "url": "https://beanham.github.io/urban-projects/"
+        },
+        {
+          "label": "Open paper",
+          "url": "https://arxiv.org/abs/2306.07292"
+        },
+        {
+          "label": "Code",
+          "url": "https://github.com/BeanHam/2024-urban-disaggregation"
+        }
+      ],
       "hero": false,
       "selected": false
     },
@@ -583,7 +729,7 @@
       "themes": [
         "privacy"
       ],
-      "url": "http://arxiv.org/abs/2208.05009",
+      "url": "https://arxiv.org/abs/2208.05009",
       "hero": false,
       "selected": false
     },
@@ -765,4 +911,4 @@
       "selected": false
     }
   ]
-}
+};
