@@ -1,6 +1,6 @@
 # RAISE website
 
-A static site for **raise.uw.edu** — hosted on **GitHub Pages** with
+A static site for **https://raiseuw.github.io/Raise-website/** — hosted on **GitHub Pages** with
 self-hosted fonts, no CDN, and no build step. The Get Involved page embeds a
 Google Calendar appointment schedule; all other content is served from the repository.
 
@@ -39,11 +39,9 @@ lives directly in the clearly-commented HTML.
 1. Put all these files at the **root** of the repository (not inside a subfolder).
 2. **Settings → Pages → Build and deployment → Deploy from a branch →
    `main` / `/ (root)`** → Save.
-3. The committed `CNAME` configures `raise.uw.edu`; point DNS to GitHub Pages
-   according to GitHub's current custom-domain instructions.
-4. In **Settings → Pages**, enable **Enforce HTTPS** after the certificate is
-   issued.
-5. Protect `main` with a repository ruleset that requires pull-request review.
+3. Leave `CNAME` absent so GitHub Pages continues serving the repository at
+   `https://raiseuw.github.io/Raise-website/` without a custom domain.
+4. Protect `main` with a repository ruleset that requires pull-request review.
 
 Because `.nojekyll` is present, GitHub Pages serves the files verbatim — no
 Jekyll, no build.

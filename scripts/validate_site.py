@@ -264,8 +264,8 @@ def validate_security(errors: list[str]) -> None:
                 fail(errors, f"{path.relative_to(ROOT)}: possible {name}")
         if re.search(r"\b(?:localStorage|sessionStorage)\b", text):
             fail(errors, f"{path.relative_to(ROOT)}: browser persistence is not allowed in deployable code")
-    if (ROOT / "CNAME").read_text(encoding="utf-8").strip() != "raise.uw.edu":
-        fail(errors, "CNAME must contain raise.uw.edu")
+    if (ROOT / "CNAME").exists():
+        fail(errors, "CNAME must remain absent while the site uses its github.io URL")
 
 
 def validate_removed_surfaces(errors: list[str]) -> None:
