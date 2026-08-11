@@ -65,6 +65,31 @@
     }).join('');
   }
 
+  /* ---------- homepage publication filters ---------- */
+  function initHomeFilters() {
+    var filters = document.getElementById('filters');
+    var list = document.getElementById('pubList');
+    if (!filters || !list) return;
+
+    filters.addEventListener('click', function (e) {
+      var button = e.target.closest('.filter');
+      if (!button || !filters.contains(button)) return;
+      var selected = button.dataset.filter || 'all';
+
+      filters.querySelectorAll('.filter').forEach(function (filterButton) {
+        filterButton.setAttribute('aria-pressed', filterButton === button ? 'true' : 'false');
+      });
+
+      list.querySelectorAll('.pub-item').forEach(function (item) {
+        var themes = (item.dataset.theme || '').split(/\s+/);
+        var visible = selected === 'all' || themes.indexOf(selected) !== -1;
+        item.classList.toggle('hidden', !visible);
+        if (visible) item.removeAttribute('aria-hidden');
+        else item.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+
   /* ---------- hero carousel ---------- */
   function initCarousel() {
     var hero = document.getElementById('hero');
@@ -185,6 +210,7 @@
     renderHero(siteData.publications);
     renderPubs(siteData.publications);
   }
+  initHomeFilters();
   initCarousel();
   initReveal();
 })();

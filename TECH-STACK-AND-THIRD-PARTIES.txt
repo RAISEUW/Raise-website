@@ -13,10 +13,10 @@ Generated 2026-06-30, before replacing the old site.
     people.html         leadership, affiliates, staff
     talks.html          speaker series
     ai-for-all.html     public programs / hack day
-    get-involved.html   contact + community links
+    get-involved.html   Google appointment calendar + community links
 - One stylesheet:  assets/raise.css  (imports assets/fonts.css)
 - Shared script:   assets/site.js    (nav, hero carousel, homepage render)
-- Page scripts:    assets/publications.js, contact.js
+- Page script:     assets/publications.js
 - Data-driven pages load  data/site-data.js  as a local classic script.
 - Content updates are made directly in the HTML or JavaScript data source.
 
@@ -35,8 +35,13 @@ Generated 2026-06-30, before replacing the old site.
     Source changes are proposed on a branch and reviewed through a pull
     request. No repository credential enters or persists in the public site.
 - NO CDNs.
+- Google Calendar appointment scheduling (calendar.google.com)
+    - The Get Involved page embeds the published RAISE scheduling calendar.
+    - Availability, invitations, and meeting details are managed in UW
+      Google Calendar rather than by this repository.
 - NO analytics / tracking (no Google Analytics, Plausible, Sentry, etc.).
-- NO cookies, NO external runtime scripts. "Zero external dependencies."
+- NO analytics and NO external runtime scripts. Google Calendar may set its
+  own cookies inside the embedded scheduling frame.
 
 =====================================================================
 4. FONTS (self-hosted — local .woff2 in assets/fonts/, no runtime call)

@@ -1,8 +1,8 @@
 # RAISE website
 
-A fully static site for **raise.uw.edu** — hosted on **GitHub Pages** with
-**zero external runtime dependencies** (fonts self-hosted, no CDN, no build
-step). Content is updated directly in the repository.
+A static site for **raise.uw.edu** — hosted on **GitHub Pages** with
+self-hosted fonts, no CDN, and no build step. The Get Involved page embeds a
+Google Calendar appointment schedule; all other content is served from the repository.
 
 ## Files
 
@@ -12,7 +12,7 @@ publications.html     ← full publications archive (filter + search)
 people.html           ← leadership, affiliates, staff
 talks.html            ← speaker series
 ai-for-all.html       ← public programs / hack day
-get-involved.html     ← contact form + community links
+get-involved.html     ← Google appointment calendar + community links
 .github/workflows/    ← pull-request release validation
 .nojekyll             ← tells GitHub Pages to serve files as-is
 
@@ -24,7 +24,6 @@ assets/
   fonts/              ← Source Serif 4, Source Sans 3, IBM Plex Mono (woff2)
   site.js             ← nav, accessible hero carousel, homepage rendering
   publications.js     ← publication filters and archive rendering
-  contact.js          ← mail-app contact workflow
   raise-logo-uw-white.webp ← official UW/RAISE lockup used site-wide
   raise-icon.jpg      ← favicon
   people/             ← headshots
