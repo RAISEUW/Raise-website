@@ -1,8 +1,7 @@
 # RAISE website
 
 A static site for **https://raiseuw.github.io/Raise-website/** — hosted on **GitHub Pages** with
-self-hosted fonts, no CDN, and no build step. The Get Involved page embeds a
-Google Calendar appointment schedule; all other content is served from the repository.
+self-hosted fonts, no CDN, and no build step. All content is served from the repository.
 
 ## Files
 
@@ -12,7 +11,7 @@ publications.html     ← full publications archive (filter + search)
 people.html           ← leadership, affiliates, staff
 talks.html            ← speaker series
 ai-for-all.html       ← public programs / hack day
-get-involved.html     ← Google appointment calendar + community links
+get-involved.html     ← community links
 .github/workflows/    ← pull-request release validation
 .nojekyll             ← tells GitHub Pages to serve files as-is
 
