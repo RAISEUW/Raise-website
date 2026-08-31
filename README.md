@@ -1,6 +1,6 @@
 # RAISE website
 
-A static site for **https://raiseuw.github.io/Raise-website/** — hosted on **GitHub Pages** with
+A static site for **https://raise.uw.edu/** — hosted on **GitHub Pages** with
 self-hosted fonts, no CDN, and no build step. All content is served from the repository.
 
 ## Files
@@ -38,8 +38,7 @@ lives directly in the clearly-commented HTML.
 1. Put all these files at the **root** of the repository (not inside a subfolder).
 2. **Settings → Pages → Build and deployment → Deploy from a branch →
    `main` / `/ (root)`** → Save.
-3. Leave `CNAME` absent so GitHub Pages continues serving the repository at
-   `https://raiseuw.github.io/Raise-website/` without a custom domain.
+3. Keep `CNAME` set to `raise.uw.edu` so GitHub Pages serves the UW custom domain.
 4. Protect `main` with a repository ruleset that requires pull-request review.
 
 Because `.nojekyll` is present, GitHub Pages serves the files verbatim — no

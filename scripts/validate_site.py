@@ -27,6 +27,7 @@ FORBIDDEN_PATHS = (
     Path("research-aims.html"),
 )
 OFFICIAL_LOGO_PATH = "assets/raise-logo-uw-white.webp"
+EXPECTED_CNAME = "raise.uw.edu"
 SITE_DATA_PATH = ROOT / "data/site-data.js"
 SITE_DATA_PATTERN = re.compile(r"\Awindow\.RAISE_SITE_DATA\s*=\s*(\{.*\})\s*;\s*\Z", re.DOTALL)
 
@@ -264,8 +265,11 @@ def validate_security(errors: list[str]) -> None:
                 fail(errors, f"{path.relative_to(ROOT)}: possible {name}")
         if re.search(r"\b(?:localStorage|sessionStorage)\b", text):
             fail(errors, f"{path.relative_to(ROOT)}: browser persistence is not allowed in deployable code")
-    if (ROOT / "CNAME").exists():
-        fail(errors, "CNAME must remain absent while the site uses its github.io URL")
+    cname_path = ROOT / "CNAME"
+    if not cname_path.is_file():
+        fail(errors, f"CNAME must define the production domain {EXPECTED_CNAME}")
+    elif cname_path.read_text(encoding="utf-8").strip() != EXPECTED_CNAME:
+        fail(errors, f"CNAME must contain only {EXPECTED_CNAME}")
 
 
 def validate_removed_surfaces(errors: list[str]) -> None:

@@ -25,8 +25,8 @@ Generated 2026-06-30, before replacing the old site.
 =====================================================================
 - GitHub Pages — free static hosting. Deploy from `main` branch, /(root).
 - .nojekyll present -> GitHub serves files verbatim (no Jekyll, no build).
-- Public URL: https://raiseuw.github.io/Raise-website/
-- No CNAME or custom domain; the release gate verifies that CNAME stays absent.
+- Public URL: https://raise.uw.edu/
+- CNAME contains raise.uw.edu; the release gate verifies the production domain.
 - Git remote: https://github.com/RAISEUW/Raise-website.git
 
 =====================================================================
