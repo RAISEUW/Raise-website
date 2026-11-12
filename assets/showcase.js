@@ -1,8 +1,8 @@
 /* ============================================================
    RAISE project showcase — renders project tiles from
    data/site-data.js (projects + thrusts) into either:
-     #gallery  → side-scrolling gallery (layout A)
-     #thrusts  → three thrusts with tiles beneath (layout B)
+     #gallery  → side-scrolling gallery (gallery)
+     #thrusts  → three thrusts with tiles beneath (pillars)
    No inline scripts (CSP). No browser storage.
    ============================================================ */
 (function () {

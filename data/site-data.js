@@ -913,25 +913,25 @@ window.RAISE_SITE_DATA = {
   ],
   "thrusts": [
     {
-      "key": "public",
-      "short": "Public sector & cities",
+      "key": "applied",
+      "short": "Applied AI",
       "num": "I",
-      "name": "AI for the public sector & cities",
-      "blurb": "Working with governments and civic partners on AI where market incentives are thin: policy analysis, urban accessibility, and public services."
+      "name": "Applied AI in Underserved Areas",
+      "blurb": "AI in areas underserved by market incentives, especially the public sector and the physical, life, and social sciences."
     },
     {
       "key": "epistemic",
       "short": "Epistemic foundations",
       "num": "II",
-      "name": "Epistemic foundations of AI",
-      "blurb": "How models come to know, when they should abstain, and how they convey uncertainty, so people can calibrate their trust."
+      "name": "Epistemological Foundations of AI",
+      "blurb": "How AI systems generate and justify claims: how errors arise, when to abstain, and how to communicate uncertainty."
     },
     {
-      "key": "integrity",
-      "short": "Information integrity",
+      "key": "open",
+      "short": "Open & specialized",
       "num": "III",
-      "name": "Information integrity & accountability",
-      "blurb": "Auditing information ecosystems, newsrooms, and public data so AI and platforms can be held accountable."
+      "name": "Open & Specialized Systems",
+      "blurb": "Smaller, open-weight models that communities can adapt, fine-tune, and govern for specialized settings."
     }
   ],
   "projects": [
@@ -939,24 +939,44 @@ window.RAISE_SITE_DATA = {
       "id": "policybridge",
       "name": "Policy Bridge",
       "partner": "City of Seattle",
-      "thrust": "public",
+      "thrust": "applied",
       "status": "active",
       "summary": "AI-assisted policy analysis with the City of Seattle.",
       "link": null,
       "linkTodo": "Repo RAISEUW/PolicyBridge is private; add a public link"
     },
     {
-      "id": "sidewalks",
-      "name": "Sidewalks / TraversRL",
-      "partner": "Urban accessibility",
-      "thrust": "public",
+      "id": "kuow",
+      "name": "AI Governance at KUOW",
+      "partner": "KUOW Public Radio",
+      "thrust": "applied",
       "status": "active",
-      "summary": "Mapping and reasoning about pedestrian infrastructure with vision-language models and RL.",
+      "summary": "Helping a public newsroom set policy for responsible use of AI.",
+      "link": null,
+      "linkTodo": "Add repo or project page"
+    },
+    {
+      "id": "iceout",
+      "name": "ICEOUT.org data analysis",
+      "partner": "ICEOUT.org",
+      "thrust": "applied",
+      "status": "active",
+      "summary": "Data analysis supporting public accountability for immigration enforcement.",
+      "link": null,
+      "linkTodo": "Add repo or project page"
+    },
+    {
+      "id": "misinfo",
+      "name": "Misinformation & health myths",
+      "partner": "Tanu Mitra's group",
+      "thrust": "applied",
+      "status": "papers",
+      "summary": "Auditing platforms and LLMs for misinformation, from COVID-19 to opioid use disorder.",
       "link": {
-        "label": "GitHub",
-        "url": "https://github.com/BeanHam/2024-vl-annotation"
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2506.00308"
       },
-      "linkTodo": "Confirm repo; TraversRL repo unknown"
+      "linkTodo": "Pick a group/project page"
     },
     {
       "id": "epistemic-alignment",
@@ -1008,37 +1028,17 @@ window.RAISE_SITE_DATA = {
       "linkTodo": null
     },
     {
-      "id": "kuow",
-      "name": "AI Governance at KUOW",
-      "partner": "KUOW Public Radio",
-      "thrust": "integrity",
+      "id": "sidewalks",
+      "name": "Sidewalks / TraversRL",
+      "partner": "Urban accessibility",
+      "thrust": "open",
       "status": "active",
-      "summary": "Helping a public newsroom set policy for responsible use of AI.",
-      "link": null,
-      "linkTodo": "Add repo or project page"
-    },
-    {
-      "id": "iceout",
-      "name": "ICEOUT.org data analysis",
-      "partner": "ICEOUT.org",
-      "thrust": "integrity",
-      "status": "active",
-      "summary": "Data analysis supporting public accountability for immigration enforcement.",
-      "link": null,
-      "linkTodo": "Add repo or project page"
-    },
-    {
-      "id": "misinfo",
-      "name": "Misinformation & health myths",
-      "partner": "Tanu Mitra's group",
-      "thrust": "integrity",
-      "status": "papers",
-      "summary": "Auditing platforms and LLMs for misinformation, from COVID-19 to opioid use disorder.",
+      "summary": "Mapping and reasoning about pedestrian infrastructure with vision-language models and RL.",
       "link": {
-        "label": "Paper",
-        "url": "https://arxiv.org/abs/2506.00308"
+        "label": "GitHub",
+        "url": "https://github.com/BeanHam/2024-vl-annotation"
       },
-      "linkTodo": "Pick a group/project page"
+      "linkTodo": "Confirm repo; TraversRL repo unknown; pillar placement is a guess"
     }
   ]
 };

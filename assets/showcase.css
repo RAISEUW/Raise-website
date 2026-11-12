@@ -35,12 +35,12 @@ a.ptile:hover .ptile__link .arr { transform: translate(2px,-2px); }
 .tiles-type .ptile__ph { display: none; }
 .tiles-type .ptile__type { display: block; padding: 0 22px; font-family: var(--serif); font-size: clamp(24px, 2.4vw, 34px); line-height: 1.08; letter-spacing: -.015em; text-align: left; justify-self: start; align-self: end; padding-bottom: 18px; }
 .tiles-type .ptile__visual { background-image: none; }
-.tiles-type .ptile--public .ptile__visual { background: var(--purple); color: #fff; }
+.tiles-type .ptile--applied .ptile__visual { background: var(--purple); color: #fff; }
 .tiles-type .ptile--epistemic .ptile__visual { background: var(--spirit); color: var(--purple-dd); }
-.tiles-type .ptile--integrity .ptile__visual { background: var(--ink); color: var(--gold); }
+.tiles-type .ptile--open .ptile__visual { background: var(--ink); color: var(--gold); }
 
 /* ============================================================
-   LAYOUT A — side-scrolling gallery
+   GALLERY — side-scrolling
    ============================================================ */
 .gallery { padding: 0 0 clamp(48px, 7vw, 96px); background: var(--paper); }
 .gallery__bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
@@ -59,15 +59,15 @@ a.ptile:hover .ptile__link .arr { transform: translate(2px,-2px); }
 .gallery__track:focus-visible { outline: 3px solid #6f4bb8; outline-offset: -3px; }
 
 /* ============================================================
-   LAYOUT B — three thrusts, projects beneath each
+   PILLARS — three research aims, projects beneath each
    ============================================================ */
 .thrusts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 32px); align-items: start; }
 .thrust__head { border-top: 3px solid var(--aim-1); padding-top: 18px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
 .thrust--epistemic .thrust__head { border-top-color: var(--aim-2); }
-.thrust--integrity .thrust__head { border-top-color: var(--aim-3); }
+.thrust--open .thrust__head { border-top-color: var(--aim-3); }
 .thrust__num { font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--purple); }
 .thrust--epistemic .thrust__num { color: var(--aim-2); }
-.thrust--integrity .thrust__num { color: var(--gold-d); }
+.thrust--open .thrust__num { color: var(--gold-d); }
 .thrust__name { font-size: 23px; line-height: 1.2; min-height: 2.4em; }
 .thrust__blurb { margin: 0; font-size: 15px; color: var(--ink-2); min-height: 6.2em; }
 .thrust__count { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }

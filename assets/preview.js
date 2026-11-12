@@ -39,8 +39,8 @@
   }
   var bar = document.createElement('div');
   bar.className = 'preview-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Design preview controls');
-  var a = link('preview-gallery.html', 'A · Gallery'); a.setAttribute('data-layout', 'preview-gallery.html');
-  var b = link('preview-thrusts.html', 'B · Thrusts'); b.setAttribute('data-layout', 'preview-thrusts.html');
+  var a = link('preview-gallery.html', 'Gallery'); a.setAttribute('data-layout', 'preview-gallery.html');
+  var b = link('preview-pillars.html', 'Pillars'); b.setAttribute('data-layout', 'preview-pillars.html');
   bar.appendChild(group('Layout', [a, b]));
   bar.appendChild(group('Tile image', [toggle('ph', 'Placeholder'), toggle('type', 'Typographic')]));
   document.body.appendChild(bar);
