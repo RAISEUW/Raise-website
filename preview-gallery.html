@@ -16,7 +16,7 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
 <!-- ============ HEADER ============ -->
-<header class="site-header" data-mode="solid" data-fixed-mode="solid" id="header">
+<header class="site-header" data-mode="over" id="header">
   <div class="site-header__inner">
     <a class="brand" href="index.html" aria-label="RAISE — home">
       <img class="brand__logo" src="assets/raise-logo-uw-white.webp" alt="" width="1284" height="109" />
@@ -51,22 +51,21 @@
 </nav>
 
 <main id="main-content">
-  <!-- ============ INTRO + PROJECT GALLERY (gallery) ============ -->
-  <section class="intro">
-    <div class="wrap">
-      <span class="eyebrow">RAISE · University of Washington</span>
+  <!-- ============ FULL-BLEED HERO + PROJECT GALLERY ============ -->
+  <section class="bghero" id="hero-bg">
+    <img class="bghero__img" id="heroImg" src="assets/backgrounds/aerial-sidewalk-network.webp" alt="" width="2000" height="843" />
+    <div class="bghero__inner">
       <h1>Responsible AI, built with the people it serves.</h1>
-      <p class="intro__dek">The Center for Responsibility in AI Systems &amp; Experiences works with cities, newsrooms, and communities on AI that serves the public good.</p>
+      <p class="bghero__dek">The Center for Responsibility in AI Systems &amp; Experiences works with cities, newsrooms, and communities on AI that serves the public good.</p>
     </div>
+    <span class="bghero__credit" id="heroCredit">Image: sidewalk network mapped by TraversRL</span>
   </section>
 
   <section class="gallery" id="projects" aria-labelledby="galleryTitle">
-    <div class="gallery" id="gallery">
+    <div id="gallery">
       <div class="wrap gallery__bar">
-        <h2 class="visually-hidden" id="galleryTitle">Projects</h2>
-        <div class="gallery__filters" role="group" aria-label="Filter projects by thrust"></div>
+        <h2 class="gallery__title" id="galleryTitle">Projects</h2>
         <div class="gallery__nav">
-          <span class="gallery__status" aria-live="polite"></span>
           <button class="gallery__btn" type="button" data-dir="-1" aria-label="Previous projects">←</button>
           <button class="gallery__btn" type="button" data-dir="1" aria-label="Next projects">→</button>
         </div>
@@ -80,41 +79,7 @@
     <div class="wrap mission reveal">
       <div class="mission__label"><span class="eyebrow eyebrow--bare">About RAISE</span></div>
       <div>
-        <p>The Center for Responsibility in AI Systems &amp; Experiences advances artificial intelligence that serves the public good, builds trust, and supports open innovation. Our work centers on three aims that define responsible AI in practice.</p>
-        <div class="aims-inline">
-          <span class="tag">applied AI</span>
-          <span class="tag">epistemic foundations</span>
-          <span class="tag">open &amp; specialized systems</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ RESEARCH AIMS ============ -->
-  <section class="section sand" id="research">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="section-head__title">
-          <span class="eyebrow">Three research aims</span>
-          <h2 class="h2">Responsible AI in practice</h2>
-        </div>
-      </div>
-      <div class="aims-grid">
-        <article class="aim-card aim-1 reveal">
-          <div class="aim-card__top"><span class="aim-card__num">I</span><span class="aim-card__count">Aim I</span></div>
-          <h3>Applied AI in Underserved Areas</h3>
-          <p>We study applications of AI in areas underserved by market incentives, especially in the public sector and the physical, life, and social sciences. We aim to improve equitable access and use as the world adapts to the proliferation of AI.</p>
-        </article>
-        <article class="aim-card aim-2 reveal">
-          <div class="aim-card__top"><span class="aim-card__num">II</span><span class="aim-card__count">Aim II</span></div>
-          <h3>Epistemological Foundations of AI</h3>
-          <p>We study how AI systems generate and justify claims across pre-training, mid-training, and post-training stages. Our focus is on the epistemological foundations of trust: how errors arise, when abstention is the right choice, how uncertainty should be communicated, and how explanations can support human oversight. By grounding trust in epistemology, we aim to create systems aligned with human values.</p>
-        </article>
-        <article class="aim-card aim-3 reveal">
-          <div class="aim-card__top"><span class="aim-card__num">III</span><span class="aim-card__count">Aim III</span></div>
-          <h3>Open &amp; Specialized Systems</h3>
-          <p>Large proprietary models limit transparency, adaptability, and governance. We advance smaller, open-weight, and open-source models that can be adapted and fine-tuned in specialized settings. These models reduce dependency on closed APIs, lower costs, and enable communities to govern AI systems according to their needs.</p>
-        </article>
+        <p>The Center for Responsibility in AI Systems &amp; Experiences advances artificial intelligence that serves the public good, builds trust, and supports open innovation.</p>
       </div>
     </div>
   </section>

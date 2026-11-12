@@ -1,34 +1,51 @@
-/* PREVIEW ONLY — layout + tile-image switcher for comparing designs.
+/* PREVIEW ONLY — layout, background, and tile-image switcher for comparing designs.
    Delete this file and its <script> tag before launch.
-   State lives in the URL (?tiles=type), never in browser storage. */
+   State lives in the URL (?tiles=type&hero=campus), never in browser storage. */
 (function () {
   'use strict';
+  var HEROES = {
+    aerial: { src: 'assets/backgrounds/aerial-sidewalk-network.webp', credit: 'Image: sidewalk network mapped by TraversRL' },
+    campus: { src: 'assets/backgrounds/uw-campus-autumn.webp', credit: 'Image: University of Washington' },
+    none: { src: '', credit: '' }
+  };
   var params = new URLSearchParams(location.search);
-  var tiles = params.get('tiles') === 'type' ? 'type' : 'ph';
+  var state = {
+    tiles: params.get('tiles') === 'type' ? 'type' : 'ph',
+    hero: HEROES[params.get('hero')] ? params.get('hero') : 'aerial'
+  };
   var page = (location.pathname.split('/').pop() || '').toLowerCase();
+  var heroImg = document.getElementById('heroImg');
+  var heroCredit = document.getElementById('heroCredit');
   document.body.classList.add('show-todo', 'has-preview-bar');
-  if (tiles === 'type') document.body.classList.add('tiles-type');
 
+  function query() {
+    var q = [];
+    if (state.tiles === 'type') q.push('tiles=type');
+    if (state.hero !== 'aerial') q.push('hero=' + state.hero);
+    return q.length ? '?' + q.join('&') : '';
+  }
+  function apply() {
+    document.body.classList.toggle('tiles-type', state.tiles === 'type');
+    if (heroImg) {
+      var h = HEROES[state.hero];
+      heroImg.hidden = !h.src;
+      if (h.src) heroImg.src = h.src;
+      if (heroCredit) heroCredit.textContent = h.credit;
+    }
+    bar.querySelectorAll('a[data-layout]').forEach(function (a) { a.href = a.getAttribute('data-layout') + query(); });
+    bar.querySelectorAll('button[data-key]').forEach(function (b) { b.setAttribute('aria-pressed', state[b.dataset.key] === b.dataset.value ? 'true' : 'false'); });
+    history.replaceState(null, '', location.pathname + query());
+  }
   function link(href, label) {
     var a = document.createElement('a');
-    var q = tiles === 'type' ? '?tiles=type' : '';
-    a.href = href + q; a.textContent = label;
+    a.setAttribute('data-layout', href); a.textContent = label;
     if (page === href) a.setAttribute('aria-current', 'page');
     return a;
   }
-  function toggle(value, label) {
+  function toggle(key, value, label) {
     var b = document.createElement('button');
-    b.type = 'button'; b.textContent = label;
-    b.setAttribute('aria-pressed', tiles === value ? 'true' : 'false');
-    b.addEventListener('click', function () {
-      tiles = value;
-      document.body.classList.toggle('tiles-type', value === 'type');
-      bar.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      bar.querySelectorAll('a[data-layout]').forEach(function (a) { a.href = a.getAttribute('data-layout') + (value === 'type' ? '?tiles=type' : ''); });
-      var u = new URL(location.href);
-      if (value === 'type') u.searchParams.set('tiles', 'type'); else u.searchParams.delete('tiles');
-      history.replaceState(null, '', u);
-    });
+    b.type = 'button'; b.textContent = label; b.dataset.key = key; b.dataset.value = value;
+    b.addEventListener('click', function () { state[key] = value; apply(); });
     return b;
   }
   function group(label, items) {
@@ -39,9 +56,9 @@
   }
   var bar = document.createElement('div');
   bar.className = 'preview-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Design preview controls');
-  var a = link('preview-gallery.html', 'Gallery'); a.setAttribute('data-layout', 'preview-gallery.html');
-  var b = link('preview-pillars.html', 'Pillars'); b.setAttribute('data-layout', 'preview-pillars.html');
-  bar.appendChild(group('Layout', [a, b]));
-  bar.appendChild(group('Tile image', [toggle('ph', 'Placeholder'), toggle('type', 'Typographic')]));
+  bar.appendChild(group('Layout', [link('preview-gallery.html', 'Gallery'), link('preview-pillars.html', 'Pillars')]));
+  if (heroImg) bar.appendChild(group('Background', [toggle('hero', 'aerial', 'Sidewalk map'), toggle('hero', 'campus', 'Campus'), toggle('hero', 'none', 'Plain')]));
+  bar.appendChild(group('Tiles', [toggle('tiles', 'ph', 'Placeholder'), toggle('tiles', 'type', 'Typographic')]));
   document.body.appendChild(bar);
+  apply();
 })();

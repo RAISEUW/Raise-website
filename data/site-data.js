@@ -915,21 +915,18 @@ window.RAISE_SITE_DATA = {
     {
       "key": "applied",
       "short": "Applied AI",
-      "num": "I",
       "name": "Applied AI in Underserved Areas",
       "blurb": "AI in areas underserved by market incentives, especially the public sector and the physical, life, and social sciences."
     },
     {
       "key": "epistemic",
       "short": "Epistemic foundations",
-      "num": "II",
       "name": "Epistemological Foundations of AI",
       "blurb": "How AI systems generate and justify claims: how errors arise, when to abstain, and how to communicate uncertainty."
     },
     {
       "key": "open",
       "short": "Open & specialized",
-      "num": "III",
       "name": "Open & Specialized Systems",
       "blurb": "Smaller, open-weight models that communities can adapt, fine-tune, and govern for specialized settings."
     }
@@ -1038,7 +1035,8 @@ window.RAISE_SITE_DATA = {
         "label": "GitHub",
         "url": "https://github.com/BeanHam/2024-vl-annotation"
       },
-      "linkTodo": "Confirm repo; TraversRL repo unknown; pillar placement is a guess"
+      "linkTodo": "Confirm repo; TraversRL repo unknown; pillar placement is a guess",
+      "image": "assets/projects/sidewalks.webp"
     }
   ]
 };

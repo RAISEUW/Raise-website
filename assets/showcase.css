@@ -40,23 +40,46 @@ a.ptile:hover .ptile__link .arr { transform: translate(2px,-2px); }
 .tiles-type .ptile--open .ptile__visual { background: var(--ink); color: var(--gold); }
 
 /* ============================================================
-   GALLERY — side-scrolling
+   FULL-BLEED BACKGROUND HERO (image TBD; stand-ins in assets/backgrounds/)
    ============================================================ */
-.gallery { padding: 0 0 clamp(48px, 7vw, 96px); background: var(--paper); }
-.gallery__bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
-.gallery__filters { display: flex; gap: 8px; flex-wrap: wrap; }
-.gallery__nav { display: flex; align-items: center; gap: 10px; }
-.gallery__status { font-family: var(--mono); font-size: 12px; color: var(--ink-3); margin-right: 6px; }
-.gallery__btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--paper); color: var(--ink); font-size: 18px; cursor: pointer; display: grid; place-items: center; }
+.bghero { position: relative; min-height: min(66vh, 600px); display: flex; align-items: flex-end; background: var(--purple-dd); color: #fff; overflow: hidden; }
+.bghero__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bghero__img[hidden] { display: none; }
+.bghero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,38,.55) 0%, rgba(20,12,38,.15) 30%, rgba(20,12,38,.25) 55%, rgba(20,12,38,.82) 100%); }
+.bghero__inner { position: relative; z-index: 1; width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 120px var(--gutter) clamp(36px, 6vh, 64px); }
+.bghero h1 { font-size: clamp(32px, 4.2vw, 56px); line-height: 1.06; letter-spacing: -.02em; max-width: 20ch; margin: 0 0 14px; text-shadow: 0 2px 24px rgba(0,0,0,.3); }
+.bghero__dek { margin: 0; max-width: 54ch; font-size: clamp(16px, 1.4vw, 19px); color: rgba(255,255,255,.88); }
+.bghero__credit { position: absolute; right: 12px; bottom: 8px; z-index: 1; font-family: var(--mono); font-size: 10.5px; color: rgba(255,255,255,.6); }
+
+/* ============================================================
+   GALLERY — minimal side-scrolling strip
+   ============================================================ */
+.gallery { padding: clamp(28px, 4vw, 44px) 0 clamp(48px, 7vw, 88px); background: var(--paper); }
+.gallery__bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 16px; }
+.gallery__title { font-family: var(--mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); margin: 0; font-weight: 500; }
+.gallery__nav { display: flex; align-items: center; gap: 8px; }
+.gallery__btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--paper); color: var(--ink); font-size: 15px; cursor: pointer; display: grid; place-items: center; }
 .gallery__btn:hover:not(:disabled) { border-color: var(--ink); }
-.gallery__btn:disabled { opacity: .35; cursor: default; }
+.gallery__btn:disabled { opacity: .3; cursor: default; }
 /* The track bleeds to the right edge of the viewport so a partly visible tile signals "more". */
-.gallery__track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
-  padding: 4px max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter))) 18px; scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
-.gallery__track .ptile { flex: 0 0 clamp(260px, 25vw, 340px); scroll-snap-align: start; }
-.gallery__track .ptile__visual { aspect-ratio: 3 / 2; }
-.gallery__track .ptile[hidden] { display: none; }
+.gallery__track { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+  padding: 4px max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter))) 14px; scrollbar-width: thin; scrollbar-color: var(--line-2) transparent; }
 .gallery__track:focus-visible { outline: 3px solid #6f4bb8; outline-offset: -3px; }
+
+/* minimal tile: picture + name, no card chrome */
+.ptile--minimal { flex: 0 0 clamp(160px, 13.5vw, 200px); scroll-snap-align: start; border: 0; border-radius: 0; background: transparent; }
+a.ptile--minimal:hover { box-shadow: none; transform: none; }
+.ptile--minimal .ptile__visual { aspect-ratio: 4 / 3; border-radius: 2px; }
+.ptile--minimal .ptile__visual img { transition: transform .4s var(--ease), filter .3s; }
+a.ptile--minimal:hover .ptile__visual img { transform: scale(1.04); }
+.ptile--minimal .ptile__body { padding: 10px 0 0; gap: 2px; }
+.ptile--minimal .ptile__name { font-family: var(--sans); font-size: 14.5px; font-weight: 600; line-height: 1.3; }
+a.ptile--minimal:hover .ptile__name { color: var(--purple); }
+.ptile--minimal .ptile__partner { font-size: 13px; color: var(--ink-3); }
+.tiles-type .ptile--minimal .ptile__type { font-size: 18px; padding: 0 12px 10px; }
+
+/* real image inside any tile */
+.ptile__visual img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
 /* ============================================================
    PILLARS — three research aims, projects beneath each
@@ -65,10 +88,8 @@ a.ptile:hover .ptile__link .arr { transform: translate(2px,-2px); }
 .thrust__head { border-top: 3px solid var(--aim-1); padding-top: 18px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
 .thrust--epistemic .thrust__head { border-top-color: var(--aim-2); }
 .thrust--open .thrust__head { border-top-color: var(--aim-3); }
-.thrust__num { font-family: var(--serif); font-size: 34px; line-height: 1; color: var(--purple); }
-.thrust--epistemic .thrust__num { color: var(--aim-2); }
-.thrust--open .thrust__num { color: var(--gold-d); }
 .thrust__name { font-size: 23px; line-height: 1.2; min-height: 2.4em; }
+.thrust__blurb { margin-bottom: 4px; }
 .thrust__blurb { margin: 0; font-size: 15px; color: var(--ink-2); min-height: 6.2em; }
 .thrust__count { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
 .thrust__tiles { display: flex; flex-direction: column; gap: 14px; }
@@ -92,4 +113,4 @@ body.has-preview-bar { padding-bottom: 72px; }
 
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 /* In typographic mode the name is already set large in the visual; keep it for screen readers only. */
-.tiles-type .ptile__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tiles-type .ptile:not(.ptile--img) .ptile__name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
