@@ -940,7 +940,8 @@ window.RAISE_SITE_DATA = {
       "status": "active",
       "summary": "AI-assisted policy analysis with the City of Seattle.",
       "link": null,
-      "linkTodo": "Repo RAISEUW/PolicyBridge is private; add a public link"
+      "linkTodo": "Repo RAISEUW/PolicyBridge is private; add a public link",
+      "image": "assets/projects/policybridge.webp"
     },
     {
       "id": "kuow",
@@ -986,7 +987,8 @@ window.RAISE_SITE_DATA = {
         "label": "Paper",
         "url": "https://openreview.net/pdf?id=Orvjm9UqH2"
       },
-      "linkTodo": "GitHub repo unknown"
+      "linkTodo": "GitHub repo unknown",
+      "image": "assets/projects/epistemic-alignment.webp"
     },
     {
       "id": "metacognition",
@@ -1009,7 +1011,8 @@ window.RAISE_SITE_DATA = {
         "label": "Project page",
         "url": "https://bbwen.github.io/publications/abstention-survey"
       },
-      "linkTodo": "GitHub repo unknown"
+      "linkTodo": "GitHub repo unknown",
+      "image": "assets/projects/abstention.webp"
     },
     {
       "id": "spuriverse",
@@ -1022,7 +1025,8 @@ window.RAISE_SITE_DATA = {
         "label": "Project page",
         "url": "https://yanyiwei.github.io/projects/spuriverse/index.html"
       },
-      "linkTodo": null
+      "linkTodo": null,
+      "image": "assets/projects/spuriverse.webp"
     },
     {
       "id": "sidewalks",

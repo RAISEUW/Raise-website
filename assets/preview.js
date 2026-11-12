@@ -4,14 +4,14 @@
 (function () {
   'use strict';
   var HEROES = {
-    aerial: { src: 'assets/backgrounds/aerial-sidewalk-network.webp', credit: 'Image: sidewalk network mapped by TraversRL' },
-    campus: { src: 'assets/backgrounds/uw-campus-autumn.webp', credit: 'Image: University of Washington' },
+    library: { src: 'assets/backgrounds/seattle-central-library.webp', credit: 'Seattle Central Library · Carol M. Highsmith, Library of Congress (public domain)' },
+    campus: { src: 'assets/backgrounds/uw-campus-autumn.webp', credit: 'University of Washington' },
     none: { src: '', credit: '' }
   };
   var params = new URLSearchParams(location.search);
   var state = {
     tiles: params.get('tiles') === 'type' ? 'type' : 'ph',
-    hero: HEROES[params.get('hero')] ? params.get('hero') : 'aerial'
+    hero: HEROES[params.get('hero')] ? params.get('hero') : 'library'
   };
   var page = (location.pathname.split('/').pop() || '').toLowerCase();
   var heroImg = document.getElementById('heroImg');
@@ -21,7 +21,7 @@
   function query() {
     var q = [];
     if (state.tiles === 'type') q.push('tiles=type');
-    if (state.hero !== 'aerial') q.push('hero=' + state.hero);
+    if (state.hero !== 'library') q.push('hero=' + state.hero);
     return q.length ? '?' + q.join('&') : '';
   }
   function apply() {
@@ -57,7 +57,7 @@
   var bar = document.createElement('div');
   bar.className = 'preview-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Design preview controls');
   bar.appendChild(group('Layout', [link('preview-gallery.html', 'Gallery'), link('preview-pillars.html', 'Pillars')]));
-  if (heroImg) bar.appendChild(group('Background', [toggle('hero', 'aerial', 'Sidewalk map'), toggle('hero', 'campus', 'Campus'), toggle('hero', 'none', 'Plain')]));
+  if (heroImg) bar.appendChild(group('Background', [toggle('hero', 'library', 'Library'), toggle('hero', 'campus', 'Campus'), toggle('hero', 'none', 'Plain')]));
   bar.appendChild(group('Tiles', [toggle('tiles', 'ph', 'Placeholder'), toggle('tiles', 'type', 'Typographic')]));
   document.body.appendChild(bar);
   apply();

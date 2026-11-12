@@ -51,37 +51,26 @@
 </nav>
 
 <main id="main-content">
-  <!-- ============ FULL-BLEED HERO + PROJECT GALLERY ============ -->
-  <section class="bghero" id="hero-bg">
-    <img class="bghero__img" id="heroImg" src="assets/backgrounds/aerial-sidewalk-network.webp" alt="" width="2000" height="843" />
+  <!-- ============ FIRST SCREEN: background image, short intro, project gallery ============ -->
+  <section class="bghero bghero--full" id="hero-bg">
+    <img class="bghero__img" id="heroImg" src="assets/backgrounds/seattle-central-library.webp" alt="" width="1299" height="924" />
     <div class="bghero__inner">
-      <h1>Responsible AI, built with the people it serves.</h1>
-      <p class="bghero__dek">The Center for Responsibility in AI Systems &amp; Experiences works with cities, newsrooms, and communities on AI that serves the public good.</p>
-    </div>
-    <span class="bghero__credit" id="heroCredit">Image: sidewalk network mapped by TraversRL</span>
-  </section>
-
-  <section class="gallery" id="projects" aria-labelledby="galleryTitle">
-    <div id="gallery">
-      <div class="wrap gallery__bar">
-        <h2 class="gallery__title" id="galleryTitle">Projects</h2>
-        <div class="gallery__nav">
-          <button class="gallery__btn" type="button" data-dir="-1" aria-label="Previous projects">←</button>
-          <button class="gallery__btn" type="button" data-dir="1" aria-label="Next projects">→</button>
+      <div class="bghero__intro">
+        <p class="bghero__tag">AI that serves the public good, builds trust, and supports open innovation.</p>
+        <p class="bghero__dek">We work with cities, newsrooms, and communities to build and evaluate AI where markets won’t. A center at the University of Washington Information School.</p>
+      </div>
+      <div class="gallery gallery--onimage" id="gallery">
+        <div class="gallery__bar">
+          <h2 class="gallery__title" id="projects">Projects</h2>
+          <div class="gallery__nav">
+            <button class="gallery__btn" type="button" data-dir="-1" aria-label="Previous projects">←</button>
+            <button class="gallery__btn" type="button" data-dir="1" aria-label="Next projects">→</button>
+          </div>
         </div>
-      </div>
-      <div class="gallery__track" tabindex="0" role="region" aria-label="Project gallery, scrolls horizontally"></div>
-    </div>
-  </section>
-
-  <!-- ============ MISSION ============ -->
-  <section class="section">
-    <div class="wrap mission reveal">
-      <div class="mission__label"><span class="eyebrow eyebrow--bare">About RAISE</span></div>
-      <div>
-        <p>The Center for Responsibility in AI Systems &amp; Experiences advances artificial intelligence that serves the public good, builds trust, and supports open innovation.</p>
+        <div class="gallery__track" tabindex="0" role="region" aria-label="Project gallery, scrolls horizontally"></div>
       </div>
     </div>
+    <span class="bghero__credit" id="heroCredit">Seattle Central Library · Carol M. Highsmith, Library of Congress (public domain)</span>
   </section>
 
   <!-- ============ SELECTED PUBLICATIONS ============ -->
