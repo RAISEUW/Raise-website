@@ -910,5 +910,135 @@ window.RAISE_SITE_DATA = {
       "hero": false,
       "selected": false
     }
+  ],
+  "thrusts": [
+    {
+      "key": "public",
+      "short": "Public sector & cities",
+      "num": "I",
+      "name": "AI for the public sector & cities",
+      "blurb": "Working with governments and civic partners on AI where market incentives are thin: policy analysis, urban accessibility, and public services."
+    },
+    {
+      "key": "epistemic",
+      "short": "Epistemic foundations",
+      "num": "II",
+      "name": "Epistemic foundations of AI",
+      "blurb": "How models come to know, when they should abstain, and how they convey uncertainty, so people can calibrate their trust."
+    },
+    {
+      "key": "integrity",
+      "short": "Information integrity",
+      "num": "III",
+      "name": "Information integrity & accountability",
+      "blurb": "Auditing information ecosystems, newsrooms, and public data so AI and platforms can be held accountable."
+    }
+  ],
+  "projects": [
+    {
+      "id": "policybridge",
+      "name": "Policy Bridge",
+      "partner": "City of Seattle",
+      "thrust": "public",
+      "status": "active",
+      "summary": "AI-assisted policy analysis with the City of Seattle.",
+      "link": null,
+      "linkTodo": "Repo RAISEUW/PolicyBridge is private; add a public link"
+    },
+    {
+      "id": "sidewalks",
+      "name": "Sidewalks / TraversRL",
+      "partner": "Urban accessibility",
+      "thrust": "public",
+      "status": "active",
+      "summary": "Mapping and reasoning about pedestrian infrastructure with vision-language models and RL.",
+      "link": {
+        "label": "GitHub",
+        "url": "https://github.com/BeanHam/2024-vl-annotation"
+      },
+      "linkTodo": "Confirm repo; TraversRL repo unknown"
+    },
+    {
+      "id": "epistemic-alignment",
+      "name": "Epistemic Alignment",
+      "partner": "Nick Clark",
+      "thrust": "epistemic",
+      "status": "active",
+      "summary": "A framework for how LLMs should deliver knowledge to match what users actually need.",
+      "link": {
+        "label": "Paper",
+        "url": "https://openreview.net/pdf?id=Orvjm9UqH2"
+      },
+      "linkTodo": "GitHub repo unknown"
+    },
+    {
+      "id": "metacognition",
+      "name": "Metacognition",
+      "partner": "Ray",
+      "thrust": "epistemic",
+      "status": "preliminary",
+      "summary": "Do models know what they know? Early work on self-monitoring in LLMs.",
+      "link": null,
+      "linkTodo": "Add repo when ready"
+    },
+    {
+      "id": "abstention",
+      "name": "Abstention in LLMs",
+      "partner": "Bingbing Wen",
+      "thrust": "epistemic",
+      "status": "papers",
+      "summary": "When should a model decline to answer? A survey and experiments on abstention.",
+      "link": {
+        "label": "Project page",
+        "url": "https://bbwen.github.io/publications/abstention-survey"
+      },
+      "linkTodo": "GitHub repo unknown"
+    },
+    {
+      "id": "spuriverse",
+      "name": "SpuriVerse",
+      "partner": "Yiwei Yang",
+      "thrust": "epistemic",
+      "status": "papers",
+      "summary": "A benchmark of spurious correlations in vision-language models (NeurIPS 2025).",
+      "link": {
+        "label": "Project page",
+        "url": "https://yanyiwei.github.io/projects/spuriverse/index.html"
+      },
+      "linkTodo": null
+    },
+    {
+      "id": "kuow",
+      "name": "AI Governance at KUOW",
+      "partner": "KUOW Public Radio",
+      "thrust": "integrity",
+      "status": "active",
+      "summary": "Helping a public newsroom set policy for responsible use of AI.",
+      "link": null,
+      "linkTodo": "Add repo or project page"
+    },
+    {
+      "id": "iceout",
+      "name": "ICEOUT.org data analysis",
+      "partner": "ICEOUT.org",
+      "thrust": "integrity",
+      "status": "active",
+      "summary": "Data analysis supporting public accountability for immigration enforcement.",
+      "link": null,
+      "linkTodo": "Add repo or project page"
+    },
+    {
+      "id": "misinfo",
+      "name": "Misinformation & health myths",
+      "partner": "Tanu Mitra's group",
+      "thrust": "integrity",
+      "status": "papers",
+      "summary": "Auditing platforms and LLMs for misinformation, from COVID-19 to opioid use disorder.",
+      "link": {
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2506.00308"
+      },
+      "linkTodo": "Pick a group/project page"
+    }
   ]
 };
