@@ -58,7 +58,7 @@
   bar.className = 'preview-bar'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Design preview controls');
   bar.appendChild(group('Layout', [link('preview-gallery.html', 'Gallery'), link('preview-pillars.html', 'Pillars')]));
   if (heroImg) bar.appendChild(group('Background', [toggle('hero', 'library', 'Library'), toggle('hero', 'campus', 'Campus'), toggle('hero', 'none', 'Plain')]));
-  bar.appendChild(group('Tiles', [toggle('tiles', 'ph', 'Placeholder'), toggle('tiles', 'type', 'Typographic')]));
+  bar.appendChild(group('Tiles', [toggle('tiles', 'ph', 'Images'), toggle('tiles', 'type', 'Typographic')]));
   document.body.appendChild(bar);
   apply();
 })();

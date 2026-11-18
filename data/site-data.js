@@ -951,7 +951,8 @@ window.RAISE_SITE_DATA = {
       "status": "active",
       "summary": "Helping a public newsroom set policy for responsible use of AI.",
       "link": null,
-      "linkTodo": "Add repo or project page"
+      "linkTodo": "Add repo or project page",
+      "image": "assets/projects/kuow.webp"
     },
     {
       "id": "iceout",
@@ -961,7 +962,8 @@ window.RAISE_SITE_DATA = {
       "status": "active",
       "summary": "Data analysis supporting public accountability for immigration enforcement.",
       "link": null,
-      "linkTodo": "Add repo or project page"
+      "linkTodo": "Add repo or project page",
+      "image": "assets/projects/iceout.webp"
     },
     {
       "id": "misinfo",
@@ -974,7 +976,8 @@ window.RAISE_SITE_DATA = {
         "label": "Paper",
         "url": "https://arxiv.org/abs/2506.00308"
       },
-      "linkTodo": "Pick a group/project page"
+      "linkTodo": "Pick a group/project page",
+      "image": "assets/projects/misinfo.webp"
     },
     {
       "id": "epistemic-alignment",
@@ -998,7 +1001,8 @@ window.RAISE_SITE_DATA = {
       "status": "preliminary",
       "summary": "Do models know what they know? Early work on self-monitoring in LLMs.",
       "link": null,
-      "linkTodo": "Add repo when ready"
+      "linkTodo": "Add repo when ready",
+      "image": "assets/projects/metacognition.webp"
     },
     {
       "id": "abstention",
